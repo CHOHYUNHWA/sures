@@ -61,20 +61,20 @@ com.sures/
 ## URL 구조
 
 ### 관리자 (/admin/**)
-| 기능 | Method | URL | 설명 |
-|------|--------|-----|------|
-| 로그인 페이지 | GET | /admin/login | 로그인 폼 |
-| 로그인 처리 | POST | /admin/login | 로그인 인증 |
-| 회원가입 페이지 | GET | /admin/register | 회원가입 폼 |
-| 회원가입 처리 | POST | /admin/register | 계정 생성 |
-| 계정 찾기 | GET | /admin/find-account | 아이디/비밀번호 찾기 |
-| 예약 목록 | GET | /admin/reservations | 검색, 필터 지원 |
-| 예약 등록 폼 | GET | /admin/reservations/new | 수기 등록 폼 |
-| 예약 등록 | POST | /admin/reservations | 예약 생성 |
-| 예약 상세 | GET | /admin/reservations/{id} | 예약 상세 조회 |
-| 예약 수정 폼 | GET | /admin/reservations/{id}/edit | 수정 폼 |
-| 예약 수정 | PUT | /admin/reservations/{id} | 예약 정보 변경 |
-| 예약 취소 | DELETE | /admin/reservations/{id} | 예약 취소 |
+| 기능 | Method | URL | 권한 | 설명 |
+|------|--------|-----|------|------|
+| 로그인 페이지 | GET | /admin/login | 없음 | 로그인 폼 |
+| 로그인 처리 | POST | /admin/login | 없음 | 로그인 인증 |
+| 회원가입 페이지 | GET | /admin/register | 없음 | 회원가입 폼 |
+| 회원가입 처리 | POST | /admin/register | 없음 | 계정 생성 |
+| 계정 찾기 | GET | /admin/find-account | 없음 | 아이디/비밀번호 찾기 |
+| 예약 목록 | GET | /admin/reservations | SUPER_ADMIN | 검색, 필터 지원 |
+| 예약 등록 폼 | GET | /admin/reservations/new | SUPER_ADMIN | 수기 등록 폼 |
+| 예약 등록 | POST | /admin/reservations | SUPER_ADMIN | 예약 생성 |
+| 예약 상세 | GET | /admin/reservations/{id} | SUPER_ADMIN | 예약 상세 조회 |
+| 예약 수정 폼 | GET | /admin/reservations/{id}/edit | SUPER_ADMIN | 수정 폼 |
+| 예약 수정 | PUT | /admin/reservations/{id} | SUPER_ADMIN | 예약 정보 변경 |
+| 예약 취소 | DELETE | /admin/reservations/{id} | SUPER_ADMIN | 예약 취소 |
 
 ### 고객 (/customer/**)
 | 기능 | Method | URL | 설명 |
@@ -121,8 +121,9 @@ templates/
 ```
 static/
 ├── css/
-│   └── styles.css
+│   └── styles.css        # 메인 스타일시트 (Alert 스타일 포함)
 ├── js/
+│   └── main.js           # 공통 JavaScript (Alert 자동 숨김 등)
 └── image/
     └── logo.png
 ```
@@ -147,9 +148,22 @@ static/
 ```
 
 ### 레이아웃 원칙
-- **Mobile First**: 모바일 기준으로 먼저 설계, 점진적 확장
+- **Mobile Only**: PC에서도 모바일과 동일한 레이아웃 표시 (max-width: 540px)
 - **터치 친화적**: 버튼 최소 44px, 충분한 간격
 - **가독성**: 본문 16px 이상, 적절한 줄간격
+
+### Alert 컴포넌트
+- **자동 숨김**: 모든 Alert 메시지는 5초 후 자동으로 fadeOut
+- **클래스**: `.alert`, `.alert-success`, `.alert-error`, `.alert-warning`, `.alert-info`
+- **사용 예시**:
+```html
+<div th:if="${success}" class="alert alert-success">
+    <span th:text="${success}">성공 메시지</span>
+</div>
+<div th:if="${error}" class="alert alert-error">
+    <span th:text="${error}">에러 메시지</span>
+</div>
+```
 
 ## 예약 비즈니스 규칙
 
@@ -242,3 +256,115 @@ private Admin admin;
 ### QueryDSL
 - 복잡한 동적 쿼리 작성에 사용
 - Q클래스는 `build/generated` 디렉토리에 자동 생성
+
+## 에러 핸들링
+
+### 구조
+- **GlobalExceptionHandler** (`common/exception/`): Controller 레벨 예외 처리
+- **CustomErrorController** (`common/controller/`): HTTP 에러 코드별 페이지 처리
+
+### 에러 페이지
+| HTTP 상태 | 페이지 | 메시지 |
+|-----------|--------|--------|
+| 403 | `error/403.html` | 접근 권한이 없습니다 |
+| 404 | `error/error.html` | 페이지를 찾을 수 없습니다 |
+| 500 | `error/error.html` | 서버 오류가 발생했습니다 |
+
+### 에러 로깅
+- **404**: `WARN` 레벨로 URI 로깅
+- **403**: `WARN` 레벨로 URI 로깅
+- **500+**: `ERROR` 레벨로 URI, 상태코드, 스택트레이스 로깅
+
+### application.properties 설정
+```properties
+server.error.whitelabel.enabled=false
+server.error.include-stacktrace=never
+server.error.include-message=never
+```
+
+## Validation 규칙
+
+### 이중 검증 아키텍처
+클라이언트와 서버 양쪽에서 동일한 규칙으로 검증합니다.
+
+```
+[Client] JS Validation → [Server] @Valid + BindingResult → [Response] 에러 메시지
+```
+
+| 레이어 | 구현 | 역할 |
+|--------|------|------|
+| 클라이언트 | JavaScript + HTML5 | 사용자 경험 개선, 즉각적 피드백 |
+| 서버 | Bean Validation (@Valid) | 데이터 무결성 보장, 보안 |
+
+### Form novalidate 정책
+- **모든 form 태그에 `novalidate` 속성 필수**
+- 브라우저 기본 validation 메시지("이 필드를 입력하세요") 방지
+- 커스텀 JS validation 메시지만 표시
+```html
+<form th:action="@{...}" method="post" id="myForm" novalidate>
+```
+
+### 관리자 회원가입
+| 필드 | 규칙 | 어노테이션 |
+|------|------|-----------|
+| 아이디 | 필수, 4~20자, 영문소문자+숫자 | `@NotBlank`, `@Size(4,20)`, `@Pattern(^[a-z0-9]+$)` |
+| 비밀번호 | 필수, 8자 이상, 영문+숫자+특수문자 | `@NotBlank`, `@Size(min=8)`, `@Pattern` |
+| 비밀번호 확인 | 비밀번호와 동일해야 함 | `@NotBlank` + `isPasswordMatching()` |
+| 이름 | 필수, 2~20자 | `@NotBlank`, `@Size(2,20)` |
+| 이메일 | 필수, 이메일 형식 | `@NotBlank`, `@Email` |
+
+### 예약 등록/수정
+| 필드 | 규칙 | 어노테이션 |
+|------|------|-----------|
+| 고객명 | 필수, 2~50자 | `@NotBlank`, `@Size(2,50)` |
+| 연락처 | 필수, 010-0000-0000 형식 | `@NotBlank`, `@Pattern(^010-\\d{4}-\\d{4}$)` |
+| 이메일 | 선택, 이메일 형식 | `@Email` |
+| 상담일 | 필수 | `@NotNull` |
+| 상담시간 | 필수 | `@NotNull` |
+| 상담유형 | 필수 | `@NotNull` |
+| 메모 | 선택, 최대 500자 | `@Size(max=500)` |
+
+### 에러 처리 패턴
+```java
+@PostMapping
+public String create(@Valid @ModelAttribute XxxRequest request,
+                     BindingResult bindingResult,
+                     RedirectAttributes redirectAttributes) {
+    if (bindingResult.hasErrors()) {
+        String errorMessage = bindingResult.getFieldErrors().stream()
+                .findFirst()
+                .map(FieldError::getDefaultMessage)
+                .orElse("입력값을 확인해주세요.");
+        redirectAttributes.addFlashAttribute("error", errorMessage);
+        return "redirect:/xxx/form";
+    }
+    // ...
+}
+```
+
+### 프론트엔드 Validation 패턴
+```javascript
+// 에러 표시
+function showError(input, message) {
+    input.classList.add('error');
+    const errorEl = document.getElementById(input.id + 'Error');
+    if (errorEl) {
+        errorEl.textContent = message;
+        errorEl.style.display = 'block';
+    }
+}
+
+// 에러 해제
+function clearError(input) {
+    input.classList.remove('error');
+    const errorEl = document.getElementById(input.id + 'Error');
+    if (errorEl) {
+        errorEl.textContent = '';
+        errorEl.style.display = 'none';
+    }
+}
+
+// 실시간 검증 (blur 이벤트)
+input.addEventListener('blur', validateField);
+input.addEventListener('input', () => clearError(input));
+```

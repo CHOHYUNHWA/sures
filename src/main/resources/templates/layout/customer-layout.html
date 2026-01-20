@@ -4,7 +4,7 @@
       layout:decorate="~{layout/base}"
       lang="ko">
 <head>
-    <title layout:title-pattern="$CONTENT_TITLE - Sures">고객</title>
+    <title layout:title-pattern="$CONTENT_TITLE - Sures">예약</title>
 </head>
 <body>
     <!-- Header Override for Customer -->
@@ -14,36 +14,37 @@
                 <div class="header-inner">
                     <a th:href="@{/customer}" class="logo">
                         <img th:src="@{/image/logo.png}" alt="Sures 로고">
-                        <span class="logo-text">Sures</span>
+                        <span class="logo-text">예약</span>
                     </a>
 
-                    <button class="nav-toggle" aria-label="메뉴 열기" onclick="toggleNav()">
+                    <button class="nav-toggle" aria-label="메뉴 열기" onclick="toggleMenu()">
                         <span></span>
                         <span></span>
                         <span></span>
                     </button>
-
-                    <nav class="nav-menu" id="navMenu">
-                        <a th:href="@{/customer}">홈</a>
-                        <a th:href="@{/customer/reservations/apply}">예약 신청</a>
-                        <a th:href="@{/customer/reservations/verify}">예약 조회</a>
-                    </nav>
                 </div>
+
+                <nav class="nav-menu" id="navMenu">
+                    <a th:href="@{/customer/reservations/apply}">예약 신청</a>
+                    <a th:href="@{/customer/reservations/verify}">예약 조회</a>
+                </nav>
             </div>
         </header>
     </th:block>
 
     <!-- Content -->
     <th:block layout:fragment="content">
-        <div class="container">
-            <th:block layout:fragment="page-content"></th:block>
+        <div class="customer-layout">
+            <div class="customer-content">
+                <th:block layout:fragment="page-content"></th:block>
+            </div>
         </div>
     </th:block>
 
     <!-- Scripts -->
     <th:block layout:fragment="scripts">
         <script>
-            function toggleNav() {
+            function toggleMenu() {
                 document.getElementById('navMenu').classList.toggle('active');
             }
         </script>

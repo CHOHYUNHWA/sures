@@ -14,18 +14,14 @@
                 <div class="header-inner">
                     <a th:href="@{/admin/reservations}" class="logo">
                         <img th:src="@{/image/logo.png}" alt="Sures 로고">
-                        <span class="logo-text">Sures 관리자</span>
+                        <span class="logo-text">관리자</span>
                     </a>
 
-                    <button class="nav-toggle" aria-label="사이드바 열기" onclick="toggleSidebar()">
+                    <button class="nav-toggle" aria-label="메뉴 열기" onclick="toggleSidebar()">
                         <span></span>
                         <span></span>
                         <span></span>
                     </button>
-
-                    <nav class="nav-menu" id="navMenu">
-                        <a th:href="@{/admin/logout}">로그아웃</a>
-                    </nav>
                 </div>
             </div>
         </header>
@@ -37,12 +33,12 @@
             <!-- Sidebar -->
             <aside class="sidebar" id="sidebar">
                 <nav class="sidebar-nav">
-                    <a th:href="@{/admin/reservations}" th:classappend="${currentMenu == 'reservations'} ? 'active'">
+                    <a th:href="@{/admin/reservations}">
                         예약 관리
                     </a>
-                    <a th:href="@{/admin/reservations/new}" th:classappend="${currentMenu == 'new'} ? 'active'">
-                        예약 등록
-                    </a>
+                    <form th:action="@{/admin/logout}" method="post" style="margin: 0;">
+                        <button type="submit" class="sidebar-logout-btn">로그아웃</button>
+                    </form>
                 </nav>
             </aside>
 

@@ -5,89 +5,667 @@
       lang="ko">
 <head>
     <title>예약 수정</title>
+    <style>
+        /* Validation styles */
+        .form-hint {
+            font-size: 0.75rem;
+            color: #666;
+            margin-top: 0.25rem;
+        }
+        .form-input.error {
+            border-color: var(--color-danger);
+        }
+        .form-error {
+            font-size: 0.75rem;
+            color: var(--color-danger);
+            margin-top: 0.25rem;
+        }
+        .reservation-number-badge {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: linear-gradient(135deg, var(--color-primary), #022a6e);
+            color: #fff;
+            border-radius: 8px;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        .time-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.5rem;
+        }
+        @media (max-width: 768px) {
+            .time-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        .time-btn {
+            padding: 0.75rem 0.5rem;
+            border: 2px solid var(--color-border);
+            border-radius: 8px;
+            background: #fff;
+            cursor: pointer;
+            text-align: center;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        .time-btn:hover:not(.reserved):not(.passed) {
+            border-color: var(--color-accent);
+            background: rgba(40, 167, 225, 0.08);
+        }
+        .time-btn.selected {
+            border-color: var(--color-accent);
+            background: #fff;
+            box-shadow: 0 0 0 3px rgba(40, 167, 225, 0.3), 0 2px 8px rgba(40, 167, 225, 0.2);
+            position: relative;
+        }
+        .time-btn.selected::before {
+            content: '✓';
+            position: absolute;
+            top: -6px;
+            right: -6px;
+            width: 20px;
+            height: 20px;
+            background: var(--color-accent);
+            color: #fff;
+            border-radius: 50%;
+            font-size: 0.7rem;
+            line-height: 20px;
+            font-weight: bold;
+        }
+        .time-btn.selected .time-text {
+            color: var(--color-accent);
+        }
+        .time-btn.reserved {
+            cursor: not-allowed;
+            background: #f5f5f5;
+            border-color: #ddd;
+            color: #999;
+        }
+        .time-btn.reserved .time-text {
+            color: #999;
+        }
+        .time-btn.reserved:hover {
+            border-color: #ddd;
+            background: #f5f5f5;
+        }
+        .time-btn.passed {
+            background: #f5f5f5;
+            border-color: #e0e0e0;
+            color: #bbb;
+            cursor: not-allowed;
+        }
+        .time-btn .time-text {
+            display: block;
+            font-weight: 600;
+        }
+        .section-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #666;
+            margin-bottom: 0.75rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--color-border);
+        }
+        .type-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.5rem;
+        }
+        @media (max-width: 768px) {
+            .type-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        .type-btn {
+            padding: 0.6rem 0.5rem;
+            border: 2px solid var(--color-border);
+            border-radius: 8px;
+            background: #fff;
+            cursor: pointer;
+            text-align: center;
+            font-size: 0.85rem;
+            transition: all 0.2s;
+        }
+        .type-btn:hover {
+            border-color: var(--color-accent);
+            background: rgba(40, 167, 225, 0.08);
+        }
+        .type-btn.selected {
+            border-color: var(--color-accent);
+            background: #fff;
+            box-shadow: 0 0 0 3px rgba(40, 167, 225, 0.3);
+            position: relative;
+        }
+        .type-btn.selected::before {
+            content: '✓';
+            position: absolute;
+            top: -6px;
+            right: -6px;
+            width: 20px;
+            height: 20px;
+            background: var(--color-accent);
+            color: #fff;
+            border-radius: 50%;
+            font-size: 0.7rem;
+            line-height: 20px;
+            font-weight: bold;
+        }
+        .date-scroll {
+            display: flex;
+            gap: 0.5rem;
+            overflow-x: auto;
+            padding: 0.5rem 0.25rem 0.5rem 0.25rem;
+            margin: -0.5rem -0.25rem;
+            -webkit-overflow-scrolling: touch;
+        }
+        .date-scroll::-webkit-scrollbar {
+            height: 4px;
+        }
+        .date-scroll::-webkit-scrollbar-thumb {
+            background: #ddd;
+            border-radius: 2px;
+        }
+        .date-btn {
+            flex-shrink: 0;
+            width: 70px;
+            padding: 0.6rem 0.4rem;
+            border: 2px solid var(--color-border);
+            border-radius: 8px;
+            background: #fff;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.2s;
+            position: relative;
+        }
+        .date-btn:hover {
+            border-color: var(--color-accent);
+            background: rgba(40, 167, 225, 0.08);
+        }
+        .date-btn.selected {
+            border-color: var(--color-accent);
+            background: #fff;
+            box-shadow: 0 0 0 3px rgba(40, 167, 225, 0.3);
+        }
+        .date-btn.selected::before {
+            content: '✓';
+            position: absolute;
+            top: -6px;
+            right: -6px;
+            width: 18px;
+            height: 18px;
+            background: var(--color-accent);
+            color: #fff;
+            border-radius: 50%;
+            font-size: 0.65rem;
+            line-height: 18px;
+            font-weight: bold;
+        }
+        .date-btn.selected .date-day {
+            color: var(--color-accent);
+        }
+        .date-btn.today {
+            border-color: var(--color-primary);
+        }
+        .date-btn.weekend {
+            background: #fafafa;
+        }
+        .date-btn.weekend .date-weekday {
+            color: var(--color-danger);
+        }
+        .date-weekday {
+            font-size: 0.7rem;
+            color: #999;
+            margin-bottom: 0.25rem;
+        }
+        .date-day {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #333;
+        }
+        .date-month {
+            font-size: 0.65rem;
+            color: #999;
+            margin-top: 0.15rem;
+        }
+
+    </style>
 </head>
 <body>
     <th:block layout:fragment="page-content">
         <h1 class="mb-3">예약 수정</h1>
 
-        <div class="card">
-            <div class="card-body">
-                <form th:action="@{/admin/reservations/{id}(id=${reservationId})}" method="post">
-                    <input type="hidden" name="_method" value="put">
+        <!-- 예약번호 -->
+        <div class="reservation-number-badge">
+            예약번호: <span th:text="${reservation.reservationNumber}">R000001</span>
+        </div>
+
+        <!-- 에러 메시지 -->
+        <div th:if="${error}" class="alert alert-error">
+            <span th:text="${error}">에러 메시지</span>
+        </div>
+
+        <form th:action="@{/admin/reservations/{id}(id=${reservation.id})}" method="post" id="reservationForm" novalidate>
+            <!-- 고객 정보 -->
+            <div class="card mb-3">
+                <div class="card-body">
+                    <div class="section-title">고객 정보</div>
 
                     <div class="form-group">
                         <label class="form-label" for="customerName">고객명 *</label>
                         <input type="text" class="form-input" id="customerName" name="customerName"
-                               th:value="${reservation?.customerName} ?: '홍길동'" required>
+                               th:value="${reservation.customerName}" placeholder="고객명 (2~50자)"
+                               minlength="2" maxlength="50" required>
+
+                        <div class="form-error" id="customerNameError"></div>
                     </div>
 
                     <div class="form-group">
                         <label class="form-label" for="phone">연락처 *</label>
                         <input type="tel" class="form-input" id="phone" name="phone"
-                               th:value="${reservation?.phone} ?: '010-1234-5678'" required>
+                               th:value="${reservation.phone}" placeholder="010-0000-0000"
+                               pattern="^010-\d{4}-\d{4}$" required>
+
+                        <div class="form-error" id="phoneError"></div>
                     </div>
 
-                    <div class="form-group">
-                        <label class="form-label" for="email">이메일</label>
+                    <div class="form-group" style="margin-bottom: 0;">
+                        <label class="form-label" for="email">이메일 (선택)</label>
                         <input type="email" class="form-input" id="email" name="email"
-                               th:value="${reservation?.email} ?: 'hong@example.com'">
+                               th:value="${reservation.email}" placeholder="example@email.com">
+                        <div class="form-error" id="emailError"></div>
                     </div>
-
-                    <div style="display: flex; gap: 1rem;">
-                        <div class="form-group" style="flex: 1;">
-                            <label class="form-label" for="reservationDate">상담일 *</label>
-                            <input type="date" class="form-input" id="reservationDate" name="reservationDate"
-                                   th:value="${reservation?.reservationDate} ?: '2026-01-25'" required>
-                        </div>
-                        <div class="form-group" style="flex: 1;">
-                            <label class="form-label" for="reservationTime">상담시간 *</label>
-                            <select class="form-select" id="reservationTime" name="reservationTime" required>
-                                <option value="09:00">09:00</option>
-                                <option value="10:00">10:00</option>
-                                <option value="11:00">11:00</option>
-                                <option value="13:00">13:00</option>
-                                <option value="14:00" selected>14:00</option>
-                                <option value="15:00">15:00</option>
-                                <option value="16:00">16:00</option>
-                                <option value="17:00">17:00</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label" for="consultationType">상담 유형 *</label>
-                        <select class="form-select" id="consultationType" name="consultationType" required>
-                            <option value="TAX_RETURN" selected>종합소득세 신고</option>
-                            <option value="VAT">부가가치세</option>
-                            <option value="CORPORATE">법인세</option>
-                            <option value="INHERITANCE">상속/증여세</option>
-                            <option value="OTHER">기타 상담</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label" for="status">예약 상태 *</label>
-                        <select class="form-select" id="status" name="status" required>
-                            <option value="PENDING">대기</option>
-                            <option value="CONFIRMED" selected>확정</option>
-                            <option value="CANCELLED">취소</option>
-                            <option value="COMPLETED">완료</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label" for="memo">메모</label>
-                        <textarea class="form-textarea" id="memo" name="memo" rows="3"
-                                  th:text="${reservation?.memo} ?: '작년 종합소득세 신고 관련 상담 요청. 부동산 임대소득 포함.'"></textarea>
-                    </div>
-
-                    <div style="display: flex; gap: 0.5rem;">
-                        <a th:href="@{/admin/reservations/{id}(id=${reservationId})}" class="btn btn-outline" style="flex: 1;">취소</a>
-                        <button type="submit" class="btn btn-primary" style="flex: 2;">저장</button>
-                    </div>
-                </form>
+                </div>
             </div>
-        </div>
+
+            <!-- 예약 일시 -->
+            <div class="card mb-3">
+                <div class="card-body">
+                    <div class="section-title">예약 일시</div>
+
+                    <div class="form-group">
+                        <label class="form-label">상담일 *</label>
+                        <div class="date-scroll" id="dateScroll">
+                            <!-- JavaScript로 동적 생성 -->
+                        </div>
+                        <input type="hidden" id="reservationDate" name="reservationDate" required>
+                    </div>
+
+                    <div class="form-group" style="margin-bottom: 0;">
+                        <label class="form-label">상담시간 *</label>
+                        <div id="timeSelectMessage" style="color: #999; padding: 1rem; text-align: center; display: none;">
+                            날짜를 먼저 선택해주세요
+                        </div>
+                        <div class="time-grid" id="timeGrid" style="display: none;">
+                            <button type="button" class="time-btn" data-time="09:00">
+                                <span class="time-text">09:00</span>
+                            </button>
+                            <button type="button" class="time-btn" data-time="10:00">
+                                <span class="time-text">10:00</span>
+                            </button>
+                            <button type="button" class="time-btn" data-time="11:00">
+                                <span class="time-text">11:00</span>
+                            </button>
+                            <button type="button" class="time-btn" data-time="13:00">
+                                <span class="time-text">13:00</span>
+                            </button>
+                            <button type="button" class="time-btn" data-time="14:00">
+                                <span class="time-text">14:00</span>
+                            </button>
+                            <button type="button" class="time-btn" data-time="15:00">
+                                <span class="time-text">15:00</span>
+                            </button>
+                            <button type="button" class="time-btn" data-time="16:00">
+                                <span class="time-text">16:00</span>
+                            </button>
+                            <button type="button" class="time-btn" data-time="17:00">
+                                <span class="time-text">17:00</span>
+                            </button>
+                        </div>
+                        <input type="hidden" id="reservationTime" name="reservationTime" required>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 상담 정보 -->
+            <div class="card mb-3">
+                <div class="card-body">
+                    <div class="section-title">상담 정보</div>
+
+                    <div class="form-group">
+                        <label class="form-label">상담 유형 *</label>
+                        <div class="type-grid">
+                            <button type="button" class="type-btn" th:each="type : ${consultationTypes}"
+                                    th:data-value="${type}" th:text="${type.description}"
+                                    th:classappend="${type == reservation.consultationType} ? 'selected' : ''">유형</button>
+                        </div>
+                        <input type="hidden" id="consultationType" name="consultationType" required>
+                    </div>
+
+                    <div class="form-group" style="margin-bottom: 0;">
+                        <label class="form-label" for="memo">메모 (선택)</label>
+                        <textarea class="form-textarea" id="memo" name="memo" rows="3"
+                                  placeholder="상담 관련 메모를 입력하세요"
+                                  th:text="${reservation.memo}"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 버튼 -->
+            <div class="form-actions">
+                <a th:href="@{/admin/reservations/{id}(id=${reservation.id})}" class="btn btn-outline">취소</a>
+                <button type="submit" class="btn btn-primary">저장</button>
+            </div>
+        </form>
+    </th:block>
+
+    <th:block layout:fragment="scripts">
+        <script th:inline="javascript">
+            document.addEventListener('DOMContentLoaded', function() {
+                const dateScroll = document.getElementById('dateScroll');
+                const dateInput = document.getElementById('reservationDate');
+                const timeGrid = document.getElementById('timeGrid');
+                const timeMessage = document.getElementById('timeSelectMessage');
+                const timeInput = document.getElementById('reservationTime');
+                const typeInput = document.getElementById('consultationType');
+                const timeBtns = document.querySelectorAll('.time-btn');
+                const typeBtns = document.querySelectorAll('.type-btn');
+                const phoneInput = document.getElementById('phone');
+
+                const weekdays = ['일', '월', '화', '수', '목', '금', '토'];
+
+                // 로컬 시간 기준 날짜 포맷 함수 (타임존 문제 방지)
+                function formatDateLocal(date) {
+                    const year = date.getFullYear();
+                    const month = String(date.getMonth() + 1).padStart(2, '0');
+                    const day = String(date.getDate()).padStart(2, '0');
+                    return `${year}-${month}-${day}`;
+                }
+
+                // 수정 모드: 현재 예약 정보
+                const isEditMode = true;
+                const currentReservationDate = /*[[${#temporals.format(reservation.reservationDate, 'yyyy-MM-dd')}]]*/ '';
+                const currentReservationTime = /*[[${#temporals.format(reservation.reservationTime, 'HH:mm')}]]*/ '';
+                const reservationId = /*[[${reservation.id}]]*/ 0;
+                const currentConsultationType = /*[[${reservation.consultationType}]]*/ '';
+
+                // ===== Validation helper =====
+                const customerNameInput = document.getElementById('customerName');
+                const emailInput = document.getElementById('email');
+                const phonePattern = /^010-\d{4}-\d{4}$/;
+                const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+                function showError(input, message) {
+                    input.classList.add('error');
+                    const errorEl = document.getElementById(input.id + 'Error');
+                    if (errorEl) {
+                        errorEl.textContent = message;
+                        errorEl.style.display = 'block';
+                    }
+                }
+
+                function clearError(input) {
+                    input.classList.remove('error');
+                    const errorEl = document.getElementById(input.id + 'Error');
+                    if (errorEl) {
+                        errorEl.textContent = '';
+                        errorEl.style.display = 'none';
+                    }
+                }
+
+                function validateCustomerName() {
+                    const value = customerNameInput.value.trim();
+                    if (!value) {
+                        showError(customerNameInput, '고객명을 입력해주세요');
+                        return false;
+                    }
+                    if (value.length < 2 || value.length > 50) {
+                        showError(customerNameInput, '고객명은 2~50자로 입력해주세요');
+                        return false;
+                    }
+                    clearError(customerNameInput);
+                    return true;
+                }
+
+                function validatePhone() {
+                    const value = phoneInput.value.trim();
+                    if (!value) {
+                        showError(phoneInput, '연락처를 입력해주세요');
+                        return false;
+                    }
+                    if (!phonePattern.test(value)) {
+                        showError(phoneInput, '연락처는 010-0000-0000 형식으로 입력해주세요');
+                        return false;
+                    }
+                    clearError(phoneInput);
+                    return true;
+                }
+
+                function validateEmail() {
+                    const value = emailInput.value.trim();
+                    if (value && !emailPattern.test(value)) {
+                        showError(emailInput, '올바른 이메일 형식이 아닙니다');
+                        return false;
+                    }
+                    clearError(emailInput);
+                    return true;
+                }
+
+                // Real-time validation (blur)
+                customerNameInput.addEventListener('blur', validateCustomerName);
+                phoneInput.addEventListener('blur', validatePhone);
+                emailInput.addEventListener('blur', validateEmail);
+
+                // Clear error on input
+                customerNameInput.addEventListener('input', () => clearError(customerNameInput));
+                emailInput.addEventListener('input', () => clearError(emailInput));
+
+                // ===== 연락처 자동 하이픈 =====
+                phoneInput.addEventListener('input', function(e) {
+                    clearError(phoneInput);
+                    let value = e.target.value.replace(/[^0-9]/g, '');
+                    if (value.length > 11) value = value.slice(0, 11);
+
+                    if (value.length <= 3) {
+                        e.target.value = value;
+                    } else if (value.length <= 7) {
+                        e.target.value = value.slice(0, 3) + '-' + value.slice(3);
+                    } else {
+                        e.target.value = value.slice(0, 3) + '-' + value.slice(3, 7) + '-' + value.slice(7);
+                    }
+                });
+
+                // ===== 상담유형 초기값 설정 =====
+                typeInput.value = currentConsultationType;
+
+                // ===== 날짜 버튼 생성 (오늘부터 14일) =====
+                function generateDateButtons() {
+                    const today = new Date();
+                    today.setHours(0, 0, 0, 0);
+
+                    // 예약일 파싱 (유효하지 않으면 오늘로 설정)
+                    let reservationDate = new Date(currentReservationDate);
+                    if (isNaN(reservationDate.getTime())) {
+                        reservationDate = new Date(today);
+                    }
+                    reservationDate.setHours(0, 0, 0, 0);
+
+                    // 시작일: 예약일과 오늘 중 더 이른 날짜
+                    const startDate = new Date(Math.min(today.getTime(), reservationDate.getTime()));
+
+                    for (let i = 0; i < 30; i++) {
+                        const date = new Date(startDate);
+                        date.setDate(startDate.getDate() + i);
+
+                        const dateStr = formatDateLocal(date);
+                        const dayOfWeek = date.getDay();
+                        const todayStr = formatDateLocal(today);
+                        const isToday = dateStr === todayStr;
+                        const isWeekend = dayOfWeek === 0 || dayOfWeek === 6;
+
+                        const btn = document.createElement('button');
+                        btn.type = 'button';
+                        btn.className = 'date-btn';
+                        if (isToday) btn.classList.add('today');
+                        if (isWeekend) btn.classList.add('weekend');
+                        btn.dataset.date = dateStr;
+                        btn.dataset.isToday = isToday ? 'true' : 'false';
+
+                        btn.innerHTML = `
+                            <div class="date-weekday">${weekdays[dayOfWeek]}${isToday ? ' (오늘)' : ''}</div>
+                            <div class="date-day">${date.getDate()}</div>
+                            <div class="date-month">${date.getMonth() + 1}월</div>
+                        `;
+
+                        btn.addEventListener('click', () => selectDate(btn, dateStr, isToday));
+                        dateScroll.appendChild(btn);
+                    }
+                }
+
+                // ===== 날짜 선택 =====
+                async function selectDate(btn, dateStr, isToday) {
+                    document.querySelectorAll('.date-btn').forEach(b => b.classList.remove('selected'));
+                    btn.classList.add('selected');
+                    dateInput.value = dateStr;
+
+                    try {
+                        const url = `/admin/reservations/reserved-times?date=${dateStr}&excludeId=${reservationId}`;
+                        const response = await fetch(url);
+                        const reservedTimes = await response.json();
+
+                        const now = new Date();
+                        const currentHour = now.getHours();
+
+                        timeBtns.forEach(b => {
+                            b.classList.remove('selected', 'reserved', 'passed');
+                            const timeText = b.querySelector('.time-text');
+                            const time = b.dataset.time;
+                            const hour = parseInt(time.split(':')[0]);
+
+                            if (reservedTimes.includes(time)) {
+                                b.classList.add('reserved');
+                                timeText.textContent = `예약됨(${time})`;
+                            } else if (isToday && hour <= currentHour) {
+                                b.classList.add('passed');
+                                timeText.textContent = time;
+                            } else {
+                                timeText.textContent = time;
+                            }
+                        });
+
+                        timeInput.value = '';
+                        timeMessage.style.display = 'none';
+                        timeGrid.style.display = 'grid';
+                    } catch (error) {
+                        console.error('시간 조회 실패:', error);
+                    }
+                }
+
+                // 초기화
+                generateDateButtons();
+                timeMessage.style.display = 'block';
+                timeGrid.style.display = 'none';
+
+                // 수정 모드: 현재 예약 날짜/시간 자동 선택
+                setTimeout(() => {
+                    const currentDateBtn = document.querySelector(`.date-btn[data-date="${currentReservationDate}"]`);
+                    if (currentDateBtn) {
+                        const todayStr = formatDateLocal(new Date());
+                        const isToday = currentReservationDate === todayStr;
+
+                        // 날짜 선택 및 스크롤
+                        currentDateBtn.classList.add('selected');
+                        dateInput.value = currentReservationDate;
+                        currentDateBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+
+                        // 시간 조회 및 현재 시간 선택
+                        fetch(`/admin/reservations/reserved-times?date=${currentReservationDate}&excludeId=${reservationId}`)
+                            .then(res => res.json())
+                            .then(reservedTimes => {
+                                const now = new Date();
+                                const currentHour = now.getHours();
+
+                                timeBtns.forEach(btn => {
+                                    const time = btn.dataset.time;
+                                    const hour = parseInt(time.split(':')[0]);
+                                    const timeText = btn.querySelector('.time-text');
+
+                                    if (reservedTimes.includes(time)) {
+                                        btn.classList.add('reserved');
+                                        timeText.textContent = `예약됨(${time})`;
+                                    } else if (isToday && hour <= currentHour) {
+                                        btn.classList.add('passed');
+                                        timeText.textContent = time;
+                                    } else {
+                                        timeText.textContent = time;
+                                    }
+
+                                    // 현재 시간 선택
+                                    if (time === currentReservationTime) {
+                                        btn.classList.remove('reserved', 'passed');
+                                        btn.classList.add('selected');
+                                        timeText.textContent = time;
+                                        timeInput.value = time;
+                                    }
+                                });
+
+                                timeGrid.style.display = 'grid';
+                                timeMessage.style.display = 'none';
+                            });
+                    }
+                }, 100);
+
+                // ===== 시간 버튼 클릭 =====
+                timeBtns.forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        if (this.classList.contains('reserved') || this.classList.contains('passed')) return;
+                        timeBtns.forEach(b => b.classList.remove('selected'));
+                        this.classList.add('selected');
+                        timeInput.value = this.dataset.time;
+                    });
+                });
+
+                // ===== 상담유형 버튼 클릭 =====
+                typeBtns.forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        typeBtns.forEach(b => b.classList.remove('selected'));
+                        this.classList.add('selected');
+                        typeInput.value = this.dataset.value;
+                    });
+                });
+
+                // ===== 폼 제출 전 검증 =====
+                document.getElementById('reservationForm').addEventListener('submit', function(e) {
+                    const isCustomerNameValid = validateCustomerName();
+                    const isPhoneValid = validatePhone();
+                    const isEmailValid = validateEmail();
+
+                    if (!isCustomerNameValid || !isPhoneValid || !isEmailValid) {
+                        e.preventDefault();
+                        const firstError = document.querySelector('.form-input.error');
+                        if (firstError) firstError.focus();
+                        return;
+                    }
+
+                    if (!dateInput.value) {
+                        e.preventDefault();
+                        alert('상담일을 선택해주세요.');
+                        return;
+                    }
+                    if (!timeInput.value) {
+                        e.preventDefault();
+                        alert('상담시간을 선택해주세요.');
+                        return;
+                    }
+                    if (!typeInput.value) {
+                        e.preventDefault();
+                        alert('상담유형을 선택해주세요.');
+                        return;
+                    }
+                });
+            });
+        </script>
     </th:block>
 </body>
 </html>

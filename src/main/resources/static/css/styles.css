@@ -63,7 +63,7 @@ body {
     font-size: 1rem;
     line-height: 1.6;
     color: var(--color-text);
-    background-color: var(--color-white);
+    background-color: var(--color-bg-light);
     min-height: 100vh;
 }
 
@@ -103,11 +103,11 @@ p {
 }
 
 /* --------------------------------------------------------------------------
-   Layout - Container
+   Layout - Container (Mobile-like layout, slightly wider for PC)
    -------------------------------------------------------------------------- */
 .container {
     width: 100%;
-    max-width: 1200px;
+    max-width: 540px;
     margin: 0 auto;
     padding: 0 var(--spacing-md);
 }
@@ -121,6 +121,7 @@ p {
 .main-content {
     flex: 1;
     padding: var(--spacing-lg) 0;
+    background-color: var(--color-bg-light);
 }
 
 /* --------------------------------------------------------------------------
@@ -432,11 +433,21 @@ p {
 }
 
 /* --------------------------------------------------------------------------
-   Admin Sidebar
+   Admin Sidebar & Layout
    -------------------------------------------------------------------------- */
 .admin-layout {
     display: flex;
     flex-direction: column;
+    min-height: calc(100vh - 60px);
+}
+
+.admin-content {
+    padding: var(--spacing-md);
+    background-color: var(--color-bg-light);
+    min-height: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    width: 100%;
 }
 
 .sidebar {
@@ -444,6 +455,13 @@ p {
     color: var(--color-white);
     padding: var(--spacing-lg);
     display: none;
+    position: fixed;
+    top: 60px;
+    left: 0;
+    right: 0;
+    z-index: 99;
+    max-height: calc(100vh - 60px);
+    overflow-y: auto;
 }
 
 .sidebar.active {
@@ -463,6 +481,291 @@ p {
 .sidebar-nav a.active {
     background-color: rgba(255, 255, 255, 0.1);
     color: var(--color-white);
+}
+
+.sidebar-logout-btn {
+    display: block;
+    width: 100%;
+    text-align: left;
+    color: rgba(255, 255, 255, 0.8);
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--spacing-xs);
+    transition: all var(--transition-fast);
+    background: none;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.sidebar-logout-btn:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--color-white);
+}
+
+/* --------------------------------------------------------------------------
+   Page Header
+   -------------------------------------------------------------------------- */
+.page-header {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-lg);
+}
+
+.page-header h1 {
+    margin-bottom: 0;
+}
+
+.page-header .btn {
+    align-self: flex-start;
+}
+
+/* --------------------------------------------------------------------------
+   Search Form
+   -------------------------------------------------------------------------- */
+.search-form {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-sm);
+}
+
+.search-actions {
+    display: flex;
+    gap: var(--spacing-sm);
+}
+
+.search-actions .btn {
+    flex: 1;
+}
+
+/* --------------------------------------------------------------------------
+   Date Range
+   -------------------------------------------------------------------------- */
+.date-range {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.date-range .form-input {
+    flex: 1;
+    min-width: 0;
+}
+
+.date-separator {
+    color: #999;
+    font-weight: 500;
+    flex-shrink: 0;
+}
+
+/* --------------------------------------------------------------------------
+   Mobile Filter (Collapsible)
+   -------------------------------------------------------------------------- */
+.filter-toggle {
+    display: none;
+    width: 100%;
+    padding: var(--spacing-sm) var(--spacing-md);
+    background: var(--color-bg-light);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--color-text);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.filter-toggle:hover {
+    background: var(--color-border);
+}
+
+.filter-toggle::after {
+    content: '';
+    display: inline-block;
+    width: 0;
+    height: 0;
+    margin-left: auto;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid var(--color-text);
+    transition: transform var(--transition-fast);
+}
+
+.filter-toggle.active::after {
+    transform: rotate(180deg);
+}
+
+.filter-content {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-sm);
+}
+
+/* Mobile Date Filter Styles */
+@media (max-width: 767px) {
+    .filter-toggle {
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-sm);
+        margin-bottom: var(--spacing-sm);
+    }
+
+    .filter-content {
+        display: none;
+        padding-top: var(--spacing-sm);
+    }
+
+    .filter-content.active {
+        display: grid;
+    }
+
+    /* 날짜 필터 모바일 레이아웃 */
+    .date-filter-mobile {
+        background: var(--color-bg-light);
+        border-radius: var(--radius-md);
+        padding: var(--spacing-md);
+        margin-bottom: var(--spacing-sm);
+    }
+
+    .date-filter-mobile .date-filter-label {
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: var(--color-primary);
+        margin-bottom: var(--spacing-sm);
+        display: block;
+    }
+
+    .date-filter-mobile .date-inputs {
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-sm);
+    }
+
+    .date-filter-mobile .date-input-group {
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-sm);
+    }
+
+    .date-filter-mobile .date-input-group label {
+        font-size: 0.75rem;
+        color: #666;
+        min-width: 40px;
+        flex-shrink: 0;
+    }
+
+    .date-filter-mobile .date-input-group .form-input {
+        flex: 1;
+    }
+
+    /* 퀵 필터 버튼 */
+    .quick-filters {
+        display: flex;
+        gap: var(--spacing-xs);
+        margin-top: var(--spacing-sm);
+        flex-wrap: wrap;
+    }
+
+    .quick-filter-btn {
+        padding: var(--spacing-xs) var(--spacing-sm);
+        font-size: 0.75rem;
+        background: var(--color-white);
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-full);
+        color: var(--color-text);
+        cursor: pointer;
+        transition: all var(--transition-fast);
+    }
+
+    .quick-filter-btn:hover,
+    .quick-filter-btn.active {
+        background: var(--color-accent);
+        border-color: var(--color-accent);
+        color: var(--color-white);
+    }
+}
+
+/* --------------------------------------------------------------------------
+   Form Actions (Submit/Cancel Buttons)
+   -------------------------------------------------------------------------- */
+.form-actions {
+    display: flex;
+    gap: var(--spacing-sm);
+    margin-top: var(--spacing-md);
+}
+
+.form-actions .btn {
+    flex: 1;
+}
+
+.form-actions .btn-primary {
+    flex: 2;
+}
+
+/* --------------------------------------------------------------------------
+   Admin Mobile Optimization
+   -------------------------------------------------------------------------- */
+/* 모바일에서 카드 마진 및 패딩 조정 */
+@media (max-width: 767px) {
+    .admin-content .card {
+        border-radius: var(--radius-md);
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .admin-content .card-body {
+        padding: var(--spacing-md);
+    }
+
+    .admin-content h1 {
+        font-size: 1.5rem;
+    }
+
+    /* 폼 요소 모바일 최적화 */
+    .admin-content .form-group {
+        margin-bottom: var(--spacing-md);
+    }
+
+    .admin-content .form-input,
+    .admin-content .form-select,
+    .admin-content .form-textarea {
+        font-size: 16px; /* iOS 확대 방지 */
+    }
+
+    /* 버튼 그룹 모바일 최적화 */
+    .admin-content .btn {
+        padding: var(--spacing-sm) var(--spacing-md);
+        font-size: 0.9rem;
+    }
+
+    /* 검색 폼 모바일 최적화 */
+    .search-form {
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-sm);
+    }
+
+    .search-form .form-input,
+    .search-form .form-select {
+        width: 100%;
+    }
+
+    .search-form .btn {
+        width: 100%;
+    }
+
+    /* 테이블 모바일 최적화 */
+    .table-responsive {
+        margin: 0 calc(-1 * var(--spacing-md));
+        padding: 0 var(--spacing-md);
+    }
+
+    /* 페이지네이션 모바일 */
+    .pagination {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
 }
 
 /* --------------------------------------------------------------------------
@@ -519,97 +822,146 @@ p {
 .hidden { display: none; }
 
 /* --------------------------------------------------------------------------
-   Media Queries - Tablet (768px+)
+   Mobile-Only Mode: PC에서도 모바일과 동일하게 표시
+   모든 화면에서 모바일 레이아웃 유지
    -------------------------------------------------------------------------- */
-@media (min-width: 768px) {
-    h1 { font-size: 2rem; }
-    h2 { font-size: 1.75rem; }
-    h3 { font-size: 1.5rem; }
 
-    .nav-toggle {
-        display: none;
-    }
+/* 모바일 스타일 적용 - 모든 화면에서 필터 토글 표시 */
+.filter-toggle {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-sm);
+}
 
-    .nav-menu {
-        display: flex;
-        position: static;
-        background: none;
-        padding: 0;
-        gap: var(--spacing-lg);
-    }
+.filter-content {
+    display: none;
+    padding-top: var(--spacing-sm);
+}
 
-    .nav-menu a {
-        padding: var(--spacing-sm) 0;
-        border-bottom: none;
-    }
+.filter-content.active {
+    display: grid;
+}
 
-    .hero {
-        padding: var(--spacing-xxl) 0 calc(var(--spacing-xxl) * 1.5);
-    }
+/* admin-content max-width - PC에서 조금 더 넓게 */
+.admin-content {
+    max-width: 540px;
+}
 
-    .hero-logo {
-        max-width: 180px;
-    }
+/* 날짜 필터 모바일 레이아웃 - 모든 화면에 적용 */
+.date-filter-mobile {
+    background: var(--color-bg-light);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-md);
+    margin-bottom: var(--spacing-sm);
+}
 
-    .hero-title {
-        font-size: 2.25rem;
-    }
+.date-filter-mobile .date-filter-label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
+    display: block;
+}
 
-    .hero-subtitle {
-        font-size: 1.125rem;
-    }
+.date-filter-mobile .date-inputs {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}
 
-    .hero-actions {
-        flex-direction: row;
-        justify-content: center;
-        max-width: none;
-    }
+.date-filter-mobile .date-input-group {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
 
-    .features-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
+.date-filter-mobile .date-input-group label {
+    font-size: 0.75rem;
+    color: #666;
+    min-width: 40px;
+    flex-shrink: 0;
+}
 
-    .admin-layout {
-        flex-direction: row;
-    }
+.date-filter-mobile .date-input-group .form-input {
+    flex: 1;
+}
 
-    .sidebar {
-        display: block;
-        width: 250px;
-        min-height: calc(100vh - 60px);
-        flex-shrink: 0;
-    }
+/* 퀵 필터 버튼 */
+.quick-filters {
+    display: flex;
+    gap: var(--spacing-xs);
+    margin-top: var(--spacing-sm);
+    flex-wrap: wrap;
+}
 
-    .admin-content {
-        flex: 1;
-        padding: var(--spacing-lg);
-    }
+.quick-filter-btn {
+    padding: var(--spacing-xs) var(--spacing-sm);
+    font-size: 0.75rem;
+    background: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-full);
+    color: var(--color-text);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.quick-filter-btn:hover,
+.quick-filter-btn.active {
+    background: var(--color-accent);
+    border-color: var(--color-accent);
+    color: var(--color-white);
 }
 
 /* --------------------------------------------------------------------------
-   Media Queries - Desktop (1024px+)
+   Alert Messages
    -------------------------------------------------------------------------- */
-@media (min-width: 1024px) {
-    h1 { font-size: 2.5rem; }
+.alert {
+    padding: var(--spacing-md);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--spacing-md);
+    font-size: 0.9375rem;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
 
-    .container {
-        padding: 0 var(--spacing-xl);
-    }
+.alert-success {
+    background-color: #d4edda;
+    border: 1px solid #c3e6cb;
+    color: #155724;
+}
 
-    .hero-title {
-        font-size: 2.75rem;
-    }
+.alert-error {
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    color: #721c24;
+}
 
-    .features-grid {
-        grid-template-columns: repeat(3, 1fr);
-    }
+.alert-warning {
+    background-color: #fff3cd;
+    border: 1px solid #ffeeba;
+    color: #856404;
+}
+
+.alert-info {
+    background-color: #d1ecf1;
+    border: 1px solid #bee5eb;
+    color: #0c5460;
 }
 
 /* --------------------------------------------------------------------------
-   Media Queries - Wide (1280px+)
+   Customer Layout
    -------------------------------------------------------------------------- */
-@media (min-width: 1280px) {
-    .sidebar {
-        width: 280px;
-    }
+.customer-layout {
+    min-height: calc(100vh - 60px);
+}
+
+.customer-content {
+    padding: var(--spacing-md);
+    background-color: var(--color-bg-light);
+    min-height: 100%;
+    max-width: 540px;
+    margin: 0 auto;
+    width: 100%;
 }

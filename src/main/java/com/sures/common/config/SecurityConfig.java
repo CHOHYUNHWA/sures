@@ -22,7 +22,11 @@ public class SecurityConfig {
                 .requestMatchers("/customer/**").permitAll()
                 // 관리자 로그인/회원가입 허용
                 .requestMatchers("/admin/login", "/admin/register", "/admin/find-account").permitAll()
-                // 관리자 페이지는 인증 필요
+                // 에러 페이지 허용
+                .requestMatchers("/error/**").permitAll()
+                // 예약 관리 기능은 SUPER_ADMIN만 허용
+                .requestMatchers("/admin/reservations/**").hasRole("SUPER_ADMIN")
+                // 그 외 관리자 페이지는 인증만 필요
                 .requestMatchers("/admin/**").authenticated()
                 // 그 외 모든 요청 허용
                 .anyRequest().permitAll()
@@ -37,7 +41,16 @@ public class SecurityConfig {
             .logout(logout -> logout
                 .logoutUrl("/admin/logout")
                 .logoutSuccessUrl("/admin/login?logout=true")
+                .invalidateHttpSession(true)
+                .deleteCookies("SURES_SESSION")
                 .permitAll()
+            )
+            .sessionManagement(session -> session
+                .maximumSessions(1) // 동시 세션 1개만 허용
+                .maxSessionsPreventsLogin(false) // 새 로그인 시 기존 세션 만료
+            )
+            .exceptionHandling(exception -> exception
+                .accessDeniedPage("/error/403") // 권한 없음 페이지
             );
 
         return http.build();

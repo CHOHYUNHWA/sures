@@ -62,7 +62,7 @@ public class Reservation extends BaseEntity {
         this.reservationDate = reservationDate;
         this.reservationTime = reservationTime;
         this.consultationType = consultationType;
-        this.status = ReservationStatus.PENDING;
+        this.status = ReservationStatus.CONFIRMED;
         this.memo = memo;
         this.adminId = adminId;
     }
@@ -93,5 +93,17 @@ public class Reservation extends BaseEntity {
 
     public void assignAdmin(Long adminId) {
         this.adminId = adminId;
+    }
+
+    public void update(String customerName, String phone, String email,
+                       LocalDate reservationDate, LocalTime reservationTime,
+                       ConsultationType consultationType, String memo) {
+        this.customerName = customerName;
+        this.phone = phone;
+        this.email = email;
+        this.reservationDate = reservationDate;
+        this.reservationTime = reservationTime;
+        this.consultationType = consultationType;
+        this.memo = memo;
     }
 }

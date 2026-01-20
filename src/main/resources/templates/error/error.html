@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/base}"
+      lang="ko">
+<head>
+    <title>오류 발생</title>
+</head>
+<body>
+    <th:block layout:fragment="header">
+        <header class="header">
+            <div class="container">
+                <div class="header-inner" style="justify-content: center;">
+                    <a th:href="@{/customer}" class="logo">
+                        <img th:src="@{/image/logo.png}" alt="Sures 로고">
+                        <span class="logo-text">Sures</span>
+                    </a>
+                </div>
+            </div>
+        </header>
+    </th:block>
+
+    <th:block layout:fragment="content">
+        <div class="container" style="max-width: 500px; padding-top: 3rem; text-align: center;">
+            <div class="card">
+                <div class="card-body" style="padding: 2rem;">
+                    <div style="font-size: 4rem; margin-bottom: 1rem;"
+                         th:text="${errorCode == '404'} ? '🔍' : (${errorCode == '400'} ? '⚠️' : '😵')">😵</div>
+                    <h1 style="margin-bottom: 0.5rem; color: var(--color-primary);">
+                        <span th:text="${errorCode}">500</span>
+                    </h1>
+                    <p style="font-size: 1.1rem; color: var(--color-text); margin-bottom: 1.5rem;"
+                       th:text="${errorMessage}">오류가 발생했습니다</p>
+                    <p style="color: #999; font-size: 0.9rem; margin-bottom: 1.5rem;">
+                        문제가 지속되면 관리자에게 문의해주세요.
+                    </p>
+                    <div style="display: flex; gap: 0.5rem; justify-content: center;">
+                        <a href="javascript:history.back()" class="btn btn-outline">이전 페이지</a>
+                        <a th:href="@{/customer}" class="btn btn-primary">홈으로</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </th:block>
+</body>
+</html>

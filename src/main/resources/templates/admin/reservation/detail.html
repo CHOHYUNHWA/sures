@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/admin-layout}"
+      lang="ko">
+<head>
+    <title>예약 상세</title>
+</head>
+<body>
+    <th:block layout:fragment="page-content">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+            <h1 style="margin-bottom: 0;">예약 상세</h1>
+            <div style="display: flex; gap: 0.5rem;">
+                <a th:href="@{/admin/reservations/{id}/edit(id=${reservationId})}" class="btn btn-accent">수정</a>
+                <form th:action="@{/admin/reservations/{id}(id=${reservationId})}" method="post" style="margin: 0;">
+                    <input type="hidden" name="_method" value="delete">
+                    <button type="submit" class="btn" style="background-color: var(--color-danger); color: white;"
+                            onclick="return confirm('예약을 취소하시겠습니까?');">
+                        취소
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <div class="card mb-3">
+            <div class="card-header">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <span style="font-weight: 600;">예약번호: R20260120001</span>
+                    <span class="text-success">확정</span>
+                </div>
+            </div>
+            <div class="card-body">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <div class="form-group">
+                        <label class="form-label">고객명</label>
+                        <p th:text="${reservation?.customerName} ?: '홍길동'">홍길동</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">연락처</label>
+                        <p th:text="${reservation?.phone} ?: '010-1234-5678'">010-1234-5678</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">이메일</label>
+                        <p th:text="${reservation?.email} ?: 'hong@example.com'">hong@example.com</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">상담일시</label>
+                        <p>
+                            <span th:text="${reservation?.reservationDate} ?: '2026-01-25'">2026-01-25</span>
+                            <span th:text="${reservation?.reservationTime} ?: '14:00'">14:00</span>
+                        </p>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">상담 유형</label>
+                        <p th:text="${reservation?.consultationType} ?: '종합소득세 신고'">종합소득세 신고</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">등록일</label>
+                        <p th:text="${reservation?.createdAt} ?: '2026-01-20 09:30'">2026-01-20 09:30</p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">메모</label>
+                    <p th:text="${reservation?.memo} ?: '작년 종합소득세 신고 관련 상담 요청. 부동산 임대소득 포함.'">
+                        작년 종합소득세 신고 관련 상담 요청. 부동산 임대소득 포함.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <a th:href="@{/admin/reservations}" class="btn btn-outline">
+            ← 목록으로
+        </a>
+    </th:block>
+</body>
+</html>

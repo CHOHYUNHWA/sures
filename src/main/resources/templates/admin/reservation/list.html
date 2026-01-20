@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/admin-layout}"
+      lang="ko">
+<head>
+    <title>예약 관리</title>
+</head>
+<body>
+    <th:block layout:fragment="page-content">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+            <h1 style="margin-bottom: 0;">예약 관리</h1>
+            <a th:href="@{/admin/reservations/new}" class="btn btn-primary">
+                + 새 예약
+            </a>
+        </div>
+
+        <!-- 검색 필터 -->
+        <div class="card mb-3">
+            <div class="card-body">
+                <form action="#" method="get" style="display: flex; flex-wrap: wrap; gap: 0.75rem;">
+                    <div style="flex: 1; min-width: 150px;">
+                        <input type="text" class="form-input" name="keyword" placeholder="이름/연락처 검색">
+                    </div>
+                    <div style="flex: 1; min-width: 150px;">
+                        <select class="form-select" name="status">
+                            <option value="">전체 상태</option>
+                            <option value="PENDING">대기</option>
+                            <option value="CONFIRMED">확정</option>
+                            <option value="CANCELLED">취소</option>
+                            <option value="COMPLETED">완료</option>
+                        </select>
+                    </div>
+                    <div style="flex: 1; min-width: 150px;">
+                        <input type="date" class="form-input" name="date">
+                    </div>
+                    <button type="submit" class="btn btn-accent">검색</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- 예약 목록 테이블 -->
+        <div class="card">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>예약번호</th>
+                            <th>예약자</th>
+                            <th>연락처</th>
+                            <th>상담일시</th>
+                            <th>상담유형</th>
+                            <th>상태</th>
+                            <th>관리</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="reservation : ${reservations}">
+                            <td th:text="${reservation.reservationNumber}">R20260120001</td>
+                            <td th:text="${reservation.customerName}">홍길동</td>
+                            <td th:text="${reservation.phone}">010-1234-5678</td>
+                            <td>
+                                <span th:text="${reservation.reservationDate}">2026-01-25</span>
+                                <span th:text="${reservation.reservationTime}">14:00</span>
+                            </td>
+                            <td th:text="${reservation.consultationType}">종합소득세</td>
+                            <td>
+                                <span class="text-success" th:text="${reservation.statusText}">확정</span>
+                            </td>
+                            <td>
+                                <a th:href="@{/admin/reservations/{id}(id=${reservation.id})}" class="btn btn-outline" style="padding: 0.25rem 0.5rem; font-size: 0.75rem;">
+                                    상세
+                                </a>
+                            </td>
+                        </tr>
+                        <!-- 샘플 데이터 -->
+                        <tr th:if="${reservations == null}">
+                            <td>R20260120001</td>
+                            <td>홍길동</td>
+                            <td>010-1234-5678</td>
+                            <td>2026-01-25 14:00</td>
+                            <td>종합소득세</td>
+                            <td><span class="text-success">확정</span></td>
+                            <td>
+                                <a th:href="@{/admin/reservations/1}" class="btn btn-outline" style="padding: 0.25rem 0.5rem; font-size: 0.75rem;">
+                                    상세
+                                </a>
+                            </td>
+                        </tr>
+                        <tr th:if="${reservations == null}">
+                            <td>R20260120002</td>
+                            <td>김철수</td>
+                            <td>010-9876-5432</td>
+                            <td>2026-01-26 10:00</td>
+                            <td>부가가치세</td>
+                            <td><span class="text-warning">대기</span></td>
+                            <td>
+                                <a th:href="@{/admin/reservations/2}" class="btn btn-outline" style="padding: 0.25rem 0.5rem; font-size: 0.75rem;">
+                                    상세
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </th:block>
+</body>
+</html>

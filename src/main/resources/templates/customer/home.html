@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/base}"
+      lang="ko">
+<head>
+    <title>세무 예약 시스템</title>
+</head>
+<body>
+    <!-- Custom Header for Landing -->
+    <th:block layout:fragment="header">
+        <header class="header">
+            <div class="container">
+                <div class="header-inner">
+                    <a th:href="@{/customer}" class="logo">
+                        <img th:src="@{/image/logo.png}" alt="Sures 로고">
+                        <span class="logo-text">Sures</span>
+                    </a>
+
+                    <button class="nav-toggle" aria-label="메뉴 열기" onclick="toggleNav()">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+
+                    <nav class="nav-menu" id="navMenu">
+                        <a th:href="@{/customer/reservations/apply}">예약 신청</a>
+                        <a th:href="@{/customer/reservations/verify}">예약 조회</a>
+                        <a th:href="@{/admin/login}">관리자</a>
+                    </nav>
+                </div>
+            </div>
+        </header>
+    </th:block>
+
+    <!-- Main Content -->
+    <th:block layout:fragment="content">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <img th:src="@{/image/logo.png}" alt="Sures 로고" class="hero-logo">
+                <h1 class="hero-title">세무 상담 예약</h1>
+                <p class="hero-subtitle">
+                    간편하게 세무 상담을 예약하고<br>
+                    전문 세무사의 상담을 받아보세요
+                </p>
+                <div class="hero-actions">
+                    <a th:href="@{/customer/reservations/apply}" class="btn btn-accent btn-lg">
+                        예약 신청하기
+                    </a>
+                    <a th:href="@{/customer/reservations/verify}" class="btn btn-outline btn-lg" style="border-color: white; color: white;">
+                        예약 조회하기
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="features">
+            <div class="container">
+                <h2 class="features-title">서비스 안내</h2>
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M11 6.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm-3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm-5 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1z"/>
+                                <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
+                            </svg>
+                        </div>
+                        <h3 class="feature-title">간편한 예약</h3>
+                        <p class="feature-desc">
+                            온라인으로 24시간 언제든지<br>
+                            상담 예약이 가능합니다
+                        </p>
+                    </div>
+
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
+                            </svg>
+                        </div>
+                        <h3 class="feature-title">전문 상담</h3>
+                        <p class="feature-desc">
+                            경험 많은 전문 세무사가<br>
+                            맞춤 상담을 제공합니다
+                        </p>
+                    </div>
+
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M10.854 7.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708 0z"/>
+                                <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
+                            </svg>
+                        </div>
+                        <h3 class="feature-title">예약 확인</h3>
+                        <p class="feature-desc">
+                            예약 내역을 언제든지<br>
+                            확인하고 관리할 수 있습니다
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta" style="padding: 3rem 0; text-align: center;">
+            <div class="container">
+                <h2 style="margin-bottom: 1rem;">지금 바로 상담 예약하세요</h2>
+                <p style="color: #666; margin-bottom: 1.5rem;">
+                    세무 관련 궁금한 점이 있으신가요?<br>
+                    전문 세무사가 친절하게 상담해 드립니다.
+                </p>
+                <a th:href="@{/customer/reservations/apply}" class="btn btn-primary btn-lg">
+                    예약 신청하기
+                </a>
+            </div>
+        </section>
+    </th:block>
+
+    <!-- Scripts -->
+    <th:block layout:fragment="scripts">
+        <script>
+            function toggleNav() {
+                document.getElementById('navMenu').classList.toggle('active');
+            }
+        </script>
+    </th:block>
+</body>
+</html>

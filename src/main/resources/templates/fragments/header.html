@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+    <header th:fragment="header" class="header">
+        <div class="container">
+            <div class="header-inner">
+                <a th:href="@{/}" class="logo">
+                    <img th:src="@{/image/logo.png}" alt="Sures 로고">
+                    <span class="logo-text">Sures</span>
+                </a>
+
+                <button class="nav-toggle" aria-label="메뉴 열기" onclick="toggleNav()">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+
+                <nav class="nav-menu" id="navMenu">
+                    <a th:href="@{/customer}">고객</a>
+                    <a th:href="@{/admin/login}">관리자</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <script th:inline="javascript">
+        function toggleNav() {
+            document.getElementById('navMenu').classList.toggle('active');
+        }
+    </script>
+</body>
+</html>

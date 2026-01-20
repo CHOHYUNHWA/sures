@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/customer-layout}"
+      lang="ko">
+<head>
+    <title>예약 내역</title>
+</head>
+<body>
+    <th:block layout:fragment="page-content">
+        <h1 class="mb-3">예약 내역</h1>
+
+        <!-- 예약 목록 -->
+        <div class="card mb-3" th:each="reservation : ${reservations}">
+            <div class="card-body">
+                <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 0.5rem;">
+                    <span class="text-primary" style="font-weight: 600;" th:text="${reservation.reservationNumber}">R20260120001</span>
+                    <span class="badge" th:classappend="${reservation.status == 'CONFIRMED'} ? 'text-success' : 'text-warning'"
+                          th:text="${reservation.statusText}">확정</span>
+                </div>
+                <p style="margin-bottom: 0.25rem;">
+                    <strong>상담일:</strong>
+                    <span th:text="${reservation.reservationDate}">2026-01-25</span>
+                    <span th:text="${reservation.reservationTime}">14:00</span>
+                </p>
+                <p style="margin-bottom: 0.5rem;">
+                    <strong>상담유형:</strong>
+                    <span th:text="${reservation.consultationType}">종합소득세 신고</span>
+                </p>
+                <a th:href="@{/customer/reservations/{id}(id=${reservation.id})}" class="btn btn-outline" style="padding: 0.25rem 0.75rem; font-size: 0.875rem;">
+                    상세보기
+                </a>
+            </div>
+        </div>
+
+        <!-- 샘플 데이터 (실제 데이터 없을 때 표시) -->
+        <div class="card mb-3" th:if="${reservations == null}">
+            <div class="card-body">
+                <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 0.5rem;">
+                    <span class="text-primary" style="font-weight: 600;">R20260120001</span>
+                    <span class="text-success">확정</span>
+                </div>
+                <p style="margin-bottom: 0.25rem;">
+                    <strong>상담일:</strong> 2026-01-25 14:00
+                </p>
+                <p style="margin-bottom: 0.5rem;">
+                    <strong>상담유형:</strong> 종합소득세 신고
+                </p>
+                <a th:href="@{/customer/reservations/1}" class="btn btn-outline" style="padding: 0.25rem 0.75rem; font-size: 0.875rem;">
+                    상세보기
+                </a>
+            </div>
+        </div>
+
+        <div class="mt-3">
+            <a th:href="@{/customer/reservations/apply}" class="btn btn-primary btn-block">
+                새 예약 신청
+            </a>
+        </div>
+    </th:block>
+</body>
+</html>

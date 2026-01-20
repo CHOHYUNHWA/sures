@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/base}"
+      lang="ko">
+<head>
+    <title layout:title-pattern="$CONTENT_TITLE - Sures">고객</title>
+</head>
+<body>
+    <!-- Header Override for Customer -->
+    <th:block layout:fragment="header">
+        <header class="header">
+            <div class="container">
+                <div class="header-inner">
+                    <a th:href="@{/customer}" class="logo">
+                        <img th:src="@{/image/logo.png}" alt="Sures 로고">
+                        <span class="logo-text">Sures</span>
+                    </a>
+
+                    <button class="nav-toggle" aria-label="메뉴 열기" onclick="toggleNav()">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+
+                    <nav class="nav-menu" id="navMenu">
+                        <a th:href="@{/customer}">홈</a>
+                        <a th:href="@{/customer/reservations/apply}">예약 신청</a>
+                        <a th:href="@{/customer/reservations/verify}">예약 조회</a>
+                    </nav>
+                </div>
+            </div>
+        </header>
+    </th:block>
+
+    <!-- Content -->
+    <th:block layout:fragment="content">
+        <div class="container">
+            <th:block layout:fragment="page-content"></th:block>
+        </div>
+    </th:block>
+
+    <!-- Scripts -->
+    <th:block layout:fragment="scripts">
+        <script>
+            function toggleNav() {
+                document.getElementById('navMenu').classList.toggle('active');
+            }
+        </script>
+    </th:block>
+</body>
+</html>

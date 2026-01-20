@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+    <footer th:fragment="footer" class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; <span th:text="${#dates.year(#dates.createNow())}">2026</span> Sures. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

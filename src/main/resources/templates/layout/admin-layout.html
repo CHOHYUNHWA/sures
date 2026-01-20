@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/base}"
+      lang="ko">
+<head>
+    <title layout:title-pattern="$CONTENT_TITLE - Sures 관리자">관리자</title>
+</head>
+<body>
+    <!-- Header Override for Admin -->
+    <th:block layout:fragment="header">
+        <header class="header">
+            <div class="container">
+                <div class="header-inner">
+                    <a th:href="@{/admin/reservations}" class="logo">
+                        <img th:src="@{/image/logo.png}" alt="Sures 로고">
+                        <span class="logo-text">Sures 관리자</span>
+                    </a>
+
+                    <button class="nav-toggle" aria-label="사이드바 열기" onclick="toggleSidebar()">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+
+                    <nav class="nav-menu" id="navMenu">
+                        <a th:href="@{/admin/logout}">로그아웃</a>
+                    </nav>
+                </div>
+            </div>
+        </header>
+    </th:block>
+
+    <!-- Content with Sidebar -->
+    <th:block layout:fragment="content">
+        <div class="admin-layout">
+            <!-- Sidebar -->
+            <aside class="sidebar" id="sidebar">
+                <nav class="sidebar-nav">
+                    <a th:href="@{/admin/reservations}" th:classappend="${currentMenu == 'reservations'} ? 'active'">
+                        예약 관리
+                    </a>
+                    <a th:href="@{/admin/reservations/new}" th:classappend="${currentMenu == 'new'} ? 'active'">
+                        예약 등록
+                    </a>
+                </nav>
+            </aside>
+
+            <!-- Main Content -->
+            <div class="admin-content">
+                <th:block layout:fragment="page-content"></th:block>
+            </div>
+        </div>
+    </th:block>
+
+    <!-- Scripts -->
+    <th:block layout:fragment="scripts">
+        <script>
+            function toggleSidebar() {
+                document.getElementById('sidebar').classList.toggle('active');
+            }
+        </script>
+    </th:block>
+</body>
+</html>

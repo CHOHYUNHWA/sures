@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/admin-layout}"
+      lang="ko">
+<head>
+    <title>예약 수정</title>
+</head>
+<body>
+    <th:block layout:fragment="page-content">
+        <h1 class="mb-3">예약 수정</h1>
+
+        <div class="card">
+            <div class="card-body">
+                <form th:action="@{/admin/reservations/{id}(id=${reservationId})}" method="post">
+                    <input type="hidden" name="_method" value="put">
+
+                    <div class="form-group">
+                        <label class="form-label" for="customerName">고객명 *</label>
+                        <input type="text" class="form-input" id="customerName" name="customerName"
+                               th:value="${reservation?.customerName} ?: '홍길동'" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="phone">연락처 *</label>
+                        <input type="tel" class="form-input" id="phone" name="phone"
+                               th:value="${reservation?.phone} ?: '010-1234-5678'" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="email">이메일</label>
+                        <input type="email" class="form-input" id="email" name="email"
+                               th:value="${reservation?.email} ?: 'hong@example.com'">
+                    </div>
+
+                    <div style="display: flex; gap: 1rem;">
+                        <div class="form-group" style="flex: 1;">
+                            <label class="form-label" for="reservationDate">상담일 *</label>
+                            <input type="date" class="form-input" id="reservationDate" name="reservationDate"
+                                   th:value="${reservation?.reservationDate} ?: '2026-01-25'" required>
+                        </div>
+                        <div class="form-group" style="flex: 1;">
+                            <label class="form-label" for="reservationTime">상담시간 *</label>
+                            <select class="form-select" id="reservationTime" name="reservationTime" required>
+                                <option value="09:00">09:00</option>
+                                <option value="10:00">10:00</option>
+                                <option value="11:00">11:00</option>
+                                <option value="13:00">13:00</option>
+                                <option value="14:00" selected>14:00</option>
+                                <option value="15:00">15:00</option>
+                                <option value="16:00">16:00</option>
+                                <option value="17:00">17:00</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="consultationType">상담 유형 *</label>
+                        <select class="form-select" id="consultationType" name="consultationType" required>
+                            <option value="TAX_RETURN" selected>종합소득세 신고</option>
+                            <option value="VAT">부가가치세</option>
+                            <option value="CORPORATE">법인세</option>
+                            <option value="INHERITANCE">상속/증여세</option>
+                            <option value="OTHER">기타 상담</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="status">예약 상태 *</label>
+                        <select class="form-select" id="status" name="status" required>
+                            <option value="PENDING">대기</option>
+                            <option value="CONFIRMED" selected>확정</option>
+                            <option value="CANCELLED">취소</option>
+                            <option value="COMPLETED">완료</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="memo">메모</label>
+                        <textarea class="form-textarea" id="memo" name="memo" rows="3"
+                                  th:text="${reservation?.memo} ?: '작년 종합소득세 신고 관련 상담 요청. 부동산 임대소득 포함.'"></textarea>
+                    </div>
+
+                    <div style="display: flex; gap: 0.5rem;">
+                        <a th:href="@{/admin/reservations/{id}(id=${reservationId})}" class="btn btn-outline" style="flex: 1;">취소</a>
+                        <button type="submit" class="btn btn-primary" style="flex: 2;">저장</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </th:block>
+</body>
+</html>

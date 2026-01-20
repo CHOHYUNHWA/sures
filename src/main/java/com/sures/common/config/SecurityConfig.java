@@ -46,8 +46,8 @@ public class SecurityConfig {
                 .permitAll()
             )
             .sessionManagement(session -> session
-                .maximumSessions(1) // 동시 세션 1개만 허용
-                .maxSessionsPreventsLogin(false) // 새 로그인 시 기존 세션 만료
+                .maximumSessions(5) // 동시 세션 최대 5개 허용
+                .maxSessionsPreventsLogin(false) // 새 로그인 시 기존 세션 만료 (6번째부터)
             )
             .exceptionHandling(exception -> exception
                 .accessDeniedPage("/error/403") // 권한 없음 페이지

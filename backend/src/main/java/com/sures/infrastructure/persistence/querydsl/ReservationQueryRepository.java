@@ -1,7 +1,7 @@
 package com.sures.infrastructure.persistence.querydsl;
 
-import com.sures.domain.entity.Reservation;
-import com.sures.domain.entity.ReservationStatus;
+import com.sures.domain.reservation.Reservation;
+import com.sures.domain.reservation.ReservationStatus;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 

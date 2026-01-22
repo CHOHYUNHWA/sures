@@ -1,230 +1,95 @@
 package com.sures.presentation.customer.controller;
 
-import com.sures.presentation.customer.dto.*;
-import com.sures.application.facade.CustomerReservationFacade;
-import com.sures.domain.entity.ConsultationType;
-import jakarta.servlet.http.HttpSession;
+import com.sures.application.customer.dto.result.CustomerReservationResult;
+import com.sures.application.customer.service.CustomerReservationService;
+import com.sures.presentation.common.dto.ApiResponse;
+import com.sures.presentation.customer.dto.request.CustomerReservationCreateRequest;
+import com.sures.presentation.customer.dto.request.CustomerReservationUpdateRequest;
+import com.sures.presentation.customer.dto.request.CustomerReservationVerifyRequest;
+import com.sures.presentation.customer.dto.response.CustomerReservationResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.LocalDate;
 import java.util.List;
 
-@Controller
-@RequestMapping("/customer")
+/**
+ * 고객 예약 REST API Controller
+ */
+@RestController
+@RequestMapping("/api/customer/reservations")
 @RequiredArgsConstructor
 public class CustomerReservationController {
 
-    private final CustomerReservationFacade reservationFacade;
+    private final CustomerReservationService reservationService;
 
     /**
-     * 고객 메인 페이지
+     * 예약 신청
      */
-    @GetMapping
-    public String home() {
-        return "customer/home";
-    }
-
-    /**
-     * 예약 신청 폼
-     */
-    @GetMapping("/reservations/apply")
-    public String applyForm(Model model) {
-        model.addAttribute("consultationTypes", ConsultationType.values());
-        model.addAttribute("today", LocalDate.now());
-        return "customer/reservation/apply";
-    }
-
-    /**
-     * 예약 신청 처리
-     */
-    @PostMapping("/reservations")
-    public String createReservation(
-            @Valid @ModelAttribute CustomerReservationCreateRequest request,
-            BindingResult bindingResult,
-            RedirectAttributes redirectAttributes
+    @PostMapping
+    public ResponseEntity<ApiResponse<CustomerReservationResponse>> create(
+            @Valid @RequestBody CustomerReservationCreateRequest request
     ) {
-        if (bindingResult.hasErrors()) {
-            String errorMessage = bindingResult.getFieldErrors().stream()
-                    .findFirst()
-                    .map(error -> error.getDefaultMessage())
-                    .orElse("입력값을 확인해주세요.");
-            redirectAttributes.addFlashAttribute("error", errorMessage);
-            return "redirect:/customer/reservations/apply";
-        }
-
-        try {
-            Long id = reservationFacade.createReservation(request);
-            CustomerReservationResponse reservation = reservationFacade.getReservation(id);
-            redirectAttributes.addFlashAttribute("success", "예약이 완료되었습니다. 예약번호: " + reservation.reservationNumber());
-            redirectAttributes.addFlashAttribute("reservationNumber", reservation.reservationNumber());
-            return "redirect:/customer/reservations/complete";
-        } catch (IllegalArgumentException e) {
-            redirectAttributes.addFlashAttribute("error", e.getMessage());
-            return "redirect:/customer/reservations/apply";
-        }
+        CustomerReservationResult result = reservationService.createReservation(request.toCommand());
+        CustomerReservationResponse response = CustomerReservationResponse.from(result);
+        return ResponseEntity.ok(ApiResponse.success(response, "예약이 완료되었습니다. 예약번호: " + response.reservationNumber()));
     }
 
     /**
-     * 예약 완료 페이지
+     * 예약 조회 (본인 인증)
      */
-    @GetMapping("/reservations/complete")
-    public String completePage(@ModelAttribute("reservationNumber") String reservationNumber, Model model) {
-        if (reservationNumber == null || reservationNumber.isEmpty()) {
-            return "redirect:/customer";
-        }
-        model.addAttribute("reservationNumber", reservationNumber);
-        return "customer/reservation/complete";
-    }
-
-    /**
-     * 예약 조회 폼 (본인 인증)
-     */
-    @GetMapping("/reservations/verify")
-    public String verifyForm() {
-        return "customer/reservation/verify";
-    }
-
-    /**
-     * 예약 조회 처리 (본인 인증)
-     */
-    @PostMapping("/reservations/verify")
-    public String verifyReservation(
-            @Valid @ModelAttribute CustomerReservationVerifyRequest request,
-            BindingResult bindingResult,
-            HttpSession session,
-            RedirectAttributes redirectAttributes
+    @PostMapping("/verify")
+    public ResponseEntity<ApiResponse<CustomerReservationResponse>> verify(
+            @Valid @RequestBody CustomerReservationVerifyRequest request
     ) {
-        if (bindingResult.hasErrors()) {
-            String errorMessage = bindingResult.getFieldErrors().stream()
-                    .findFirst()
-                    .map(error -> error.getDefaultMessage())
-                    .orElse("입력값을 확인해주세요.");
-            redirectAttributes.addFlashAttribute("error", errorMessage);
-            return "redirect:/customer/reservations/verify";
-        }
-
-        try {
-            CustomerReservationResponse reservation = reservationFacade.verifyAndGetReservation(request);
-            // 세션에 인증 정보 저장
-            session.setAttribute("verifiedReservationId", reservation.id());
-            session.setAttribute("verifiedCustomerName", request.customerName());
-            session.setAttribute("verifiedPhone", request.phone());
-            return "redirect:/customer/reservations/" + reservation.id();
-        } catch (IllegalArgumentException e) {
-            redirectAttributes.addFlashAttribute("error", e.getMessage());
-            return "redirect:/customer/reservations/verify";
-        }
+        CustomerReservationResult result = reservationService.verifyAndGetReservation(request.toCommand());
+        CustomerReservationResponse response = CustomerReservationResponse.from(result);
+        return ResponseEntity.ok(ApiResponse.success(response));
     }
 
     /**
      * 예약 상세 조회
      */
-    @GetMapping("/reservations/{id}")
-    public String detail(@PathVariable Long id, HttpSession session, Model model) {
-        // 인증 확인
-        Long verifiedId = (Long) session.getAttribute("verifiedReservationId");
-        if (verifiedId == null || !verifiedId.equals(id)) {
-            return "redirect:/customer/reservations/verify";
-        }
-
-        CustomerReservationResponse reservation = reservationFacade.getReservation(id);
-        model.addAttribute("reservation", reservation);
-        return "customer/reservation/detail";
+    @GetMapping("/{id}")
+    public ResponseEntity<ApiResponse<CustomerReservationResponse>> getById(@PathVariable Long id) {
+        CustomerReservationResult result = reservationService.getReservation(id);
+        CustomerReservationResponse response = CustomerReservationResponse.from(result);
+        return ResponseEntity.ok(ApiResponse.success(response));
     }
 
     /**
-     * 예약 수정 폼
+     * 예약 내용 수정 (메모, 상담유형, 이메일만 변경 가능)
      */
-    @GetMapping("/reservations/{id}/edit")
-    public String editForm(@PathVariable Long id, HttpSession session, Model model) {
-        // 인증 확인
-        Long verifiedId = (Long) session.getAttribute("verifiedReservationId");
-        if (verifiedId == null || !verifiedId.equals(id)) {
-            return "redirect:/customer/reservations/verify";
-        }
-
-        CustomerReservationResponse reservation = reservationFacade.getReservation(id);
-
-        // 취소된 예약은 수정 불가
-        if (reservation.status().name().equals("CANCELLED")) {
-            return "redirect:/customer/reservations/" + id;
-        }
-
-        model.addAttribute("reservation", reservation);
-        model.addAttribute("consultationTypes", ConsultationType.values());
-        return "customer/reservation/edit";
-    }
-
-    /**
-     * 예약 수정 처리
-     */
-    @PostMapping("/reservations/{id}")
-    public String update(
+    @PutMapping("/{id}")
+    public ResponseEntity<ApiResponse<CustomerReservationResponse>> update(
             @PathVariable Long id,
-            @Valid @ModelAttribute CustomerReservationUpdateRequest request,
-            BindingResult bindingResult,
-            HttpSession session,
-            RedirectAttributes redirectAttributes
+            @Valid @RequestBody CustomerReservationUpdateRequest request
     ) {
-        // 인증 확인
-        Long verifiedId = (Long) session.getAttribute("verifiedReservationId");
-        if (verifiedId == null || !verifiedId.equals(id)) {
-            return "redirect:/customer/reservations/verify";
-        }
-
-        if (bindingResult.hasErrors()) {
-            String errorMessage = bindingResult.getFieldErrors().stream()
-                    .findFirst()
-                    .map(error -> error.getDefaultMessage())
-                    .orElse("입력값을 확인해주세요.");
-            redirectAttributes.addFlashAttribute("error", errorMessage);
-            return "redirect:/customer/reservations/" + id + "/edit";
-        }
-
-        try {
-            reservationFacade.updateReservation(id, request);
-            redirectAttributes.addFlashAttribute("success", "예약 정보가 수정되었습니다.");
-        } catch (IllegalArgumentException e) {
-            redirectAttributes.addFlashAttribute("error", e.getMessage());
-        }
-        return "redirect:/customer/reservations/" + id;
+        CustomerReservationResult result = reservationService.updateReservation(id, request.toCommand());
+        CustomerReservationResponse response = CustomerReservationResponse.from(result);
+        return ResponseEntity.ok(ApiResponse.success(response, "예약 정보가 수정되었습니다."));
     }
 
     /**
      * 예약 취소
      */
-    @PostMapping("/reservations/{id}/cancel")
-    public String cancel(@PathVariable Long id, HttpSession session, RedirectAttributes redirectAttributes) {
-        // 인증 확인
-        Long verifiedId = (Long) session.getAttribute("verifiedReservationId");
-        if (verifiedId == null || !verifiedId.equals(id)) {
-            return "redirect:/customer/reservations/verify";
-        }
-
-        try {
-            reservationFacade.cancelReservation(id);
-            redirectAttributes.addFlashAttribute("success", "예약이 취소되었습니다.");
-        } catch (IllegalArgumentException e) {
-            redirectAttributes.addFlashAttribute("error", e.getMessage());
-        }
-        return "redirect:/customer/reservations/" + id;
+    @DeleteMapping("/{id}")
+    public ResponseEntity<ApiResponse<Void>> cancel(@PathVariable Long id) {
+        reservationService.cancelReservation(id);
+        return ResponseEntity.ok(ApiResponse.success("예약이 취소되었습니다."));
     }
 
     /**
-     * 특정 날짜의 예약된 시간 목록 조회 (AJAX)
+     * 특정 날짜의 예약된 시간 목록 조회
      */
-    @GetMapping("/reservations/reserved-times")
-    @ResponseBody
-    public List<String> getReservedTimes(@RequestParam LocalDate date) {
-        return reservationFacade.getReservedTimes(date)
+    @GetMapping("/reserved-times")
+    public ResponseEntity<ApiResponse<List<String>>> getReservedTimes(@RequestParam LocalDate date) {
+        List<String> times = reservationService.getReservedTimes(date)
                 .stream()
                 .map(time -> time.toString().substring(0, 5))
                 .toList();
+        return ResponseEntity.ok(ApiResponse.success(times));
     }
 }

@@ -1,7 +1,7 @@
 package com.sures.infrastructure.persistence.impl;
 
-import com.sures.domain.entity.Reservation;
-import com.sures.domain.repository.CustomerReservationRepository;
+import com.sures.domain.reservation.CustomerReservationRepository;
+import com.sures.domain.reservation.Reservation;
 import com.sures.infrastructure.persistence.jpa.CustomerReservationJpaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;

@@ -1,7 +1,7 @@
 package com.sures.infrastructure.persistence.impl;
 
-import com.sures.domain.entity.Admin;
-import com.sures.domain.repository.AdminRepository;
+import com.sures.domain.admin.Admin;
+import com.sures.domain.admin.AdminRepository;
 import com.sures.infrastructure.persistence.jpa.AdminJpaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;

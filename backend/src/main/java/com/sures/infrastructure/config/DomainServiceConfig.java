@@ -1,9 +1,9 @@
 package com.sures.infrastructure.config;
 
-import com.sures.domain.repository.AdminRepository;
-import com.sures.domain.repository.ReservationRepository;
-import com.sures.domain.service.AdminDomainService;
-import com.sures.domain.service.ReservationDomainService;
+import com.sures.domain.admin.AdminDomainService;
+import com.sures.domain.admin.AdminRepository;
+import com.sures.domain.reservation.ReservationDomainService;
+import com.sures.domain.reservation.ReservationRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

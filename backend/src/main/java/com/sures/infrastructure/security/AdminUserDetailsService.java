@@ -1,7 +1,7 @@
 package com.sures.infrastructure.security;
 
-import com.sures.domain.repository.AdminRepository;
-import com.sures.domain.entity.Admin;
+import com.sures.domain.admin.Admin;
+import com.sures.domain.admin.AdminRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;

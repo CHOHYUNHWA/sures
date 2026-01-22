@@ -1,6 +1,6 @@
 package com.sures.infrastructure.persistence.jpa;
 
-import com.sures.domain.entity.Admin;
+import com.sures.domain.admin.Admin;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

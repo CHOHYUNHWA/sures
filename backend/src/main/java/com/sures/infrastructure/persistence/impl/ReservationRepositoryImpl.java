@@ -1,10 +1,10 @@
 package com.sures.infrastructure.persistence.impl;
 
-import com.sures.domain.entity.Reservation;
-import com.sures.domain.entity.ReservationStatus;
-import com.sures.domain.repository.ReservationRepository;
-import com.sures.domain.vo.PageRequest;
-import com.sures.domain.vo.PageResult;
+import com.sures.domain.common.PageRequest;
+import com.sures.domain.common.PageResult;
+import com.sures.domain.reservation.Reservation;
+import com.sures.domain.reservation.ReservationRepository;
+import com.sures.domain.reservation.ReservationStatus;
 import com.sures.infrastructure.persistence.jpa.ReservationJpaRepository;
 import com.sures.infrastructure.persistence.querydsl.ReservationQueryRepository;
 import lombok.RequiredArgsConstructor;

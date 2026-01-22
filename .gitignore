@@ -1,6 +1,13 @@
+# ================================
+# Monorepo .gitignore
+# ================================
+
+# ================================
+# Backend (Spring Boot / Gradle)
+# ================================
 HELP.md
-.gradle
-build/
+.gradle/
+**/build/
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
 !**/src/test/**/build/
@@ -17,15 +24,6 @@ bin/
 !**/src/main/**/bin/
 !**/src/test/**/bin/
 
-### IntelliJ IDEA ###
-.idea
-*.iws
-*.iml
-*.ipr
-out/
-!**/src/main/**/out/
-!**/src/test/**/out/
-
 ### NetBeans ###
 /nbproject/private/
 /nbbuild/
@@ -33,46 +31,106 @@ out/
 /nbdist/
 /.nb-gradle/
 
-### VS Code ###
-.vscode/
-
-### macOS ###
-.DS_Store
-*.swp
-*.swo
-*~
-
-### Logs ###
-*.log
-logs/
-
-### Environment ###
-.env
-.env.local
-.env.*.local
-application.properties
-application.yml
-application-*.properties
-application-*.yml
-
-### Serena MCP ###
-.serena/
-
-### Claude ###
-.claude/
-
-### Temporary files ###
-*.tmp
-*.temp
-*.bak
-
 ### Package files ###
 *.jar
 *.war
 *.ear
-!gradle/wrapper/gradle-wrapper.jar
+!**/gradle/wrapper/gradle-wrapper.jar
 
 ### Test outputs ###
 test-output/
 target/
 
+# ================================
+# Frontend (Node.js / React / Vite)
+# ================================
+node_modules/
+dist/
+dist-ssr/
+*.local
+
+### Vite ###
+vite.config.ts.timestamp-*
+
+### Next.js (향후 마이그레이션 대비) ###
+.next/
+.turbo/
+.vercel/
+
+### Testing ###
+coverage/
+.nyc_output/
+.jest/
+
+### Build ###
+*.tsbuildinfo
+.cache/
+
+# ================================
+# IDE / Editor
+# ================================
+### IntelliJ IDEA ###
+.idea/
+*.iws
+*.iml
+*.ipr
+out/
+!**/src/main/**/out/
+!**/src/test/**/out/
+
+### VS Code ###
+.vscode/
+
+# ================================
+# OS Generated
+# ================================
+### macOS ###
+.DS_Store
+*.swp
+*.swo
+*~
+Thumbs.db
+
+# ================================
+# Logs
+# ================================
+*.log
+logs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# ================================
+# Environment / Secrets
+# ================================
+.env
+.env.local
+.env.*.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+### Spring Boot Config (민감정보) ###
+backend/src/main/resources/application.properties
+backend/src/main/resources/application.yml
+backend/src/main/resources/application-*.properties
+backend/src/main/resources/application-*.yml
+!backend/src/main/resources/application-example.properties
+
+# ================================
+# Tools / Cache
+# ================================
+### Serena MCP ###
+.serena/
+
+### Claude ###
+.claude/
+.sisyphus/
+.agents/
+
+### Temporary files ###
+*.tmp
+*.temp
+*.bak
+MIGRATION_PLAN.md

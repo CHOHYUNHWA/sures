@@ -1,79 +1,57 @@
 package com.sures.presentation.admin.controller;
 
-import com.sures.presentation.admin.dto.AdminSignupRequest;
-import com.sures.application.facade.AdminFacade;
+import com.sures.application.admin.dto.result.AdminResult;
+import com.sures.application.admin.service.AdminService;
+import com.sures.presentation.admin.dto.request.AdminSignupRequest;
+import com.sures.presentation.common.dto.ApiResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
-@Controller
-@RequestMapping("/admin")
+/**
+ * 관리자 인증 REST API Controller
+ */
+@RestController
+@RequestMapping("/api/admin/auth")
 @RequiredArgsConstructor
 public class AdminAuthController {
 
-    private final AdminFacade adminFacade;
+    private final AdminService adminService;
 
     /**
-     * 로그인 페이지
-     */
-    @GetMapping("/login")
-    public String loginForm() {
-        return "admin/auth/login";
-    }
-
-    /**
-     * 회원가입 페이지
-     */
-    @GetMapping("/register")
-    public String registerForm() {
-        return "admin/auth/register";
-    }
-
-    /**
-     * 회원가입 처리
+     * 회원가입
      */
     @PostMapping("/register")
-    public String register(@Valid @ModelAttribute AdminSignupRequest request,
-                           BindingResult bindingResult,
-                           RedirectAttributes redirectAttributes) {
-        // Validation 에러 처리
-        if (bindingResult.hasErrors()) {
-            String errorMessage = bindingResult.getFieldErrors().stream()
-                    .findFirst()
-                    .map(error -> error.getDefaultMessage())
-                    .orElse("입력값을 확인해주세요.");
-            redirectAttributes.addFlashAttribute("error", errorMessage);
-            return "redirect:/admin/register";
-        }
-
+    public ResponseEntity<ApiResponse<Long>> register(@Valid @RequestBody AdminSignupRequest request) {
         // 비밀번호 확인 체크
         if (!request.isPasswordMatching()) {
-            redirectAttributes.addFlashAttribute("error", "비밀번호가 일치하지 않습니다.");
-            return "redirect:/admin/register";
+            return ResponseEntity.badRequest()
+                    .body(ApiResponse.error("VALIDATION_ERROR", "비밀번호가 일치하지 않습니다."));
         }
 
-        try {
-            adminFacade.signup(request);
-            redirectAttributes.addFlashAttribute("success", "회원가입이 완료되었습니다. 로그인해주세요.");
-            return "redirect:/admin/login";
-        } catch (IllegalArgumentException e) {
-            redirectAttributes.addFlashAttribute("error", e.getMessage());
-            return "redirect:/admin/register";
-        }
+        AdminResult result = adminService.signup(request.toCommand());
+        return ResponseEntity.ok(ApiResponse.success(result.id(), "회원가입이 완료되었습니다."));
     }
 
     /**
-     * 계정 찾기 페이지
+     * 로그인 (Spring Security에서 처리)
+     * - POST /api/admin/auth/login
+     * - Body: { "username": "...", "password": "..." }
      */
-    @GetMapping("/find-account")
-    public String findAccountForm() {
-        return "admin/auth/find-account";
+    @PostMapping("/login")
+    public ResponseEntity<ApiResponse<Void>> login() {
+        // Spring Security에서 처리됨
+        // 이 엔드포인트는 문서화 목적으로만 존재
+        return ResponseEntity.ok(ApiResponse.success("로그인 성공"));
+    }
+
+    /**
+     * 로그아웃 (Spring Security에서 처리)
+     */
+    @PostMapping("/logout")
+    public ResponseEntity<ApiResponse<Void>> logout() {
+        // Spring Security에서 처리됨
+        return ResponseEntity.ok(ApiResponse.success("로그아웃 성공"));
     }
 }

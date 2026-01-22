@@ -27,138 +27,118 @@
 sures/
 ├── frontend/          # React (FSD 패턴)
 ├── backend/           # Spring Boot (Clean Layered)
+├── docs/              # 상세 아키텍처 문서
+│   ├── backend/       # Backend 아키텍처 가이드
+│   └── frontend/      # Frontend 아키텍처 가이드
 ├── package.json       # 루트 워크스페이스 설정
 └── CLAUDE.md          # 프로젝트 문서
+```
+
+## 상세 아키텍처 문서
+
+| 문서 | 경로 | 내용 |
+|------|------|------|
+| Backend 아키텍처 | `docs/backend/ARCHITECTURE.md` | Clean Layered, DTO 변환, Mapper 규칙 |
+| Frontend 아키텍처 | `docs/frontend/ARCHITECTURE.md` | FSD 패턴, 레이어 규칙, 컴포넌트 패턴 |
+
+> **Claude Code 참고**: 각 영역 작업 시 해당 문서를 먼저 읽고 규칙을 준수할 것
+
+## Git 브랜치 전략
+
+### 브랜치 구조
+| 브랜치 | 용도 | 수정 범위 |
+|--------|------|-----------|
+| `main` | 통합 브랜치 | 전체 (머지용) |
+| `frontend` | 프론트엔드 개발 | `frontend/` 디렉토리만 |
+| `backend` | 백엔드 개발 | `backend/` 디렉토리만 |
+
+### 브랜치 독립성 규칙
+- **`frontend` 브랜치**: `frontend/` 디렉토리만 수정, `backend/` 수정 금지
+- **`backend` 브랜치**: `backend/` 디렉토리만 수정, `frontend/` 수정 금지
+- **`main` 브랜치**: 각 브랜치에서 PR/머지로 통합
+
+### 작업 흐름
+```bash
+# 프론트엔드 작업
+git checkout frontend
+# frontend/ 디렉토리 작업 후 커밋
+git push origin frontend
+
+# 백엔드 작업
+git checkout backend
+# backend/ 디렉토리 작업 후 커밋
+git push origin backend
+
+# 통합 (main으로 머지)
+git checkout main
+git merge frontend
+git merge backend
 ```
 
 ---
 
 # Frontend (React + FSD)
 
-## FSD 패키지 구조
-```
-frontend/src/
-├── app/               # 앱 초기화, 프로바이더, 라우터
-│   ├── providers/     # Context Providers
-│   ├── router/        # React Router 설정
-│   └── styles/        # 글로벌 스타일
-├── pages/             # 페이지 컴포넌트
-│   ├── admin/         # 관리자 페이지
-│   └── customer/      # 고객 페이지
-├── widgets/           # 독립적 UI 블록 (레이아웃, 헤더 등)
-│   ├── header/
-│   ├── sidebar/
-│   └── footer/
-├── features/          # 비즈니스 로직 기능
-│   ├── auth/          # 인증 관련 기능
-│   └── reservation/   # 예약 관련 기능
-├── entities/          # 비즈니스 엔티티
-│   ├── admin/
-│   ├── reservation/
-│   └── customer/
-└── shared/            # 공유 유틸리티
-    ├── ui/            # 공통 UI 컴포넌트
-    ├── lib/           # 유틸리티 함수
-    ├── api/           # API 클라이언트 (Axios)
-    ├── config/        # 설정
-    └── types/         # TypeScript 타입 정의
-```
+> **상세 문서**: [`docs/frontend/ARCHITECTURE.md`](docs/frontend/ARCHITECTURE.md)
 
-## FSD 레이어 규칙
+## FSD 레이어 (요약)
 ```
 app → pages → widgets → features → entities → shared
- ↓      ↓        ↓          ↓          ↓         ↓
-하위 레이어만 import 가능 (상위 레이어 import 금지)
 ```
+- 하위 레이어만 import 가능, 상위 레이어 import 금지
+- 같은 레이어 내 슬라이스 간 cross-import 금지
 
-## Path Alias
-```typescript
-// tsconfig.app.json에 설정됨
-import { apiClient } from '@/shared/api'
-import { Button } from '@/shared/ui'
-import { Reservation } from '@/shared/types'
-```
-
-## React 컴포넌트 컨벤션
-```typescript
-// 함수형 컴포넌트 + TypeScript
-export function ComponentName({ prop }: Props) {
-  return <div>...</div>
-}
-
-// 기본 export 금지, named export 사용
-export { ComponentName }
-```
-
-## API 호출 패턴
-```typescript
-// entities/reservation/api.ts
-import { apiClient } from '@/shared/api'
-import type { Reservation } from '@/shared/types'
-
-export const reservationApi = {
-  getAll: () => apiClient.get<Reservation[]>('/api/admin/reservations'),
-  create: (data: CreateRequest) => apiClient.post<Reservation>('/api/customer/reservations', data),
-}
-```
+## 핵심 규칙
+- **함수형 컴포넌트 + Named Export** 사용
+- **TanStack Query**로 서버 상태 관리
+- **Path Alias**: `@/shared/ui`, `@/features/auth` 등
 
 ---
 
 # Backend (Spring Boot + Clean Layered)
 
-## Clean Layered Architecture 구조
-```
-backend/src/main/java/com/sures/
-├── presentation/          # Controller, DTO (Request/Response)
-│   ├── admin/
-│   │   ├── controller/    # AdminAuthController, AdminReservationController
-│   │   └── dto/           # 관리자 요청/응답 DTO
-│   ├── customer/
-│   │   ├── controller/    # CustomerReservationController
-│   │   └── dto/           # 고객 요청/응답 DTO
-│   └── common/
-│       └── controller/    # HomeController, CustomErrorController
-├── application/           # Service (Use Cases)
-│   ├── admin/             # AdminService, ReservationService
-│   └── customer/          # CustomerReservationService
-├── domain/                # Entity, Repository Interface
-│   ├── entity/            # Admin, Reservation, ConsultationType 등
-│   ├── repository/        # JPA Repository 인터페이스
-│   └── constant/          # 도메인 상수
-└── infrastructure/        # Config, Security, 기술 구현체
-    ├── config/            # SecurityConfig, JpaConfig, QuerydslConfig
-    ├── security/          # AdminUserDetailsService
-    ├── exception/         # GlobalExceptionHandler
-    └── persistence/       # Repository 구현체 (필요시)
-```
+> **상세 문서**: [`docs/backend/ARCHITECTURE.md`](docs/backend/ARCHITECTURE.md)
 
-## 레이어 의존성 규칙
+## Clean Layered Architecture (요약)
 ```
 presentation → application → domain ← infrastructure
-                    ↓           ↓
-              domain만 의존    domain 구현
 ```
 
-- **presentation**: HTTP 요청/응답 처리, DTO 변환
-- **application**: 비즈니스 로직, 트랜잭션 관리
-- **domain**: 핵심 비즈니스 엔티티, 리포지토리 인터페이스
-- **infrastructure**: 기술 구현체, 설정, 외부 시스템 연동
+### 레이어별 DTO
+| Layer | 입력 DTO | 출력 DTO |
+|-------|----------|----------|
+| Presentation | Request | Response |
+| Application | Command | Result |
+| Domain | Entity | Entity |
 
-## DTO 변환 규칙 (Mapper 사용 금지)
+### Domain 레이어 구조 (도메인 단위)
+```
+domain/
+├── admin/           # Admin, AdminRole, AdminRepository, AdminDomainService
+├── reservation/     # Reservation, ReservationStatus, ConsultationType, ...
+└── common/          # BaseEntity, PageRequest, PageResult
+```
+
+### DTO 변환 규칙
+```
+Request → Command → (Entity/파라미터) → Result → Response
+```
+
+- **절대 규칙**: 2계층 뛰어넘기 금지 (presentation → domain 직접 참조 불가)
+- **변환 위치**: Request의 `toCommand()`, Result의 `from(Entity)`, Response의 `from(Result)`
+- **Entity 노출 금지**: Controller에서 Entity 직접 반환 금지
+
+### 변환 흐름 예시
 ```java
-public record ReservationResponse(
-    Long id,
-    String customerName,
-    LocalDateTime reservationDate
-) {
-    public static ReservationResponse from(Reservation entity) {
-        return new ReservationResponse(
-            entity.getId(),
-            entity.getCustomerName(),
-            entity.getReservationDate()
-        );
-    }
-}
+// Controller (Presentation)
+CreateReservationCommand command = request.toCommand();
+ReservationResult result = service.create(command);
+return ReservationResponse.from(result);
+
+// Service (Application)  
+Reservation entity = command.toEntity(adminId);
+Reservation saved = repository.save(entity);
+return ReservationResult.from(saved);
 ```
 
 ---

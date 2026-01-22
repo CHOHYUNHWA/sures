@@ -1,59 +1,100 @@
 package com.sures.infrastructure.exception;
 
+import com.sures.presentation.common.dto.ApiResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.NoHandlerFoundException;
 import org.springframework.web.servlet.resource.NoResourceFoundException;
 
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
 @Slf4j
-@ControllerAdvice
+@RestControllerAdvice
 public class GlobalExceptionHandler {
 
     /**
-     * 404 - 페이지를 찾을 수 없음
+     * 404 - 리소스를 찾을 수 없음
      */
     @ExceptionHandler({NoHandlerFoundException.class, NoResourceFoundException.class})
-    @ResponseStatus(HttpStatus.NOT_FOUND)
-    public String handleNotFoundException(Exception ex, HttpServletRequest request, Model model) {
+    public ResponseEntity<ApiResponse<Void>> handleNotFoundException(Exception ex, HttpServletRequest request) {
         log.warn("404 Not Found - URI: {}, Method: {}",
                 request.getRequestURI(), request.getMethod());
 
-        model.addAttribute("errorCode", "404");
-        model.addAttribute("errorMessage", "페이지를 찾을 수 없습니다");
-        return "error/error";
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body(ApiResponse.error("NOT_FOUND", "요청한 리소스를 찾을 수 없습니다."));
     }
 
     /**
-     * 400 - 잘못된 요청 (IllegalArgumentException)
+     * 400 - Validation 실패
+     */
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<ApiResponse<Void>> handleValidationException(
+            MethodArgumentNotValidException ex, HttpServletRequest request) {
+
+        List<Map<String, String>> errors = ex.getBindingResult().getFieldErrors().stream()
+                .map(error -> Map.of(
+                        "field", error.getField(),
+                        "message", error.getDefaultMessage() != null ? error.getDefaultMessage() : "유효하지 않은 값입니다"
+                ))
+                .collect(Collectors.toList());
+
+        String firstError = ex.getBindingResult().getFieldErrors().stream()
+                .findFirst()
+                .map(FieldError::getDefaultMessage)
+                .orElse("입력값이 올바르지 않습니다.");
+
+        log.warn("400 Validation Error - URI: {}, Errors: {}",
+                request.getRequestURI(), errors);
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body(ApiResponse.error("VALIDATION_ERROR", firstError, errors));
+    }
+
+    /**
+     * 400 - 비즈니스 로직 에러 (IllegalArgumentException)
      */
     @ExceptionHandler(IllegalArgumentException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public String handleIllegalArgumentException(IllegalArgumentException ex,
-                                                  HttpServletRequest request, Model model) {
+    public ResponseEntity<ApiResponse<Void>> handleIllegalArgumentException(
+            IllegalArgumentException ex, HttpServletRequest request) {
+
         log.warn("400 Bad Request - URI: {}, Message: {}",
                 request.getRequestURI(), ex.getMessage());
 
-        model.addAttribute("errorCode", "400");
-        model.addAttribute("errorMessage", ex.getMessage());
-        return "error/error";
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body(ApiResponse.error("BAD_REQUEST", ex.getMessage()));
+    }
+
+    /**
+     * 400 - 비즈니스 로직 에러 (IllegalStateException)
+     */
+    @ExceptionHandler(IllegalStateException.class)
+    public ResponseEntity<ApiResponse<Void>> handleIllegalStateException(
+            IllegalStateException ex, HttpServletRequest request) {
+
+        log.warn("400 Bad Request - URI: {}, Message: {}",
+                request.getRequestURI(), ex.getMessage());
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body(ApiResponse.error("BAD_REQUEST", ex.getMessage()));
     }
 
     /**
      * 500 - 서버 내부 오류 (모든 예외)
      */
     @ExceptionHandler(Exception.class)
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    public String handleException(Exception ex, HttpServletRequest request, Model model) {
+    public ResponseEntity<ApiResponse<Void>> handleException(Exception ex, HttpServletRequest request) {
         log.error("500 Internal Server Error - URI: {}, Method: {}",
                 request.getRequestURI(), request.getMethod(), ex);
 
-        model.addAttribute("errorCode", "500");
-        model.addAttribute("errorMessage", "서버 오류가 발생했습니다");
-        return "error/error";
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body(ApiResponse.error("INTERNAL_ERROR", "서버 오류가 발생했습니다. 잠시 후 다시 시도해주세요."));
     }
 }

@@ -1,59 +1,89 @@
 package com.sures.infrastructure.config;
 
+import java.util.Arrays;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+import com.sures.infrastructure.security.jwt.JwtAuthenticationFilter;
+import com.sures.infrastructure.security.jwt.JwtTokenProvider;
+
+import lombok.RequiredArgsConstructor;
 
 @Configuration
 @EnableWebSecurity
+@RequiredArgsConstructor
 public class SecurityConfig {
 
+    private final JwtTokenProvider jwtTokenProvider;
+
+    /**
+     * REST API 전용 보안 설정
+     * - JWT 인증
+     * - Stateless 세션
+     * - CORS 허용
+     */
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
+            .cors(cors -> cors.configurationSource(corsConfigurationSource()))
+            .csrf(csrf -> csrf.disable())
+            .sessionManagement(session -> session
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+            )
             .authorizeHttpRequests(auth -> auth
-                // 정적 리소스 허용
-                .requestMatchers("/css/**", "/js/**", "/image/**").permitAll()
-                // 고객 페이지 전체 허용
-                .requestMatchers("/customer/**").permitAll()
-                // 관리자 로그인/회원가입 허용
-                .requestMatchers("/admin/login", "/admin/register", "/admin/find-account").permitAll()
-                // 에러 페이지 허용
-                .requestMatchers("/error/**").permitAll()
-                // 예약 관리 기능은 SUPER_ADMIN만 허용
-                .requestMatchers("/admin/reservations/**").hasRole("SUPER_ADMIN")
-                // 그 외 관리자 페이지는 인증만 필요
-                .requestMatchers("/admin/**").authenticated()
-                // 그 외 모든 요청 허용
+                // 관리자 인증 API 허용
+                .requestMatchers("/api/admin/auth/login", "/api/admin/auth/register", "/api/admin/auth/refresh").permitAll()
+                // 고객 API 허용
+                .requestMatchers("/api/customer/**").permitAll()
+                // 관리자 예약 API는 인증 필요
+                .requestMatchers("/api/admin/reservations/**").authenticated()
+                // 그 외 관리자 API는 인증 필요
+                .requestMatchers("/api/admin/**").authenticated()
+                // 그 외 요청 허용
                 .anyRequest().permitAll()
             )
-            .formLogin(form -> form
-                .loginPage("/admin/login")
-                .loginProcessingUrl("/admin/login")
-                .defaultSuccessUrl("/admin/reservations", true)
-                .failureUrl("/admin/login?error=true")
-                .permitAll()
-            )
-            .logout(logout -> logout
-                .logoutUrl("/admin/logout")
-                .logoutSuccessUrl("/admin/login?logout=true")
-                .invalidateHttpSession(true)
-                .deleteCookies("SURES_SESSION")
-                .permitAll()
-            )
-            .sessionManagement(session -> session
-                .maximumSessions(5) // 동시 세션 최대 5개 허용
-                .maxSessionsPreventsLogin(false) // 새 로그인 시 기존 세션 만료 (6번째부터)
-            )
-            .exceptionHandling(exception -> exception
-                .accessDeniedPage("/error/403") // 권한 없음 페이지
+            .addFilterBefore(
+                new JwtAuthenticationFilter(jwtTokenProvider),
+                UsernamePasswordAuthenticationFilter.class
             );
 
         return http.build();
+    }
+
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedOrigins(Arrays.asList(
+            "http://localhost:3000",
+            "http://localhost:3001",
+            "http://localhost:5173"
+        ));
+        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"));
+        configuration.setAllowedHeaders(Arrays.asList("*"));
+        configuration.setAllowCredentials(true);
+        configuration.setMaxAge(3600L);
+
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
+    }
+
+    @Bean
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
+        return config.getAuthenticationManager();
     }
 
     @Bean

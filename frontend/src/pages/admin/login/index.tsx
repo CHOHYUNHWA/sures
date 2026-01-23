@@ -1,75 +1,102 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation, Link } from 'react-router-dom'
+import { Card, CardBody, Button, Input, Alert } from '@/shared/ui'
+import { authApi } from '@/features/auth'
+import { setTokens } from '@/shared/api'
+import styles from './Login.module.css'
 
 export function AdminLoginPage() {
   const navigate = useNavigate()
-  const [formData, setFormData] = useState({
-    username: '',
-    password: '',
-  })
-  const [error, setError] = useState('')
+  const location = useLocation()
+  const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+  const [success, setSuccess] = useState<string | null>(location.state?.success || null)
+
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    setError('')
+    setError(null)
+    setSuccess(null)
+
+    if (!username || !password) {
+      setError('아이디와 비밀번호를 입력해주세요.')
+      return
+    }
+
+    setIsLoading(true)
 
     try {
-      // TODO: API 연동
-      console.log('Login attempt:', formData)
+      const response = await authApi.login({ username, password })
+      setTokens(response.accessToken, response.refreshToken)
       navigate('/admin/reservations')
     } catch (err) {
-      setError('로그인에 실패했습니다. 아이디와 비밀번호를 확인해주세요.')
+      setError('아이디 또는 비밀번호가 올바르지 않습니다.')
+    } finally {
+      setIsLoading(false)
     }
   }
 
   return (
-    <div className="container" style={{ paddingTop: '80px' }}>
-      <div className="login-box">
-        <h1 style={{ textAlign: 'center', marginBottom: '32px', color: 'var(--color-primary)' }}>
-          관리자 로그인
-        </h1>
+    <div className={styles.container}>
+      <header className={styles.header}>
+        <Link to="/customer" className={styles.logo}>
+          <img src="/image/logo.png" alt="Sures 로고" />
+          <span className={styles.logoText}>Sures</span>
+        </Link>
+      </header>
 
-        {error && <div className="alert alert-error">{error}</div>}
+      <div className={styles.content}>
+        <h1 className={styles.title}>관리자 로그인</h1>
 
-        <form onSubmit={handleSubmit}>
-          <div style={{ marginBottom: '16px' }}>
-            <label htmlFor="username">아이디</label>
-            <input
-              type="text"
-              id="username"
-              className="input"
-              value={formData.username}
-              onChange={(e) => setFormData({ ...formData, username: e.target.value })}
-              required
-            />
-          </div>
+        {error && (
+          <Alert variant="error" onClose={() => setError(null)}>
+            {error}
+          </Alert>
+        )}
 
-          <div style={{ marginBottom: '24px' }}>
-            <label htmlFor="password">비밀번호</label>
-            <input
-              type="password"
-              id="password"
-              className="input"
-              value={formData.password}
-              onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-              required
-            />
-          </div>
+        {success && (
+          <Alert variant="success" onClose={() => setSuccess(null)}>
+            {success}
+          </Alert>
+        )}
 
-          <button type="submit" className="btn btn-primary" style={{ width: '100%' }}>
-            로그인
-          </button>
-        </form>
+        <Card>
+          <CardBody>
+            <form onSubmit={handleSubmit} noValidate>
+              <div className={styles.formGroup}>
+                <Input
+                  label="아이디"
+                  placeholder="아이디를 입력하세요"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                  autoFocus
+                />
+              </div>
 
-        <div style={{ marginTop: '16px', textAlign: 'center' }}>
-          <a href="/admin/register" style={{ color: 'var(--color-accent)' }}>
-            회원가입
-          </a>
-          <span style={{ margin: '0 8px', color: '#ccc' }}>|</span>
-          <a href="/admin/find-account" style={{ color: 'var(--color-accent)' }}>
-            아이디/비밀번호 찾기
-          </a>
-        </div>
+              <div className={styles.formGroup}>
+                <Input
+                  label="비밀번호"
+                  type="password"
+                  placeholder="비밀번호를 입력하세요"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              </div>
+
+              <Button type="submit" variant="primary" size="lg" block loading={isLoading}>
+                로그인
+              </Button>
+            </form>
+
+            <div className={styles.links}>
+              <Link to="/admin/register">회원가입</Link>
+              <span className={styles.divider}>|</span>
+              <Link to="/admin/find-account">계정 찾기</Link>
+            </div>
+          </CardBody>
+        </Card>
       </div>
     </div>
   )

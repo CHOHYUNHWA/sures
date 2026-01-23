@@ -1,0 +1,57 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.label {
+    font-weight: 500;
+    color: #011541;
+    font-size: 0.9375rem;
+}
+
+.input {
+    width: 100%;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #333333;
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    transition: border-color 150ms ease, box-shadow 150ms ease;
+    min-height: 44px;
+}
+
+.input:focus {
+    outline: none;
+    border-color: #28a7e1;
+    box-shadow: 0 0 0 3px rgba(40, 167, 225, 0.2);
+}
+
+.input::placeholder {
+    color: #999;
+}
+
+.input:disabled {
+    background-color: #f5f5f5;
+    cursor: not-allowed;
+}
+
+.input.error {
+    border-color: #dc3545;
+}
+
+.input.error:focus {
+    box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.2);
+}
+
+.hint {
+    font-size: 0.75rem;
+    color: #666;
+}
+
+.errorText {
+    font-size: 0.75rem;
+    color: #dc3545;
+}

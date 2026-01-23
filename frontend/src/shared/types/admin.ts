@@ -16,7 +16,17 @@ export interface LoginRequest {
 
 export interface LoginResponse {
   accessToken: string
+  refreshToken: string
   admin: Admin
+}
+
+export interface TokenResponse {
+  accessToken: string
+  refreshToken?: string
+}
+
+export interface RefreshTokenRequest {
+  refreshToken: string
 }
 
 export interface SignupRequest {

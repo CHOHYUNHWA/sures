@@ -1,0 +1,94 @@
+.header {
+    background-color: #011541;
+    color: #ffffff;
+    padding: 1rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.headerInner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.logo img {
+    height: 32px;
+    width: auto;
+}
+
+.logoText {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.navToggle {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+}
+
+.navToggle span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background-color: #ffffff;
+    transition: transform 150ms ease;
+}
+
+.navMenu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: -1rem;
+    right: -1rem;
+    background-color: #011541;
+    padding: 1rem;
+    margin-top: 1rem;
+}
+
+.navMenu.active {
+    display: block;
+}
+
+.navMenu a {
+    display: block;
+    color: #ffffff;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    text-decoration: none;
+}
+
+.navMenu a:hover {
+    color: #28a7e1;
+}
+
+.footer {
+    background-color: #f5f5f5;
+    border-top: 1px solid #e0e0e0;
+    padding: 2rem 0;
+    margin-top: auto;
+}
+
+.footerContent {
+    text-align: center;
+    color: #666;
+    font-size: 0.875rem;
+}
+
+.footerContent p {
+    margin: 0;
+}

@@ -1,36 +1,54 @@
-import { Outlet, NavLink, useNavigate } from 'react-router-dom'
+import { useState } from 'react'
+import { Outlet, Link, NavLink, useNavigate } from 'react-router-dom'
+import { clearTokens } from '@/shared/api'
+import styles from './Sidebar.module.css'
 
 export function AdminLayout() {
   const navigate = useNavigate()
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   const handleLogout = () => {
-    localStorage.removeItem('accessToken')
+    clearTokens()
     navigate('/admin/login')
   }
 
   return (
-    <div className="admin-layout">
-      <aside className="sidebar">
-        <div className="sidebar-header">
-          <a href="/admin" className="logo">
-            Sures Admin
-          </a>
+    <div className="page-wrapper">
+      <header className={styles.header}>
+        <div className="container">
+          <div className={styles.headerInner}>
+            <Link to="/admin/reservations" className={styles.logo}>
+              <img src="/image/logo.png" alt="Sures 로고" />
+              <span className={styles.logoText}>Sures Admin</span>
+            </Link>
+
+            <button
+              className={styles.navToggle}
+              aria-label="메뉴 열기"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+            >
+              <span></span>
+              <span></span>
+              <span></span>
+            </button>
+          </div>
         </div>
 
-        <nav className="sidebar-nav">
-          <NavLink to="/admin/reservations" className="nav-item">
+        <nav className={`${styles.sidebar} ${isMenuOpen ? styles.active : ''}`}>
+          <NavLink
+            to="/admin/reservations"
+            className={({ isActive }) => `${styles.navItem} ${isActive ? styles.activeNav : ''}`}
+            onClick={() => setIsMenuOpen(false)}
+          >
             예약 관리
           </NavLink>
-        </nav>
-
-        <div className="sidebar-footer">
-          <button onClick={handleLogout} className="btn btn-logout">
+          <button type="button" className={styles.logoutBtn} onClick={handleLogout}>
             로그아웃
           </button>
-        </div>
-      </aside>
+        </nav>
+      </header>
 
-      <main className="admin-main">
+      <main className={styles.main}>
         <Outlet />
       </main>
     </div>

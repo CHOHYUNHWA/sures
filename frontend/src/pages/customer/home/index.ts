@@ -1,1 +1,1 @@
-export { CustomerHomePage } from './index'
+export { CustomerHomePage } from './index.tsx'

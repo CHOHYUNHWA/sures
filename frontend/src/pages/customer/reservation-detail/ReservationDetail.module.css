@@ -1,0 +1,75 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.reservationId {
+    font-weight: 600;
+    color: #011541;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.infoRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.infoRow:last-child {
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.infoLabel {
+    font-size: 0.875rem;
+    color: #666;
+    flex-shrink: 0;
+}
+
+.infoValue {
+    font-weight: 500;
+    color: #333;
+    text-align: right;
+    word-break: break-word;
+    max-width: 60%;
+}
+
+.notice {
+    background-color: #fff3cd;
+    border: 1px solid #ffeeba;
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.notice h4 {
+    font-size: 0.875rem;
+    color: #856404;
+    margin: 0 0 0.5rem;
+}
+
+.notice ul {
+    margin: 0;
+    padding-left: 1.25rem;
+}
+
+.notice li {
+    font-size: 0.8125rem;
+    color: #856404;
+    margin-bottom: 0.25rem;
+}
+
+.notice li:last-child {
+    margin-bottom: 0;
+}

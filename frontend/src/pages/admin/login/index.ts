@@ -1,1 +1,1 @@
-export { AdminLoginPage } from './index'
+export { AdminLoginPage } from './index.tsx'

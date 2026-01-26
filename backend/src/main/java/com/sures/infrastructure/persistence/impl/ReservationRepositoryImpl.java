@@ -110,4 +110,13 @@ public class ReservationRepositoryImpl implements ReservationRepository {
     public Optional<String> findLastReservationNumber() {
         return jpaRepository.findLastReservationNumber();
     }
+
+    @Override
+    public Optional<Reservation> findByCustomerVerification(
+            String customerName,
+            String phone,
+            String reservationNumber
+    ) {
+        return jpaRepository.findByCustomerVerification(customerName, phone, reservationNumber);
+    }
 }

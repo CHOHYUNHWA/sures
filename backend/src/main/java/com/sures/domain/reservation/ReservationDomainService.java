@@ -1,7 +1,11 @@
 package com.sures.domain.reservation;
 
+import com.sures.domain.common.PageRequest;
+import com.sures.domain.common.PageResult;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 
 /**
  * 예약 도메인 서비스 (순수 비즈니스 로직 - Spring 의존성 없음)
@@ -137,5 +141,74 @@ public class ReservationDomainService {
     public Reservation getByReservationNumber(String reservationNumber) {
         return reservationRepository.findByReservationNumber(reservationNumber)
                 .orElseThrow(() -> new IllegalArgumentException("예약을 찾을 수 없습니다."));
+    }
+
+    /**
+     * 예약 생성 및 저장 (통합)
+     */
+    public Reservation createAndSave(
+            String customerName,
+            String phone,
+            String email,
+            LocalDate reservationDate,
+            LocalTime reservationTime,
+            ConsultationType consultationType,
+            String memo,
+            Long adminId
+    ) {
+        Reservation reservation = createReservation(
+                customerName, phone, email,
+                reservationDate, reservationTime,
+                consultationType, memo, adminId
+        );
+        return reservationRepository.save(reservation);
+    }
+
+    /**
+     * 예약 저장
+     */
+    public Reservation save(Reservation reservation) {
+        return reservationRepository.save(reservation);
+    }
+
+    /**
+     * 예약 목록 검색 (페이징)
+     */
+    public PageResult<Reservation> searchReservations(
+            ReservationStatus status,
+            LocalDate startDate,
+            LocalDate endDate,
+            String keyword,
+            PageRequest pageRequest
+    ) {
+        return reservationRepository.searchReservations(
+                status, startDate, endDate, keyword, pageRequest
+        );
+    }
+
+    /**
+     * 특정 날짜의 예약된 시간 목록 조회
+     */
+    public List<LocalTime> findReservedTimesByDate(LocalDate date) {
+        return reservationRepository.findReservedTimesByDate(date);
+    }
+
+    /**
+     * 특정 날짜의 예약된 시간 목록 조회 (특정 예약 제외)
+     */
+    public List<LocalTime> findReservedTimesByDateExcluding(LocalDate date, Long excludeId) {
+        return reservationRepository.findReservedTimesByDateExcluding(date, excludeId);
+    }
+
+    /**
+     * 고객 정보로 예약 인증 조회
+     */
+    public Reservation findByCustomerVerification(
+            String customerName,
+            String phone,
+            String reservationNumber
+    ) {
+        return reservationRepository.findByCustomerVerification(customerName, phone, reservationNumber)
+                .orElseThrow(() -> new IllegalArgumentException("예약 정보를 찾을 수 없습니다. 입력 정보를 확인해주세요."));
     }
 }

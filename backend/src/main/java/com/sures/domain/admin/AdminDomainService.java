@@ -60,4 +60,11 @@ public class AdminDomainService {
         return adminRepository.findByUsername(username)
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 관리자입니다."));
     }
+
+    /**
+     * 관리자 저장
+     */
+    public Admin save(Admin admin) {
+        return adminRepository.save(admin);
+    }
 }

@@ -83,14 +83,26 @@ presentation/
 
 ### 2. Application Layer
 
-**역할**: 비즈니스 유스케이스 구현, 트랜잭션 관리, 도메인 조합
+**역할**: Facade 및 DTO Mapper (비즈니스 로직 조합 계층)
+
+Application Layer는 다음 역할만 수행합니다:
+- **DTO 변환**: Request → Command, Result → Response
+- **Domain Service 조합**: Domain Service들을 조합하여 유스케이스 구성
+- **트랜잭션 경계 관리**: @Transactional 범위 설정
+- **Presentation으로 전달**: Result DTO 반환
+
+**중요**: Application Service는 **Repository를 직접 참조하거나 주입받으면 안됩니다**. 모든 데이터 접근은 Domain Service를 통해서만 수행합니다.
 
 **구성요소**:
 | 요소 | 설명 | 네이밍 |
 |------|------|--------|
-| Service | 유스케이스 구현 | `*Service` |
+| Service | 유스케이스 Facade | `*Service` |
 | Command | 서비스 입력 데이터 | `*Command` |
 | Result | 서비스 출력 데이터 | `*Result` |
+
+**의존성 규칙**:
+- ✅ Domain Service 의존 (필수)
+- ❌ Repository 직접 의존 (금지)
 
 **디렉토리 구조**:
 ```
@@ -312,22 +324,27 @@ public class AdminReservationController {
 @Transactional(readOnly = true)
 public class ReservationService {
 
-    private final ReservationRepository reservationRepository;
+    // ✅ GOOD - Domain Service만 의존
     private final ReservationDomainService reservationDomainService;
+
+    // ❌ BAD - Repository 직접 의존 금지
+    // private final ReservationRepository reservationRepository;
 
     @Transactional
     public ReservationResult createReservation(CreateReservationCommand command, Long adminId) {
-        // 1. Domain Service로 비즈니스 규칙 검증 및 Entity 생성
-        Reservation reservation = reservationDomainService.createReservation(
+        // 1. Domain Service로 Entity 생성 및 저장
+        Reservation saved = reservationDomainService.createAndSave(
             command.customerName(),
             command.phone(),
-            // ... 파라미터로 전달
+            command.email(),
+            command.reservationDate(),
+            command.reservationTime(),
+            command.consultationType(),
+            command.memo(),
+            adminId
         );
 
-        // 2. 저장
-        Reservation saved = reservationRepository.save(reservation);
-
-        // 3. Entity → Result 변환
+        // 2. Entity → Result 변환
         return ReservationResult.from(saved);
     }
 }
@@ -405,6 +422,48 @@ public class GoodService {
     public ReservationResult create(CreateReservationCommand command) { ... }
 }
 ```
+
+### 4. Application Layer에서 Repository 직접 참조 금지
+
+**중요**: Application Service는 Repository를 직접 주입받거나 참조하면 안됩니다. 모든 데이터 접근은 Domain Service를 통해서만 수행합니다.
+
+```java
+// ❌ BAD - Application Service에서 Repository 직접 주입
+@Service
+@RequiredArgsConstructor
+public class BadReservationService {
+    private final ReservationRepository repository; // 금지!
+    private final ReservationDomainService domainService;
+
+    @Transactional
+    public ReservationResult create(CreateReservationCommand command) {
+        Reservation reservation = domainService.createReservation(...);
+        Reservation saved = repository.save(reservation); // 금지!
+        return ReservationResult.from(saved);
+    }
+}
+
+// ✅ GOOD - Domain Service를 통해 데이터 접근
+@Service
+@RequiredArgsConstructor
+public class GoodReservationService {
+    private final ReservationDomainService domainService; // Domain Service만 의존
+
+    @Transactional
+    public ReservationResult create(CreateReservationCommand command) {
+        // Domain Service에서 생성+저장을 처리
+        Reservation saved = domainService.createAndSave(...);
+        return ReservationResult.from(saved);
+    }
+}
+```
+
+**Application Layer의 역할**:
+- ✅ DTO 변환 (Request → Command, Result → Response)
+- ✅ Domain Service 조합 (비즈니스 로직 구성)
+- ✅ 트랜잭션 경계 관리
+- ❌ Repository 직접 호출 (금지)
+- ❌ 직접적인 데이터 접근 (금지)
 
 ---
 

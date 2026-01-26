@@ -4,7 +4,6 @@ import com.sures.application.customer.dto.command.CustomerCreateReservationComma
 import com.sures.application.customer.dto.command.CustomerUpdateReservationCommand;
 import com.sures.application.customer.dto.command.CustomerVerifyReservationCommand;
 import com.sures.application.customer.dto.result.CustomerReservationResult;
-import com.sures.domain.reservation.CustomerReservationRepository;
 import com.sures.domain.reservation.Reservation;
 import com.sures.domain.reservation.ReservationDomainService;
 import lombok.RequiredArgsConstructor;
@@ -26,7 +25,6 @@ import java.util.List;
 @Transactional(readOnly = true)
 public class CustomerReservationService {
 
-    private final CustomerReservationRepository reservationRepository;
     private final ReservationDomainService reservationDomainService;
 
     /**
@@ -34,7 +32,7 @@ public class CustomerReservationService {
      */
     @Transactional
     public CustomerReservationResult createReservation(CustomerCreateReservationCommand command) {
-        Reservation reservation = reservationDomainService.createReservation(
+        Reservation saved = reservationDomainService.createAndSave(
                 command.customerName(),
                 command.phone(),
                 command.email(),
@@ -45,7 +43,6 @@ public class CustomerReservationService {
                 null  // 고객 예약은 adminId 없음
         );
 
-        Reservation saved = reservationRepository.save(reservation);
         return CustomerReservationResult.from(saved);
     }
 
@@ -53,12 +50,11 @@ public class CustomerReservationService {
      * 예약 조회 (본인 인증)
      */
     public CustomerReservationResult verifyAndGetReservation(CustomerVerifyReservationCommand command) {
-        Reservation reservation = reservationRepository.findByCustomerVerification(
-                        command.customerName(),
-                        command.phone(),
-                        command.reservationNumber()
-                )
-                .orElseThrow(() -> new IllegalArgumentException("예약 정보를 찾을 수 없습니다. 입력 정보를 확인해주세요."));
+        Reservation reservation = reservationDomainService.findByCustomerVerification(
+                command.customerName(),
+                command.phone(),
+                command.reservationNumber()
+        );
         return CustomerReservationResult.from(reservation);
     }
 
@@ -66,8 +62,7 @@ public class CustomerReservationService {
      * 예약 단건 조회
      */
     public CustomerReservationResult getReservation(Long id) {
-        Reservation reservation = reservationRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("예약을 찾을 수 없습니다."));
+        Reservation reservation = reservationDomainService.getById(id);
         return CustomerReservationResult.from(reservation);
     }
 
@@ -75,8 +70,7 @@ public class CustomerReservationService {
      * 예약번호로 조회
      */
     public CustomerReservationResult getReservationByNumber(String reservationNumber) {
-        Reservation reservation = reservationRepository.findByReservationNumber(reservationNumber)
-                .orElseThrow(() -> new IllegalArgumentException("예약을 찾을 수 없습니다."));
+        Reservation reservation = reservationDomainService.getByReservationNumber(reservationNumber);
         return CustomerReservationResult.from(reservation);
     }
 
@@ -85,8 +79,7 @@ public class CustomerReservationService {
      */
     @Transactional
     public CustomerReservationResult updateReservation(Long id, CustomerUpdateReservationCommand command) {
-        Reservation reservation = reservationRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("예약을 찾을 수 없습니다."));
+        Reservation reservation = reservationDomainService.getById(id);
 
         // 취소된 예약은 수정 불가
         if (reservation.getStatus().name().equals("CANCELLED")) {
@@ -124,8 +117,7 @@ public class CustomerReservationService {
      */
     @Transactional
     public void cancelReservation(Long id) {
-        Reservation reservation = reservationRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("예약을 찾을 수 없습니다."));
+        Reservation reservation = reservationDomainService.getById(id);
 
         // 이미 취소된 예약
         if (reservation.getStatus().name().equals("CANCELLED")) {
@@ -147,6 +139,6 @@ public class CustomerReservationService {
      * 특정 날짜의 예약된 시간 목록 조회
      */
     public List<LocalTime> getReservedTimes(LocalDate date) {
-        return reservationRepository.findReservedTimesByDate(date);
+        return reservationDomainService.findReservedTimesByDate(date);
     }
 }

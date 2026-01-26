@@ -8,7 +8,6 @@ import com.sures.domain.common.PageRequest;
 import com.sures.domain.common.PageResult;
 import com.sures.domain.reservation.Reservation;
 import com.sures.domain.reservation.ReservationDomainService;
-import com.sures.domain.reservation.ReservationRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,7 +27,6 @@ import java.util.List;
 @Transactional(readOnly = true)
 public class ReservationService {
 
-    private final ReservationRepository reservationRepository;
     private final ReservationDomainService reservationDomainService;
 
     /**
@@ -37,7 +35,7 @@ public class ReservationService {
     public PageResult<ReservationResult> searchReservations(SearchReservationCommand command) {
         PageRequest pageRequest = PageRequest.of(command.page(), command.size());
 
-        PageResult<Reservation> reservations = reservationRepository.searchReservations(
+        PageResult<Reservation> reservations = reservationDomainService.searchReservations(
                 command.status(),
                 command.startDate(),
                 command.endDate(),
@@ -61,7 +59,7 @@ public class ReservationService {
      */
     @Transactional
     public ReservationResult createReservation(CreateReservationCommand command, Long adminId) {
-        Reservation reservation = reservationDomainService.createReservation(
+        Reservation saved = reservationDomainService.createAndSave(
                 command.customerName(),
                 command.phone(),
                 command.email(),
@@ -72,7 +70,6 @@ public class ReservationService {
                 adminId
         );
 
-        Reservation saved = reservationRepository.save(reservation);
         return ReservationResult.from(saved);
     }
 
@@ -143,13 +140,13 @@ public class ReservationService {
      * 특정 날짜의 예약된 시간 목록 조회
      */
     public List<LocalTime> getReservedTimes(LocalDate date) {
-        return reservationRepository.findReservedTimesByDate(date);
+        return reservationDomainService.findReservedTimesByDate(date);
     }
 
     /**
      * 특정 날짜의 예약된 시간 목록 조회 (특정 예약 제외)
      */
     public List<LocalTime> getReservedTimesExcluding(LocalDate date, Long excludeId) {
-        return reservationRepository.findReservedTimesByDateExcluding(date, excludeId);
+        return reservationDomainService.findReservedTimesByDateExcluding(date, excludeId);
     }
 }

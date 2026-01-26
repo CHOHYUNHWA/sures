@@ -61,6 +61,15 @@ public interface ReservationRepository {
     List<LocalTime> findReservedTimesByDateExcluding(LocalDate date, Long excludeId);
 
     /**
+     * 고객명 + 전화번호 + 예약번호로 예약 조회 (본인 인증용)
+     */
+    Optional<Reservation> findByCustomerVerification(
+            String customerName,
+            String phone,
+            String reservationNumber
+    );
+
+    /**
      * 마지막 예약번호 조회 (순번 생성용)
      */
     Optional<String> findLastReservationNumber();

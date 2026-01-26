@@ -18,6 +18,13 @@ public interface ReservationJpaRepository extends JpaRepository<Reservation, Lon
 
     Optional<Reservation> findByReservationNumber(String reservationNumber);
 
+    @Query("SELECT r FROM Reservation r WHERE r.customerName = :name AND r.phone = :phone AND r.reservationNumber = :reservationNumber")
+    Optional<Reservation> findByCustomerVerification(
+            @Param("name") String customerName,
+            @Param("phone") String phone,
+            @Param("reservationNumber") String reservationNumber
+    );
+
     List<Reservation> findByReservationDateBetween(LocalDate startDate, LocalDate endDate);
 
     List<Reservation> findByStatus(ReservationStatus status);

@@ -4,7 +4,6 @@ import com.sures.application.admin.dto.command.AdminSignupCommand;
 import com.sures.application.admin.dto.result.AdminResult;
 import com.sures.domain.admin.Admin;
 import com.sures.domain.admin.AdminDomainService;
-import com.sures.domain.admin.AdminRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -21,7 +20,6 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(readOnly = true)
 public class AdminService {
 
-    private final AdminRepository adminRepository;
     private final AdminDomainService adminDomainService;
     private final PasswordEncoder passwordEncoder;
 
@@ -44,7 +42,7 @@ public class AdminService {
                 command.email()
         );
 
-        Admin savedAdmin = adminRepository.save(admin);
+        Admin savedAdmin = adminDomainService.save(admin);
         return AdminResult.from(savedAdmin);
     }
 

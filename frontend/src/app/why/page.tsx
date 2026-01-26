@@ -74,7 +74,7 @@ export default function WhyPage() {
       <section className={`${styles.section} ${styles.sectionTrust}`}>
         <div className={styles.sectionInner}>
           <h2 className={styles.trustTitle}>
-            신고 이후가 아닌,<br />신고 이전의 세무를 봅니다
+            당신의 필요에<br />확신을 더하는 파트너
           </h2>
           <p className={styles.trustDescription}>
             사업의 성장을 함께 고민하고, 세무 리스크를 사전에 관리하며,<br />

@@ -121,16 +121,15 @@ export default function HomePage() {
               <h3 className={styles.contactLabel}>영업시간</h3>
               <p className={styles.contactValue}>평일 09:00-18:00</p>
             </div>
-          </div>
-          <div className={styles.ctaCenter}>
             <a
               href="http://pf.kakao.com/_BxbuLn"
               target="_blank"
               rel="noopener noreferrer"
+              className={styles.contactItem}
             >
-              <Button variant="accent" size="lg">
-                카카오톡 상담하기
-              </Button>
+              <div className={styles.contactIcon}>💬</div>
+              <h3 className={styles.contactLabel}>카카오톡</h3>
+              <p className={styles.contactValue}>상담하기</p>
             </a>
           </div>
         </div>

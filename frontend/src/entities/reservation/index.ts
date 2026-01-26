@@ -1,1 +1,0 @@
-export { reservationApi } from './api'

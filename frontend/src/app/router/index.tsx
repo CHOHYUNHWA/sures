@@ -3,16 +3,7 @@ import { CustomerHomePage } from '@/pages/customer/home'
 import { ServicesPage } from '@/pages/customer/services'
 import { WhyPage } from '@/pages/customer/why'
 import { ContactPage } from '@/pages/customer/contact'
-import { ReservationApplyPage } from '@/pages/customer/reservation-apply'
-import { ReservationCompletePage } from '@/pages/customer/reservation-complete'
-import { ReservationVerifyPage } from '@/pages/customer/reservation-verify'
-import { ReservationDetailPage } from '@/pages/customer/reservation-detail'
-import { AdminLoginPage } from '@/pages/admin/login'
-import { AdminRegisterPage } from '@/pages/admin/register'
-import { AdminReservationListPage } from '@/pages/admin/reservation-list'
-import { AdminReservationCreatePage } from '@/pages/admin/reservation-create'
-import { AdminLayout } from '@/widgets/sidebar'
-import { CustomerLayout } from '@/widgets/header'
+ import { CustomerLayout } from '@/widgets/header'
 
 export const router = createBrowserRouter([
   // Customer Routes
@@ -24,26 +15,6 @@ export const router = createBrowserRouter([
       { path: 'services', element: <ServicesPage /> },
       { path: 'why', element: <WhyPage /> },
       { path: 'contact', element: <ContactPage /> },
-      { path: 'reservations/apply', element: <ReservationApplyPage /> },
-      { path: 'reservations/complete', element: <ReservationCompletePage /> },
-      { path: 'reservations/verify', element: <ReservationVerifyPage /> },
-      { path: 'reservations/:id', element: <ReservationDetailPage /> },
-    ],
-  },
-  // Admin Routes
-  {
-    path: '/admin',
-    children: [
-      { path: 'login', element: <AdminLoginPage /> },
-      { path: 'register', element: <AdminRegisterPage /> },
-      {
-        element: <AdminLayout />,
-        children: [
-          { index: true, element: <Navigate to="/admin/reservations" replace /> },
-          { path: 'reservations', element: <AdminReservationListPage /> },
-          { path: 'reservations/new', element: <AdminReservationCreatePage /> },
-        ],
-      },
     ],
   },
   // Default redirect

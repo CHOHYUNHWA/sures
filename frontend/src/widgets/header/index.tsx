@@ -53,9 +53,6 @@ export function CustomerLayout() {
               <Link to="/customer/contact" onClick={() => setIsMenuOpen(false)}>
                 오시는 길
               </Link>
-              <Link to="/customer/reservations/apply" onClick={() => setIsMenuOpen(false)}>
-                예약하기
-              </Link>
             </nav>
           </div>
         </div>

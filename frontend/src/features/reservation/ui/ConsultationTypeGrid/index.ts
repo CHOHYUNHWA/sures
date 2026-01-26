@@ -1,1 +1,0 @@
-export { ConsultationTypeGrid } from './ConsultationTypeGrid'

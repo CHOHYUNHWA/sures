@@ -1,5 +1,4 @@
 import { Hero } from '@/widgets/hero'
-import { ServiceCard } from '@/shared/ui'
 import styles from './Services.module.css'
 
 export function ServicesPage() {

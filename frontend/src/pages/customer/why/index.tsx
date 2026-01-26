@@ -1,5 +1,4 @@
 import { Hero } from '@/widgets/hero'
-import { ValueCard } from '@/shared/ui'
 import styles from './Why.module.css'
 
 export function WhyPage() {

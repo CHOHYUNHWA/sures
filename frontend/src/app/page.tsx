@@ -1,5 +1,4 @@
-import Link from 'next/link'
-import { Hero, Button, ValueCard, ServiceCard, ProcessStep } from '@/components/ui'
+import { Hero, ValueCard, ServiceCard, ProcessStep } from '@/components/ui'
 import styles from './page.module.css'
 
 export default function HomePage() {
@@ -9,13 +8,8 @@ export default function HomePage() {
       <Hero
         title="세무 예약의 새로운 기준"
         subtitle="24시간 온라인 예약으로 편리하게, 전문 세무사와 정확하게"
-      >
-        <Link href="/services">
-          <Button variant="outline" size="lg">
-            서비스 알아보기
-          </Button>
-        </Link>
-      </Hero>
+        showTrustBadges
+      />
 
       {/* 핵심 가치 */}
       <section className={styles.section}>
@@ -25,7 +19,7 @@ export default function HomePage() {
             <ValueCard
               icon="🕐"
               title="24시간 온라인 예약"
-              description="언제 어디서나 편리하게 예약하세요. 평일 운영시간 내 온라인 예약 가능, 주말/야간은 유선 예약으로 안내해드립니다."
+              description="언제 어디서나 편리하게 예약하세요. 카카오톡 또는 네이버 예약으로 간편하게 상담을 신청하실 수 있습니다."
             />
             <ValueCard
               icon="👨‍💼"
@@ -122,7 +116,7 @@ export default function HomePage() {
               <p className={styles.contactValue}>평일 09:00-18:00</p>
             </div>
             <a
-              href="http://pf.kakao.com/_BxbuLn"
+              href="http://pf.kakao.com/_zqepn"
               target="_blank"
               rel="noopener noreferrer"
               className={styles.contactItem}

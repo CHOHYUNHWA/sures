@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { Header, Footer } from '@/components/layout'
+import { FloatingKakao } from '@/components/ui'
 import './globals.css'
 
 export const metadata: Metadata = {
@@ -25,6 +26,7 @@ export default function RootLayout({
           <Header />
           <main>{children}</main>
           <Footer />
+          <FloatingKakao />
         </div>
       </body>
     </html>

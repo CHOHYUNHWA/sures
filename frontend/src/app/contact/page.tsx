@@ -140,7 +140,7 @@ export default function ContactPage() {
 
           <div className={styles.ctaCenter}>
             <a
-              href="http://pf.kakao.com/_BxbuLn"
+              href="http://pf.kakao.com/_zqepn"
               target="_blank"
               rel="noopener noreferrer"
             >

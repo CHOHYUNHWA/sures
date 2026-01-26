@@ -1,101 +1,151 @@
 import { Link } from 'react-router-dom'
-import { Button } from '@/shared/ui'
+import { Hero } from '@/widgets/hero'
+import { Button, ValueCard, ServiceCard, ProcessStep } from '@/shared/ui'
 import styles from './Home.module.css'
 
 export function CustomerHomePage() {
   return (
     <>
       {/* Hero Section */}
-      <section className={styles.hero}>
-        <div className="container">
-          <img src="/image/logo.png" alt="Sures 로고" className={styles.heroLogo} />
-          <h1 className={styles.heroTitle}>세무 상담 예약</h1>
-          <p className={styles.heroSubtitle}>
-            간편하게 세무 상담을 예약하고
-            <br />
-            전문 세무사의 상담을 받아보세요
+      <Hero
+        title="세무 예약의 새로운 기준"
+        subtitle="24시간 온라인 예약으로 편리하게, 전문 세무사와 정확하게"
+      >
+        <Link to="/customer/reservations/apply">
+          <Button variant="primary" size="lg">
+            지금 예약하기
+          </Button>
+        </Link>
+        <Link to="/customer/services">
+          <Button variant="outline" size="lg">
+            서비스 알아보기
+          </Button>
+        </Link>
+      </Hero>
+
+      {/* 핵심 가치 */}
+      <section className={styles.section}>
+        <div className={styles.sectionInner}>
+          <h2 className={styles.sectionTitle}>신뢰할 수 있는 세무 파트너</h2>
+          <div className="grid-3">
+            <ValueCard
+              icon="🕐"
+              title="24시간 온라인 예약"
+              description="언제 어디서나 편리하게 예약하세요. 평일 운영시간 내 온라인 예약 가능, 주말/야간은 유선 예약으로 안내해드립니다."
+            />
+            <ValueCard
+              icon="👨‍💼"
+              title="전문 세무사 상담"
+              description="믿을 수 있는 전문가와 함께하세요. 풍부한 경험의 세무사가 고객님의 세무 문제를 직접 상담해드립니다."
+            />
+            <ValueCard
+              icon="📊"
+              title="체계적인 관리"
+              description="한눈에 보는 예약 관리. 예약 조회부터 수정, 취소까지 모두 간편하게 처리할 수 있습니다."
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* 서비스 소개 */}
+      <section className={styles.section + ' ' + styles.sectionGray}>
+        <div className={styles.sectionInner}>
+          <h2 className={styles.sectionTitle}>전문 세무 서비스</h2>
+          <p className={styles.sectionSubtitle}>
+            신고 대행을 넘어 사업의 성장을 이끄는 파트너가 되겠습니다
           </p>
-          <div className={styles.heroActions}>
+          <div className="grid-2">
+            <ServiceCard
+              title="경리 아웃소싱"
+              description="복잡한 장부 관리를 전문가에게 맡기세요. 회계 처리, 급여 계산, 부가세 신고 등 경리 업무를 체계적으로 지원합니다."
+              link="/customer/services"
+            />
+            <ServiceCard
+              title="세무조사 대응"
+              description="철저한 준비와 전문적인 대응으로 함께합니다. 자료 준비부터 조사 입회, 의견 진술까지 모든 과정을 지원합니다."
+              link="/customer/services"
+            />
+            <ServiceCard
+              title="양도·상속·증여 자문"
+              description="절세 전략과 정확한 신고로 안내합니다. 취득세, 양도세, 상속세, 증여세 등 각종 세목에 대한 전문 컨설팅을 제공합니다."
+              link="/customer/services"
+            />
+            <ServiceCard
+              title="조세불복 대행"
+              description="부당한 과세에 대한 권리 구제를 도와드립니다. 이의신청, 심사청구, 심판청구 등 불복 절차를 대행합니다."
+              link="/customer/services"
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* 예약 프로세스 */}
+      <section className={styles.section}>
+        <div className={styles.sectionInner}>
+          <h2 className={styles.sectionTitle}>간편한 온라인 예약 절차</h2>
+          <p className={styles.sectionSubtitle}>
+            단 3단계로 세무 상담 예약을 완료하세요
+          </p>
+          <div className={styles.processGrid}>
+            <ProcessStep
+              step={1}
+              title="날짜 선택"
+              description="원하시는 상담 날짜를 선택하세요"
+            />
+            <ProcessStep
+              step={2}
+              title="시간 선택"
+              description="예약 가능한 시간대를 확인하고 선택하세요"
+            />
+            <ProcessStep
+              step={3}
+              title="정보 입력"
+              description="고객 정보와 상담 내용을 입력하면 완료!"
+              showArrow={false}
+            />
+          </div>
+          <div className={styles.ctaCenter}>
             <Link to="/customer/reservations/apply">
-              <Button variant="accent" size="lg" block>
-                예약 신청하기
-              </Button>
-            </Link>
-            <Link to="/customer/reservations/verify">
-              <Button variant="outline" size="lg" block className={styles.outlineWhite}>
-                예약 조회하기
+              <Button variant="primary" size="lg">
+                지금 바로 예약하기
               </Button>
             </Link>
           </div>
         </div>
       </section>
 
-      {/* Features Section */}
-      <section className={styles.features}>
-        <div className="container">
-          <h2 className={styles.featuresTitle}>서비스 안내</h2>
-          <div className={styles.featuresGrid}>
-            <div className={styles.featureItem}>
-              <div className={styles.featureIcon}>
-                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" viewBox="0 0 16 16">
-                  <path d="M11 6.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm-3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm-5 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1z" />
-                  <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z" />
-                </svg>
-              </div>
-              <h3 className={styles.featureTitle}>간편한 예약</h3>
-              <p className={styles.featureDesc}>
-                온라인으로 24시간 언제든지
-                <br />
-                상담 예약이 가능합니다
-              </p>
+      {/* 연락처 정보 */}
+      <section className={styles.section + ' ' + styles.sectionContact}>
+        <div className={styles.sectionInner}>
+          <h2 className={styles.sectionTitle}>문의하기</h2>
+          <div className={styles.contactGrid}>
+            <div className={styles.contactItem}>
+              <div className={styles.contactIcon}>📞</div>
+              <h3 className={styles.contactLabel}>전화</h3>
+              <p className={styles.contactValue}>02-6954-7716</p>
             </div>
-
-            <div className={styles.featureItem}>
-              <div className={styles.featureIcon}>
-                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" viewBox="0 0 16 16">
-                  <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z" />
-                </svg>
-              </div>
-              <h3 className={styles.featureTitle}>전문 상담</h3>
-              <p className={styles.featureDesc}>
-                경험 많은 전문 세무사가
-                <br />
-                맞춤 상담을 제공합니다
-              </p>
+            <div className={styles.contactItem}>
+              <div className={styles.contactIcon}>✉️</div>
+              <h3 className={styles.contactLabel}>이메일</h3>
+              <p className={styles.contactValue}>surestax@naver.com</p>
             </div>
-
-            <div className={styles.featureItem}>
-              <div className={styles.featureIcon}>
-                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" viewBox="0 0 16 16">
-                  <path d="M10.854 7.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708 0z" />
-                  <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z" />
-                </svg>
-              </div>
-              <h3 className={styles.featureTitle}>예약 확인</h3>
-              <p className={styles.featureDesc}>
-                예약 내역을 언제든지
-                <br />
-                확인하고 관리할 수 있습니다
-              </p>
+            <div className={styles.contactItem}>
+              <div className={styles.contactIcon}>🕐</div>
+              <h3 className={styles.contactLabel}>영업시간</h3>
+              <p className={styles.contactValue}>평일 09:00-18:00</p>
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className={styles.cta}>
-        <div className="container">
-          <h2>지금 바로 상담 예약하세요</h2>
-          <p>
-            세무 관련 궁금한 점이 있으신가요?
-            <br />
-            전문 세무사가 친절하게 상담해 드립니다.
-          </p>
-          <Link to="/customer/reservations/apply">
-            <Button variant="primary" size="lg">
-              예약 신청하기
-            </Button>
-          </Link>
+          <div className={styles.ctaCenter}>
+            <a
+              href="http://pf.kakao.com/_BxbuLn"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Button variant="accent" size="lg">
+                카카오톡 상담하기
+              </Button>
+            </a>
+          </div>
         </div>
       </section>
     </>

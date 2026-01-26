@@ -1,13 +1,24 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Outlet, Link, useLocation } from 'react-router-dom'
+import { Footer } from '@/widgets/footer'
 import styles from './Header.module.css'
 
 export function CustomerLayout() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const location = useLocation()
 
-  // 홈페이지는 헤더 스타일이 다름
-  const isHomePage = location.pathname === '/customer' || location.pathname === '/'
+  // 페이지 전환 시 스크롤을 맨 위로
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [location.pathname])
+
+  // Hero 컴포넌트를 사용하는 페이지들은 padding 제거
+  const isHeroPage =
+    location.pathname === '/customer' ||
+    location.pathname === '/' ||
+    location.pathname === '/customer/services' ||
+    location.pathname === '/customer/why' ||
+    location.pathname === '/customer/contact'
 
   return (
     <div className="page-wrapper">
@@ -30,31 +41,31 @@ export function CustomerLayout() {
             </button>
 
             <nav className={`${styles.navMenu} ${isMenuOpen ? styles.active : ''}`}>
+              <Link to="/customer" onClick={() => setIsMenuOpen(false)}>
+                홈
+              </Link>
+              <Link to="/customer/services" onClick={() => setIsMenuOpen(false)}>
+                서비스 소개
+              </Link>
+              <Link to="/customer/why" onClick={() => setIsMenuOpen(false)}>
+                Why SURES
+              </Link>
+              <Link to="/customer/contact" onClick={() => setIsMenuOpen(false)}>
+                오시는 길
+              </Link>
               <Link to="/customer/reservations/apply" onClick={() => setIsMenuOpen(false)}>
-                예약 신청
-              </Link>
-              <Link to="/customer/reservations/verify" onClick={() => setIsMenuOpen(false)}>
-                예약 조회
-              </Link>
-              <Link to="/admin/login" onClick={() => setIsMenuOpen(false)}>
-                관리자
+                예약하기
               </Link>
             </nav>
           </div>
         </div>
       </header>
 
-      <main className={isHomePage ? '' : 'main-content'}>
+      <main className={isHeroPage ? '' : 'main-content'}>
         <Outlet />
       </main>
 
-      <footer className={styles.footer}>
-        <div className="container">
-          <div className={styles.footerContent}>
-            <p>&copy; 2025 Sures. All rights reserved.</p>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   )
 }

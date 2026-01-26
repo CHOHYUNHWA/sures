@@ -1,0 +1,33 @@
+.card {
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: var(--radius-md);
+  padding: 2rem;
+  text-align: center;
+  transition: all var(--transition-fast);
+  box-shadow: var(--shadow-sm);
+}
+
+.card:hover {
+  border-color: var(--color-accent);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  margin-bottom: 0.75rem;
+}
+
+.description {
+  font-size: 0.9375rem;
+  color: #666;
+  line-height: 1.6;
+}

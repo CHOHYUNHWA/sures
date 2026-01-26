@@ -1,5 +1,8 @@
 import { createBrowserRouter, Navigate } from 'react-router-dom'
 import { CustomerHomePage } from '@/pages/customer/home'
+import { ServicesPage } from '@/pages/customer/services'
+import { WhyPage } from '@/pages/customer/why'
+import { ContactPage } from '@/pages/customer/contact'
 import { ReservationApplyPage } from '@/pages/customer/reservation-apply'
 import { ReservationCompletePage } from '@/pages/customer/reservation-complete'
 import { ReservationVerifyPage } from '@/pages/customer/reservation-verify'
@@ -18,6 +21,9 @@ export const router = createBrowserRouter([
     element: <CustomerLayout />,
     children: [
       { index: true, element: <CustomerHomePage /> },
+      { path: 'services', element: <ServicesPage /> },
+      { path: 'why', element: <WhyPage /> },
+      { path: 'contact', element: <ContactPage /> },
       { path: 'reservations/apply', element: <ReservationApplyPage /> },
       { path: 'reservations/complete', element: <ReservationCompletePage /> },
       { path: 'reservations/verify', element: <ReservationVerifyPage /> },

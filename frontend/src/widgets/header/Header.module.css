@@ -5,6 +5,8 @@
     position: sticky;
     top: 0;
     z-index: 100;
+    border-bottom: 1px solid rgba(40, 167, 225, 0.2);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
 .headerInner {
@@ -74,21 +76,4 @@
 
 .navMenu a:hover {
     color: #28a7e1;
-}
-
-.footer {
-    background-color: #f5f5f5;
-    border-top: 1px solid #e0e0e0;
-    padding: 2rem 0;
-    margin-top: auto;
-}
-
-.footerContent {
-    text-align: center;
-    color: #666;
-    font-size: 0.875rem;
-}
-
-.footerContent p {
-    margin: 0;
 }

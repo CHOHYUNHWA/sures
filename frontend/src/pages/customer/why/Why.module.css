@@ -1,0 +1,121 @@
+.section {
+  padding: var(--section-spacing) 0;
+  background-color: #ffffff;
+}
+
+.sectionTrust {
+  background: linear-gradient(135deg, var(--color-primary) 0%, #022a6e 100%);
+  color: #ffffff;
+}
+
+.sectionInner {
+  max-width: var(--page-max-width);
+  margin: 0 auto;
+  padding: 0 var(--spacing-md);
+}
+
+@media (max-width: 480px) {
+  .section {
+    padding: calc(var(--section-spacing) / 1.5) 0;
+  }
+}
+
+.sectionTitle {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  text-align: center;
+  margin-bottom: var(--spacing-md);
+}
+
+@media (max-width: 480px) {
+  .sectionTitle {
+    font-size: 1.5rem;
+  }
+}
+
+.sectionSubtitle {
+  text-align: center;
+  color: #666;
+  font-size: 1.0625rem;
+  margin-bottom: var(--spacing-xl);
+  line-height: 1.6;
+}
+
+/* Value Card */
+.valueCard {
+  background: #ffffff;
+  border: 2px solid #e0e0e0;
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  transition: all var(--transition-fast);
+  position: relative;
+  overflow: hidden;
+}
+
+.valueCard:hover {
+  border-color: var(--color-accent);
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-4px);
+}
+
+.valueNumber {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 3rem;
+  font-weight: 700;
+  color: rgba(40, 167, 225, 0.1);
+  line-height: 1;
+}
+
+.valueTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin-bottom: 0.5rem;
+}
+
+.valueSubtitle {
+  font-size: 1rem;
+  color: var(--color-accent);
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.valueDescription {
+  font-size: 0.9375rem;
+  color: #666;
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* Trust Section */
+.trustTitle {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #ffffff;
+  text-align: center;
+  line-height: 1.4;
+  margin-bottom: var(--spacing-lg);
+}
+
+@media (max-width: 480px) {
+  .trustTitle {
+    font-size: 1.5rem;
+  }
+}
+
+.trustDescription {
+  text-align: center;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1.0625rem;
+  line-height: 1.8;
+  margin: 0;
+}
+
+@media (max-width: 480px) {
+  .trustDescription br {
+    display: none;
+  }
+}

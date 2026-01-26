@@ -40,6 +40,11 @@
     /* Transitions */
     --transition-fast: 150ms ease;
     --transition-normal: 300ms ease;
+
+    /* SureTax-style Layout */
+    --page-max-width: 900px;
+    --section-spacing: 4rem;
+    --grid-gap: 1.5rem;
 }
 
 /* --------------------------------------------------------------------------
@@ -457,5 +462,48 @@ p {
 @media (max-width: 480px) {
     .type-grid {
         grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* --------------------------------------------------------------------------
+   Landing Page Sections
+   -------------------------------------------------------------------------- */
+.section {
+    max-width: var(--page-max-width);
+    margin: 0 auto;
+    padding: var(--section-spacing) var(--spacing-md);
+}
+
+@media (max-width: 480px) {
+    .section {
+        padding: calc(var(--section-spacing) / 1.5) var(--spacing-md);
+    }
+}
+
+/* Grid Layouts */
+.grid-2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--grid-gap);
+}
+
+.grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--grid-gap);
+}
+
+.grid-4 {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--grid-gap);
+}
+
+@media (max-width: 768px) {
+    .grid-2,
+    .grid-3,
+    .grid-4 {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-md);
     }
 }

@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Outlet, Link, NavLink, useNavigate } from 'react-router-dom'
 import { clearTokens } from '@/shared/api'
+import { Footer } from '@/widgets/footer'
 import styles from './Sidebar.module.css'
 
 export function AdminLayout() {
@@ -51,6 +52,8 @@ export function AdminLayout() {
       <main className={styles.main}>
         <Outlet />
       </main>
+
+      <Footer />
     </div>
   )
 }

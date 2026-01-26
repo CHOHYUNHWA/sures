@@ -17,3 +17,15 @@ export type { AlertProps, AlertVariant } from './Alert'
 // Modal
 export { Modal, ConfirmModal } from './Modal'
 export type { ModalProps, ConfirmModalProps } from './Modal'
+
+// ValueCard
+export { ValueCard } from './ValueCard'
+export type { ValueCardProps } from './ValueCard'
+
+// ServiceCard
+export { ServiceCard } from './ServiceCard'
+export type { ServiceCardProps } from './ServiceCard'
+
+// ProcessStep
+export { ProcessStep } from './ProcessStep'
+export type { ProcessStepProps } from './ProcessStep'

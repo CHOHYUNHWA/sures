@@ -4,39 +4,43 @@
 
 ## 프로젝트 개요
 세무사 사무소 홍보 및 정보 제공 **정적 웹사이트**.
-Cloudflare Pages로 배포 예정.
+Next.js App Router + Static Export로 구축, Cloudflare Pages로 배포.
 
 ## 기술 스택
 
-- **Framework**: React 19 + TypeScript
-- **Build Tool**: Vite
-- **Routing**: React Router DOM
+- **Framework**: Next.js 15 + React 19 + TypeScript
+- **Rendering**: Static Site Generation (SSG)
 - **Hosting**: Cloudflare Pages
-- **서버리스 함수**: Cloudflare Workers (블로그 RSS 프록시용)
+- **서버리스 함수**: Cloudflare Workers (블로그 RSS 프록시용 - 예정)
 
 ## 프로젝트 구조
 ```
 sures/
-├── frontend/           # React 정적 사이트
+├── frontend/              # Next.js 정적 사이트
 │   ├── src/
-│   │   ├── app/        # 앱 설정, 라우터
-│   │   ├── pages/      # 페이지 컴포넌트
-│   │   ├── widgets/    # 레이아웃 (Header, Footer)
-│   │   └── shared/     # 공통 UI 컴포넌트
-│   ├── public/         # 정적 파일 (이미지 등)
-│   └── dist/           # 빌드 결과물
-├── docs/               # 문서
-└── CLAUDE.md           # 프로젝트 문서
+│   │   ├── app/           # App Router 페이지
+│   │   │   ├── layout.tsx # 루트 레이아웃
+│   │   │   ├── page.tsx   # 홈 페이지
+│   │   │   ├── services/  # 서비스 소개 페이지
+│   │   │   ├── why/       # Why SURES 페이지
+│   │   │   └── contact/   # 오시는 길 페이지
+│   │   └── components/
+│   │       ├── layout/    # Header, Footer
+│   │       └── ui/        # 공통 UI 컴포넌트
+│   ├── public/            # 정적 파일 (이미지 등)
+│   └── out/               # 빌드 결과물 (Static Export)
+├── docs/                  # 문서
+└── CLAUDE.md              # 프로젝트 문서
 ```
 
 ## 페이지 구성
 
 | 페이지 | 경로 | 설명 |
 |--------|------|------|
-| 홈 | `/customer` | 메인 페이지 |
-| 서비스 소개 | `/customer/services` | 제공 서비스 안내 |
-| Why SURES | `/customer/why` | 사무소 소개 |
-| 오시는 길 | `/customer/contact` | 연락처, 위치 |
+| 홈 | `/` | 메인 페이지 |
+| 서비스 소개 | `/services` | 제공 서비스 안내 |
+| Why SURES | `/why` | 사무소 소개 |
+| 오시는 길 | `/contact` | 연락처, 위치 |
 
 ## 디자인 가이드
 
@@ -58,35 +62,33 @@ sures/
 
 ### TypeScript/React
 - 함수형 컴포넌트 + Named Export 사용
-- CSS Modules 또는 CSS Variables 사용
-- Path Alias: `@/pages/...`, `@/widgets/...`, `@/shared/...`
+- CSS Modules 사용
+- Path Alias: `@/components/...`, `@/app/...`
+
+### SEO
+- 각 페이지에 `metadata` export로 메타태그 설정
+- Static Export로 HTML 사전 렌더링 → 검색엔진 최적화
 
 ## 개발 환경
 
 ```bash
 # 개발 서버 실행
 cd frontend
-npm run dev     # localhost:5173
+npm run dev     # localhost:3000
 
 # 빌드
-npm run build   # dist/ 폴더에 결과물 생성
+npm run build   # out/ 폴더에 결과물 생성
 
 # 빌드 미리보기
-npm run preview
+npm run start
 ```
 
 ## Cloudflare Pages 배포
 
 ### 설정
 - **Build command**: `npm run build`
-- **Build output directory**: `dist`
+- **Build output directory**: `out`
 - **Root directory**: `frontend`
-
-### SPA 라우팅
-`frontend/public/_redirects` 파일:
-```
-/*    /index.html   200
-```
 
 ## TODO: 네이버 블로그 연동
 

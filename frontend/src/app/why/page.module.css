@@ -1,0 +1,121 @@
+.section {
+  padding: 4rem 0;
+  background-color: #ffffff;
+}
+
+.sectionTrust {
+  background: linear-gradient(135deg, #011541 0%, #022a6e 100%);
+  color: #ffffff;
+}
+
+.sectionInner {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+@media (max-width: 480px) {
+  .section {
+    padding: 2.5rem 0;
+  }
+}
+
+.sectionTitle {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #011541;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+@media (max-width: 480px) {
+  .sectionTitle {
+    font-size: 1.5rem;
+  }
+}
+
+.sectionSubtitle {
+  text-align: center;
+  color: #666;
+  font-size: 1.0625rem;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+/* Value Card */
+.valueCard {
+  background: #ffffff;
+  border: 2px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 2rem;
+  transition: all 150ms ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.valueCard:hover {
+  border-color: #28a7e1;
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+  transform: translateY(-4px);
+}
+
+.valueNumber {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 3rem;
+  font-weight: 700;
+  color: rgba(40, 167, 225, 0.1);
+  line-height: 1;
+}
+
+.valueTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #011541;
+  margin-bottom: 0.5rem;
+}
+
+.valueSubtitle {
+  font-size: 1rem;
+  color: #28a7e1;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.valueDescription {
+  font-size: 0.9375rem;
+  color: #666;
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* Trust Section */
+.trustTitle {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #ffffff;
+  text-align: center;
+  line-height: 1.4;
+  margin-bottom: 1.5rem;
+}
+
+@media (max-width: 480px) {
+  .trustTitle {
+    font-size: 1.5rem;
+  }
+}
+
+.trustDescription {
+  text-align: center;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1.0625rem;
+  line-height: 1.8;
+  margin: 0;
+}
+
+@media (max-width: 480px) {
+  .trustDescription br {
+    display: none;
+  }
+}

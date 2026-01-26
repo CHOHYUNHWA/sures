@@ -1,0 +1,82 @@
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-weight: 500;
+    line-height: 1.5;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 150ms ease;
+    min-height: 44px;
+    min-width: 44px;
+    text-decoration: none;
+}
+
+.btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* Variants */
+.btnPrimary {
+    background-color: #011541;
+    color: #ffffff;
+}
+
+.btnPrimary:hover:not(:disabled) {
+    background-color: #022a6e;
+}
+
+.btnAccent {
+    background-color: #28a7e1;
+    color: #ffffff;
+}
+
+.btnAccent:hover:not(:disabled) {
+    background-color: #1e8fc4;
+}
+
+.btnOutline {
+    background-color: transparent;
+    border: 2px solid #011541;
+    color: #011541;
+}
+
+.btnOutline:hover:not(:disabled) {
+    background-color: #011541;
+    color: #ffffff;
+}
+
+.btnDanger {
+    background-color: #dc3545;
+    color: #ffffff;
+}
+
+.btnDanger:hover:not(:disabled) {
+    background-color: #c82333;
+}
+
+/* Sizes */
+.btnSm {
+    padding: 0.25rem 0.75rem;
+    font-size: 0.875rem;
+    min-height: 36px;
+}
+
+.btnMd {
+    padding: 0.5rem 1.5rem;
+    font-size: 1rem;
+}
+
+.btnLg {
+    padding: 1rem 2rem;
+    font-size: 1.125rem;
+}
+
+/* Block */
+.btnBlock {
+    display: flex;
+    width: 100%;
+}

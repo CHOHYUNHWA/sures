@@ -12,8 +12,7 @@ export function Header() {
     <header className={styles.header}>
       <div className={styles.headerInner}>
         <Link href="/" className={styles.logo}>
-          <Image src="/image/logo.png" alt="Sures 로고" width={32} height={32} />
-          <span className={styles.logoText}>Sures</span>
+          <Image src="/image/sures_logo.png" alt="Sures 로고" width={32} height={32} />
         </Link>
 
         <button

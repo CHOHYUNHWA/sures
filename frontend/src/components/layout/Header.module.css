@@ -19,6 +19,13 @@
     padding: 0 1rem;
 }
 
+@media (min-width: 769px) {
+    .headerInner {
+        max-width: 1200px;
+        padding: 0 2rem;
+    }
+}
+
 .logo {
     display: flex;
     align-items: center;
@@ -46,6 +53,12 @@
     padding: 0.5rem;
 }
 
+@media (min-width: 769px) {
+    .navToggle {
+        display: none;
+    }
+}
+
 .navToggle span {
     display: block;
     width: 24px;
@@ -65,8 +78,25 @@
     margin-top: 1rem;
 }
 
+@media (min-width: 769px) {
+    .navMenu {
+        display: flex;
+        position: static;
+        padding: 0;
+        margin: 0;
+        gap: 2rem;
+        background-color: transparent;
+    }
+}
+
 .navMenu.active {
     display: block;
+}
+
+@media (min-width: 769px) {
+    .navMenu.active {
+        display: flex;
+    }
 }
 
 .navMenu a {
@@ -75,6 +105,13 @@
     padding: 0.5rem 0;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     text-decoration: none;
+}
+
+@media (min-width: 769px) {
+    .navMenu a {
+        padding: 0.5rem 0;
+        border-bottom: none;
+    }
 }
 
 .navMenu a:hover {

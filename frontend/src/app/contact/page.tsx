@@ -13,8 +13,9 @@ export default function ContactPage() {
     <>
       {/* Hero Section */}
       <Hero
-        title="오시는 길"
-        subtitle="귀한 발걸음이 헛되지 않도록, 전문성과 진심을 다해 준비하겠습니다"
+        title="귀한 발걸음이 헛되지 않도록, 전문성과 진심을 다해 준비하겠습니다"
+        backgroundImage="/image/sures_background.png"
+        badge="오시는 길"
       />
 
       {/* 방문 안내 */}

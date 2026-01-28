@@ -12,13 +12,20 @@ export default function WhyPage() {
     <>
       {/* Hero Section */}
       <Hero
-        title="SURES는 고객의 Sure(확신)를 Success(성공)로 연결합니다"
+        title={
+          <>
+            <span style={{ color: '#BE9F5D' }}>SURES</span>는<br />
+            고객의 확신<span style={{ color: '#BE9F5D' }}>SURE</span>을<br />
+            성공<span style={{ color: '#BE9F5D' }}>SUCCESS</span>으로 연결합니다
+          </>
+        }
+        backgroundImage="/image/sures_background.png"
+        badge="Why SURES"
       />
 
       {/* 핵심 가치 */}
       <section className={styles.section}>
         <div className={styles.sectionInner}>
-          <h2 className={styles.sectionTitle}>왜 SURES인가</h2>
           <p className={styles.sectionSubtitle}>
             4가지 핵심 가치로 고객의 성공을 지원합니다
           </p>

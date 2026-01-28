@@ -49,10 +49,61 @@
 }
 
 .serviceSubtitle {
-  font-size: 1rem;
-  color: #666;
+  font-size: 1.25rem;
+  color: #011541;
   margin-bottom: 1.5rem;
-  font-weight: 500;
+  font-weight: 600;
+}
+
+.serviceDescription {
+  font-size: 1.0625rem;
+  color: #555;
+  line-height: 1.8;
+  margin-bottom: 1.5rem;
+}
+
+.subCardGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .subCardGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.subCard {
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 1.25rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+  transition: all 0.2s ease;
+  min-height: 100px;
+  display: flex;
+  flex-direction: column;
+}
+
+.subCard:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  transform: translateY(-2px);
+}
+
+.subCardTitle {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #28a7e1;
+  margin-bottom: 0.5rem;
+}
+
+.subCardDescription {
+  font-size: 0.875rem;
+  color: #666;
+  line-height: 1.6;
+  margin: 0;
 }
 
 .serviceList {
@@ -93,12 +144,75 @@
   }
 }
 
+.specialtySubtitle {
+  text-align: center;
+  color: #011541;
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  line-height: 1.5;
+}
+
 .specialtyDescription {
   text-align: center;
   color: #666;
   font-size: 1.0625rem;
   line-height: 1.8;
   margin-bottom: 2rem;
+}
+
+.descriptionText {
+  text-align: center;
+  color: #555;
+  font-size: 1rem;
+  line-height: 1.8;
+  margin-bottom: 2.5rem;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Feature Grid */
+.featureGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+@media (max-width: 768px) {
+  .featureGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.featureCard {
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: all 0.2s ease;
+}
+
+.featureCard:hover {
+  border-color: #28a7e1;
+  box-shadow: 0 4px 16px rgba(40, 167, 225, 0.15);
+  transform: translateY(-2px);
+}
+
+.featureTitle {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #28a7e1;
+  margin-bottom: 0.75rem;
+}
+
+.featureDescription {
+  font-size: 0.9375rem;
+  color: #666;
+  line-height: 1.7;
+  margin: 0;
 }
 
 /* Industry Grid */

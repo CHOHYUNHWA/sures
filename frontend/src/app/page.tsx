@@ -6,30 +6,49 @@ export default function HomePage() {
     <>
       {/* Hero Section */}
       <Hero
-        title="세무 예약의 새로운 기준"
-        subtitle="24시간 온라인 예약으로 편리하게, 전문 세무사와 정확하게"
-        showTrustBadges
-      />
+        title="당신의 필요에 확신을 더하는 파트너"
+        subtitle="시작부터 결이 다른 전략으로 모든 세무 문제를 해결하세요."
+        backgroundImage="/image/sures_background.png"
+      >
+        <div className={styles.ctaButtons}>
+          <a
+            href="http://pf.kakao.com/_zqepn"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.ctaButtonOutline}
+          >
+            카카오톡 문의
+          </a>
+          <a
+            href="https://map.naver.com/p/entry/place/2083776809?c=15.00,0,0,0,dh&placePath=/ticket?fromPanelNum=1&additionalHeight=76&timestamp=202601281353&locale=ko&svcName=map_pcv5&additionalHeight=76&timestamp=202601281353&locale=ko&svcName=map_pcv5&fromPanelNum=1"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.ctaButtonPrimary}
+          >
+            예약하기 →
+          </a>
+        </div>
+      </Hero>
 
       {/* 핵심 가치 */}
       <section className={styles.section}>
         <div className={styles.sectionInner}>
-          <h2 className={styles.sectionTitle}>신뢰할 수 있는 세무 파트너</h2>
+          <h2 className={styles.sectionTitle}>슈어스는 고객의 확신을 성공으로 연결합니다.</h2>
           <div className="grid-3">
             <ValueCard
-              icon="🕐"
-              title="24시간 온라인 예약"
-              description="언제 어디서나 편리하게 예약하세요. 카카오톡 또는 네이버 예약으로 간편하게 상담을 신청하실 수 있습니다."
-            />
-            <ValueCard
               icon="👨‍💼"
-              title="전문 세무사 상담"
-              description="믿을 수 있는 전문가와 함께하세요. 풍부한 경험의 세무사가 고객님의 세무 문제를 직접 상담해드립니다."
+              title="대표 세무사 전담"
+              description="믿을 수 있는 전문가와 함께하세요. 직원에게 맡기는 대형 사무소와는 다릅니다. 더 꼼꼼하게 더 전문적으로 대표 세무사가 직접 관리합니다."
             />
             <ValueCard
-              icon="📊"
-              title="체계적인 관리"
-              description="한눈에 보는 예약 관리. 예약 조회부터 수정, 취소까지 모두 간편하게 처리할 수 있습니다."
+              icon="🕐"
+              title="스마트 온라인 예약"
+              description="언제 어디서나 편리하게 예약하세요. 24시간 네이버 예약과 카카오톡 채널을 통해 간편하게 소통하실 수 있습니다."
+            />
+            <ValueCard
+              icon="🏢"
+              title="대형 법인 재무팀 경력"
+              description="실무 노하우를 바탕으로 기업의 재무 상태를 면밀히 분석하여 과도한 세금 지출을 막고 기업 성장을 위한 최적의 세무 환경을 구축합니다."
             />
           </div>
         </div>

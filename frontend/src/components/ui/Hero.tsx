@@ -2,14 +2,15 @@ import type { ReactNode } from 'react'
 import styles from './Hero.module.css'
 
 interface HeroProps {
-  title: string
+  title: ReactNode
   subtitle?: string
   backgroundImage?: string
   children?: ReactNode
   showTrustBadges?: boolean
+  badge?: string
 }
 
-export function Hero({ title, subtitle, backgroundImage, children, showTrustBadges }: HeroProps) {
+export function Hero({ title, subtitle, backgroundImage, children, showTrustBadges, badge }: HeroProps) {
   const style = backgroundImage
     ? { backgroundImage: `linear-gradient(rgba(1, 21, 65, 0.6), rgba(1, 21, 65, 0.3)), url(${backgroundImage})` }
     : {}
@@ -17,7 +18,7 @@ export function Hero({ title, subtitle, backgroundImage, children, showTrustBadg
   return (
     <section className={styles.hero} style={style}>
       <div className={styles.content}>
-        <div className={styles.badge}>SURES TAX & ACCOUNTING</div>
+        {badge && <div className={styles.badge}>{badge}</div>}
         <h1 className={styles.title}>{title}</h1>
         {subtitle && <p className={styles.subtitle}>{subtitle}</p>}
         {children && <div className={styles.actions}>{children}</div>}
@@ -38,7 +39,6 @@ export function Hero({ title, subtitle, backgroundImage, children, showTrustBadg
           </div>
         )}
       </div>
-      <div className={styles.decorLine} />
     </section>
   )
 }

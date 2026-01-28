@@ -125,3 +125,66 @@ a.contactItem:hover {
   display: inline-block;
   text-decoration: none;
 }
+
+/* CTA Buttons */
+.ctaButtons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.ctaButtonOutline {
+  padding: 1rem 2rem;
+  font-size: 1.0625rem;
+  font-weight: 600;
+  background-color: #ffffff;
+  color: #011541;
+  border: 2px solid #d0d0d0;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  min-width: 160px;
+  text-align: center;
+}
+
+.ctaButtonOutline:hover {
+  background-color: #f5f5f5;
+  border-color: #011541;
+  color: #011541;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(1, 21, 65, 0.15);
+}
+
+.ctaButtonPrimary {
+  padding: 1rem 2rem;
+  font-size: 1.0625rem;
+  font-weight: 600;
+  background-color: #1e5a8e;
+  color: #ffffff;
+  border: 2px solid #1e5a8e;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  min-width: 160px;
+  text-align: center;
+}
+
+.ctaButtonPrimary:hover {
+  background-color: #2770b3;
+  border-color: #2770b3;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(30, 90, 142, 0.35);
+}
+
+@media (max-width: 480px) {
+  .ctaButtons {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .ctaButtonOutline,
+  .ctaButtonPrimary {
+    min-width: 100%;
+  }
+}

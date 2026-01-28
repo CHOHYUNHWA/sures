@@ -12,8 +12,9 @@ export default function ServicesPage() {
     <>
       {/* Hero Section */}
       <Hero
-        title="업무 안내"
-        subtitle="신고 대행을 넘어 사업의 성장을 이끄는 파트너가 되겠습니다"
+        title={<>신고 대행을 넘어<br />사업의 성장을<br />이끄는 파트너가 되겠습니다</>}
+        badge="업무안내"
+        backgroundImage="/image/sures_background.png"
       />
 
       {/* 서비스 소개 */}
@@ -21,55 +22,95 @@ export default function ServicesPage() {
         <div className={styles.sectionInner}>
           <div className="grid-2">
             <div className={styles.serviceDetail}>
-              <h3 className={styles.serviceTitle}>경리 아웃소싱</h3>
+              <h3 className={styles.serviceTitle}>법인 조정</h3>
               <div className={styles.divider}></div>
-              <p className={styles.serviceSubtitle}>복잡한 장부 관리를 전문가에게</p>
-              <ul className={styles.serviceList}>
-                <li>일반 회계 처리 및 결산</li>
-                <li>급여 계산 및 4대 보험 관리</li>
-                <li>부가세 신고 및 종합소득세 신고</li>
-                <li>법인세 신고 및 세무조정</li>
-                <li>각종 세무 신고 대행</li>
-              </ul>
+              <p className={styles.serviceSubtitle}>법인의 가치를 높이고 세금부담은 낮추고</p>
+              <p className={styles.serviceDescription}>
+                슈어스는 복잡한 법인 결산부터 기업별 특성에 맞는 정교한 세무조정까지, 기업의 재무 상태를 면밀히 분석하여 과도한 세금 지출을 막고 기업 성장을 위한 최적의 세무 환경을 구축합니다.
+              </p>
+              <div className={styles.subCardGrid}>
+                <div className={styles.subCard}>
+                  <h4 className={styles.subCardTitle}>법인세 세무조정</h4>
+                  <p className={styles.subCardDescription}>
+                    세무상 이익 산출 및 기업회계와 세무회계의 차이 조정 등
+                  </p>
+                </div>
+                <div className={styles.subCard}>
+                  <h4 className={styles.subCardTitle}>절세 혜택 극대화</h4>
+                  <p className={styles.subCardDescription}>
+                    연구소 설립, 고용 증대 등 각종 세액공제 및 감면 적용 등
+                  </p>
+                </div>
+              </div>
             </div>
 
             <div className={styles.serviceDetail}>
-              <h3 className={styles.serviceTitle}>세무조사 대응</h3>
+              <h3 className={styles.serviceTitle}>종합소득세</h3>
               <div className={styles.divider}></div>
-              <p className={styles.serviceSubtitle}>철저한 준비와 전문적인 대응</p>
-              <ul className={styles.serviceList}>
-                <li>세무조사 사전 준비 및 컨설팅</li>
-                <li>조사 자료 준비 및 검토</li>
-                <li>세무조사 입회 및 대응</li>
-                <li>의견 진술 및 소명 자료 작성</li>
-                <li>과세 전 적부심사 청구</li>
-              </ul>
+              <p className={styles.serviceSubtitle}>성공 사업자의 파트너, 업종별 맞춤 소득세 관리</p>
+              <p className={styles.serviceDescription}>
+                슈어스는 개인 사업자의 업종별 맞춤 기장부터 프리랜서 및 고소득자의 소득세 신고까지, 누락 없는 공제와 정교한 분석으로 고객님의 세금 부담을 덜어드리는 통합 세무 솔루션을 제공합니다.
+              </p>
+              <div className={styles.subCardGrid}>
+                <div className={styles.subCard}>
+                  <h4 className={styles.subCardTitle}>사업자</h4>
+                  <p className={styles.subCardDescription}>
+                    업종별 맞춤 경비 분석 및 최적의 절세 전략 수립 등
+                  </p>
+                </div>
+                <div className={styles.subCard}>
+                  <h4 className={styles.subCardTitle}>프리랜서/고소득자</h4>
+                  <p className={styles.subCardDescription}>
+                    3.3% 사업소득자 환급 진단 및 고액 자산가 소득 관리 등
+                  </p>
+                </div>
+              </div>
             </div>
 
             <div className={styles.serviceDetail}>
-              <h3 className={styles.serviceTitle}>양도·상속·증여 자문</h3>
+              <h3 className={styles.serviceTitle}>신규 창업·사업자 등록</h3>
               <div className={styles.divider}></div>
-              <p className={styles.serviceSubtitle}>절세 전략과 정확한 신고</p>
-              <ul className={styles.serviceList}>
-                <li>부동산 양도소득세 절세 컨설팅</li>
-                <li>상속세 및 증여세 신고 대행</li>
-                <li>가업승계 및 사전증여 설계</li>
-                <li>부동산 취득세 및 재산세 자문</li>
-                <li>세무조사 대비 사전 검토</li>
-              </ul>
+              <p className={styles.serviceSubtitle}>공적인 사업의 첫 단추, 시작부터 전문가와 함께</p>
+              <p className={styles.serviceDescription}>
+                슈어스는 예비 창업자의 업종별 특성을 고려한 사업자 등록 방식부터 초기 세무 세팅까지, 대표님이 사업 본연의 가치에만 집중하실 수 있도록 든든한 기초 토대를 마련해 드립니다.
+              </p>
+              <div className={styles.subCardGrid}>
+                <div className={styles.subCard}>
+                  <h4 className={styles.subCardTitle}>업종별 맞춤 등록</h4>
+                  <p className={styles.subCardDescription}>
+                    간이/일반 과세자 선택 및 인허가 업종 체크 등
+                  </p>
+                </div>
+                <div className={styles.subCard}>
+                  <h4 className={styles.subCardTitle}>초기 세무 세팅</h4>
+                  <p className={styles.subCardDescription}>
+                    창업 세액감면 요건 확인 및 홈택스/카드 등록 가이드 등
+                  </p>
+                </div>
+              </div>
             </div>
 
             <div className={styles.serviceDetail}>
-              <h3 className={styles.serviceTitle}>조세불복 대행</h3>
+              <h3 className={styles.serviceTitle}>세무조사·조세불복</h3>
               <div className={styles.divider}></div>
-              <p className={styles.serviceSubtitle}>부당한 과세에 대한 권리 구제</p>
-              <ul className={styles.serviceList}>
-                <li>이의신청 대리 및 자료 작성</li>
-                <li>심사청구 및 심판청구 대행</li>
-                <li>과세전적부심사 청구</li>
-                <li>경정청구 및 환급 신청</li>
-                <li>행정소송 자료 준비 지원</li>
-              </ul>
+              <p className={styles.serviceSubtitle}>세무조사의 위기, 전문가의 치밀한 방어로</p>
+              <p className={styles.serviceDescription}>
+                슈어스는 갑작스러운 세무조사에 대한 전략적 대응부터, 잘못 부과된 세금을 바로잡는 조세불복까지 풍부한 경험과 치밀한 법리 해석을 바탕으로 고객님의 정당한 권리를 되찾아 드립니다.
+              </p>
+              <div className={styles.subCardGrid}>
+                <div className={styles.subCard}>
+                  <h4 className={styles.subCardTitle}>세무조사 대응</h4>
+                  <p className={styles.subCardDescription}>
+                    조사 사전 대비 및 현장 대응, 의견 진술 대행 등
+                  </p>
+                </div>
+                <div className={styles.subCard}>
+                  <h4 className={styles.subCardTitle}>조세불복·환급</h4>
+                  <p className={styles.subCardDescription}>
+                    경정청구, 이의신청, 조세심판청구 등 권리 구제
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -107,6 +148,31 @@ export default function ServicesPage() {
                 <small>실시간 문의 가능</small>
               </span>
             </a>
+          </div>
+        </div>
+      </section>
+
+      {/* 법인조정 */}
+      <section className={styles.section}>
+        <div className={styles.sectionInner}>
+          <h2 className={styles.specialtyTitle}>법인조정</h2>
+          <p className={styles.specialtySubtitle}>법인의 가치를 높이고 세금 부담은 낮추고</p>
+          <p className={styles.descriptionText}>
+            슈어스는 복잡한 법인 결산부터 기업별 특성에 맞는 정교한 세무조정까지, 기업의 재무 상태를 면밀히 분석하여 과도한 세금 지출을 막고 기업 성장을 위한 최적의 세무 환경을 구축합니다.
+          </p>
+          <div className={styles.featureGrid}>
+            <div className={styles.featureCard}>
+              <h4 className={styles.featureTitle}>법인세 세무조정</h4>
+              <p className={styles.featureDescription}>
+                세무상 이익 산출 및 기업회계와 세무회계의 차이 조정 등
+              </p>
+            </div>
+            <div className={styles.featureCard}>
+              <h4 className={styles.featureTitle}>절세 혜택 극대화</h4>
+              <p className={styles.featureDescription}>
+                연구소 설립, 고용 증대 등 각종 세액공제 및 감면 적용 등
+              </p>
+            </div>
           </div>
         </div>
       </section>

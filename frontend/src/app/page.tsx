@@ -6,7 +6,7 @@ export default function HomePage() {
     <>
       {/* Hero Section */}
       <Hero
-        title="당신의 필요에 확신을 더하는 파트너"
+        title={<>당신의 필요에 <span style={{ color: '#c0a460' }}>확신</span>을 더하는 파트너</>}
         subtitle="시작부터 결이 다른 전략으로 모든 세무 문제를 해결하세요."
         backgroundImage="/image/sures_background.png"
       >

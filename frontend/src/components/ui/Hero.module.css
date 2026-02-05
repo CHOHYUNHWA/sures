@@ -45,13 +45,13 @@
   display: inline-block;
   font-size: 1rem;
   font-weight: 700;
-  color: #013B7D;
+  color: #ffffff;
   letter-spacing: 2px;
   margin-bottom: 1.5rem;
   padding: 0.6rem 2rem;
-  border: 2px solid #0D5B9B;
+  border: 2px solid rgba(255, 255, 255, 0.6);
   border-radius: 9999px;
-  background: #ffffff;
+  background: rgba(255, 255, 255, 0.4);
 }
 
 @media (max-width: 480px) {
@@ -62,7 +62,7 @@
 }
 
 .title {
-  font-size: 2.5rem;
+  font-size: 2.75rem;
   font-weight: 700;
   color: #ffffff;
   margin-bottom: 1rem;
@@ -72,7 +72,7 @@
 
 @media (max-width: 480px) {
   .title {
-    font-size: 1.75rem;
+    font-size: 1.875rem;
   }
 }
 

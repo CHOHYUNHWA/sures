@@ -3,7 +3,7 @@ import { Hero } from '@/components/ui'
 import styles from './page.module.css'
 
 export const metadata: Metadata = {
-  title: 'Why SURES | 슈어스세무회계',
+  title: 'Why SURES | 슈어스세무회계, 당신의 필요에 확신을 더하는 파트너',
   description: 'SURES는 고객의 확신을 성공으로 연결합니다. 확신, 트렌드, 방어, 밀착 - 4가지 핵심 가치로 고객의 성공을 지원합니다.',
 }
 

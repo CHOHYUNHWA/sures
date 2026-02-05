@@ -29,8 +29,11 @@ export function Header() {
           <Link href="/" onClick={() => setIsMenuOpen(false)}>
             홈
           </Link>
+          <Link href="/about" onClick={() => setIsMenuOpen(false)}>
+            세무사 소개
+          </Link>
           <Link href="/services" onClick={() => setIsMenuOpen(false)}>
-            서비스 소개
+            업무 안내
           </Link>
           <Link href="/why" onClick={() => setIsMenuOpen(false)}>
             Why SURES

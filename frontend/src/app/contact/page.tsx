@@ -4,7 +4,7 @@ import { Hero, Button } from '@/components/ui'
 import styles from './page.module.css'
 
 export const metadata: Metadata = {
-  title: '오시는 길 | 슈어스세무회계',
+  title: '오시는 길 | 슈어스세무회계, 당신의 필요에 확신을 더하는 파트너',
   description: '서울특별시 강동구 천호대로 1024 (힐스테이트천호역젠트리스) 303호. 지하철 5호선, 8호선 천호역 6번 출구 도보 1분.',
 }
 
@@ -13,7 +13,7 @@ export default function ContactPage() {
     <>
       {/* Hero Section */}
       <Hero
-        title="귀한 발걸음이 헛되지 않도록, 전문성과 진심을 다해 준비하겠습니다"
+        title={<>귀한 발걸음이 헛되지 않도록<br />전문성과 진심을 다해 준비하겠습니다.</>}
         backgroundImage="/image/sures_background.png"
         badge="오시는 길"
       />
@@ -139,15 +139,30 @@ export default function ContactPage() {
             </div>
           </div>
 
-          <div className={styles.ctaCenter}>
+          <div className={styles.ctaButtons}>
+            <a
+              href="https://naver.me/G4GVUglM"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.ctaButtonNaver}
+            >
+              <span className={styles.ctaIcon}>📅</span>
+              <span className={styles.ctaButtonText}>
+                <strong>네이버 예약</strong>
+                <small>온라인으로 간편하게</small>
+              </span>
+            </a>
             <a
               href="http://pf.kakao.com/_zqepn"
               target="_blank"
               rel="noopener noreferrer"
+              className={styles.ctaButtonKakao}
             >
-              <Button variant="primary" size="lg">
-                카카오톡 상담하기
-              </Button>
+              <span className={styles.ctaIcon}>💬</span>
+              <span className={styles.ctaButtonText}>
+                <strong>카카오톡 상담</strong>
+                <small>실시간 문의 가능</small>
+              </span>
             </a>
           </div>
         </div>

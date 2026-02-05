@@ -3,7 +3,7 @@ import { Hero, Button } from '@/components/ui'
 import styles from './page.module.css'
 
 export const metadata: Metadata = {
-  title: '서비스 소개 | 슈어스세무회계',
+  title: '업무 안내 | 슈어스세무회계, 당신의 필요에 확신을 더하는 파트너',
   description: '경리 아웃소싱, 세무조사 대응, 양도·상속·증여 자문, 조세불복 대행 등 전문 세무 서비스를 제공합니다.',
 }
 
@@ -68,9 +68,55 @@ export default function ServicesPage() {
             </div>
 
             <div className={styles.serviceDetail}>
+              <h3 className={styles.serviceTitle}>기장 및 신고 대행</h3>
+              <div className={styles.divider}></div>
+              <p className={styles.serviceSubtitle}>대표님은 사업에만 집중하세요.</p>
+              <p className={styles.serviceDescription}>
+                슈어스는 매월 발생하는 복잡한 장부 작성과 급여 관리부터 부가가치세, 법인세/소득세 신고까지 비즈니스 주기에 맞춘 철저한 관리로 세무 리스크 제로(Zero)를 실현합니다.
+              </p>
+              <div className={styles.subCardGrid}>
+                <div className={styles.subCard}>
+                  <h4 className={styles.subCardTitle}>정기 기장 관리</h4>
+                  <p className={styles.subCardDescription}>
+                    실시간 장부 작성, 인건비 신고 및 4대 보험 관리 등
+                  </p>
+                </div>
+                <div className={styles.subCard}>
+                  <h4 className={styles.subCardTitle}>주요 세무 신고</h4>
+                  <p className={styles.subCardDescription}>
+                    부가가치세, 법인세, 종합소득세 신고 대행 등
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className={styles.serviceDetail}>
+              <h3 className={styles.serviceTitle}>양도·상속·증여</h3>
+              <div className={styles.divider}></div>
+              <p className={styles.serviceSubtitle}>소중한 자산일수록 전문가의 설계로 지키세요.</p>
+              <p className={styles.serviceDescription}>
+                슈어스는 증여/상속을 통한 지혜로운 자산 승계부터, 부동산/주식 매도 시의 정교한 절세 전략까지<br />통합적인 자산 관리 솔루션을 제공합니다.
+              </p>
+              <div className={styles.subCardGrid}>
+                <div className={styles.subCard}>
+                  <h4 className={styles.subCardTitle}>상속·증여</h4>
+                  <p className={styles.subCardDescription}>
+                    최적의 사전 증여 플랜 및 상속세 리스크 점검 등
+                  </p>
+                </div>
+                <div className={styles.subCard}>
+                  <h4 className={styles.subCardTitle}>양도소득세</h4>
+                  <p className={styles.subCardDescription}>
+                    아파트, 분양권, 주식 매도 전 절세 진단 등
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className={styles.serviceDetail}>
               <h3 className={styles.serviceTitle}>신규 창업·사업자 등록</h3>
               <div className={styles.divider}></div>
-              <p className={styles.serviceSubtitle}>공적인 사업의 첫 단추, 시작부터 전문가와 함께</p>
+              <p className={styles.serviceSubtitle}>성공적인 사업의 시작, 세무 전문가와 함께</p>
               <p className={styles.serviceDescription}>
                 슈어스는 예비 창업자의 업종별 특성을 고려한 사업자 등록 방식부터 초기 세무 세팅까지, 대표님이 사업 본연의 가치에만 집중하실 수 있도록 든든한 기초 토대를 마련해 드립니다.
               </p>
@@ -116,6 +162,38 @@ export default function ServicesPage() {
         </div>
       </section>
 
+      {/* 산업별 특화 */}
+      <section className={`${styles.section} ${styles.sectionSpecialty}`}>
+        <div className={styles.sectionInner}>
+          <h2 className={styles.specialtyTitle}>
+            다양한 산업에 최적화된 세무 서비스
+          </h2>
+          <div className={styles.specialtyDivider}></div>
+          <p className={styles.specialtyDescription}>
+            1인 미디어 창작자, SNS마켓 사업자, 프리랜서 등<br />
+            변화하는 산업 구조에 맞춘 전문 상담을 제공합니다
+          </p>
+          <div className={styles.industryGrid}>
+            <div className={styles.industryItem}>
+              <span className={styles.industryIcon}>🎥</span>
+              <p className={styles.industryName}>1인 미디어 창작자</p>
+            </div>
+            <div className={styles.industryItem}>
+              <span className={styles.industryIcon}>🛍️</span>
+              <p className={styles.industryName}>SNS마켓 사업자</p>
+            </div>
+            <div className={styles.industryItem}>
+              <span className={styles.industryIcon}>💼</span>
+              <p className={styles.industryName}>프리랜서</p>
+            </div>
+            <div className={styles.industryItem}>
+              <span className={styles.industryIcon}>🏢</span>
+              <p className={styles.industryName}>소상공인</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* CTA 섹션 */}
       <section className={styles.ctaSection}>
         <div className={styles.sectionInner}>
@@ -148,62 +226,6 @@ export default function ServicesPage() {
                 <small>실시간 문의 가능</small>
               </span>
             </a>
-          </div>
-        </div>
-      </section>
-
-      {/* 법인조정 */}
-      <section className={styles.section}>
-        <div className={styles.sectionInner}>
-          <h2 className={styles.specialtyTitle}>법인조정</h2>
-          <p className={styles.specialtySubtitle}>법인의 가치를 높이고 세금 부담은 낮추고</p>
-          <p className={styles.descriptionText}>
-            슈어스는 복잡한 법인 결산부터 기업별 특성에 맞는 정교한 세무조정까지, 기업의 재무 상태를 면밀히 분석하여 과도한 세금 지출을 막고 기업 성장을 위한 최적의 세무 환경을 구축합니다.
-          </p>
-          <div className={styles.featureGrid}>
-            <div className={styles.featureCard}>
-              <h4 className={styles.featureTitle}>법인세 세무조정</h4>
-              <p className={styles.featureDescription}>
-                세무상 이익 산출 및 기업회계와 세무회계의 차이 조정 등
-              </p>
-            </div>
-            <div className={styles.featureCard}>
-              <h4 className={styles.featureTitle}>절세 혜택 극대화</h4>
-              <p className={styles.featureDescription}>
-                연구소 설립, 고용 증대 등 각종 세액공제 및 감면 적용 등
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 산업별 특화 */}
-      <section className={`${styles.section} ${styles.sectionSpecialty}`}>
-        <div className={styles.sectionInner}>
-          <h2 className={styles.specialtyTitle}>
-            다양한 산업에 최적화된 세무 서비스
-          </h2>
-          <p className={styles.specialtyDescription}>
-            1인 미디어 창작자, SNS마켓 사업자, 프리랜서 등<br />
-            변화하는 산업 구조에 맞춘 전문 상담을 제공합니다
-          </p>
-          <div className={styles.industryGrid}>
-            <div className={styles.industryItem}>
-              <span className={styles.industryIcon}>🎥</span>
-              <p className={styles.industryName}>1인 미디어 창작자</p>
-            </div>
-            <div className={styles.industryItem}>
-              <span className={styles.industryIcon}>🛍️</span>
-              <p className={styles.industryName}>SNS마켓 사업자</p>
-            </div>
-            <div className={styles.industryItem}>
-              <span className={styles.industryIcon}>💼</span>
-              <p className={styles.industryName}>프리랜서</p>
-            </div>
-            <div className={styles.industryItem}>
-              <span className={styles.industryIcon}>🏢</span>
-              <p className={styles.industryName}>소상공인</p>
-            </div>
           </div>
         </div>
       </section>

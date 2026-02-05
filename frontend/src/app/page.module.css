@@ -72,19 +72,44 @@
 
 @media (max-width: 768px) {
   .contactGrid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr;
     gap: 0.75rem;
+  }
+
+  .contactItem {
+    flex-direction: row;
+    gap: 0.75rem;
+    padding: 1rem;
+    text-align: left;
+  }
+
+  .contactIcon {
+    font-size: 1.5rem;
+    margin-bottom: 0;
+  }
+
+  .contactLabel {
+    font-size: 0.75rem;
+    margin-bottom: 0.125rem;
+  }
+
+  .contactValue {
+    font-size: 0.875rem;
   }
 }
 
 .contactItem {
   text-align: center;
-  padding: 1.25rem 1rem;
+  padding: 1rem;
   background: #ffffff;
   border-radius: 8px;
   border: 1px solid #e0e0e0;
   text-decoration: none;
   transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 a.contactItem:hover {

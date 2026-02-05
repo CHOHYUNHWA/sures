@@ -149,10 +149,8 @@ a.contactItem:hover {
 }
 
 .ctaButtonOutline:hover {
-  background-color: #011541;
-  color: #ffffff;
-  transform: translateY(-1px);
-  box-shadow: 0 4px 16px rgba(255, 255, 255, 0.25);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(255, 255, 255, 0.3);
 }
 
 .ctaButtonPrimary {
@@ -170,10 +168,9 @@ a.contactItem:hover {
 }
 
 .ctaButtonPrimary:hover {
-  background-color: #ffffff;
-  color: #011541;
-  transform: translateY(-1px);
-  box-shadow: 0 4px 16px rgba(255, 255, 255, 0.25);
+  color: #ffffff;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(1, 21, 65, 0.4);
 }
 
 @media (max-width: 480px) {

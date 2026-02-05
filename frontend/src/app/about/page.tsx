@@ -4,7 +4,7 @@ import { Hero } from '@/components/ui'
 import styles from './page.module.css'
 
 export const metadata: Metadata = {
-  title: '세무사 소개 | 슈어스세무회계, 당신의 필요에 확신을 더하는 파트너',
+  title: '슈어스세무회계, 당신의 필요에 확신을 더하는 파트너',
   description: '대표 세무사 김성국. 국세청 출석부터 조세불복까지, 실전 세무의 압도적 경험으로 고객의 정당한 권익을 되찾아 드립니다.',
 }
 

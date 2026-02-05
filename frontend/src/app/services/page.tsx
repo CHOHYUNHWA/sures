@@ -3,7 +3,7 @@ import { Hero, Button } from '@/components/ui'
 import styles from './page.module.css'
 
 export const metadata: Metadata = {
-  title: '업무 안내 | 슈어스세무회계, 당신의 필요에 확신을 더하는 파트너',
+  title: '슈어스세무회계, 당신의 필요에 확신을 더하는 파트너',
   description: '경리 아웃소싱, 세무조사 대응, 양도·상속·증여 자문, 조세불복 대행 등 전문 세무 서비스를 제공합니다.',
 }
 
@@ -95,7 +95,7 @@ export default function ServicesPage() {
               <div className={styles.divider}></div>
               <p className={styles.serviceSubtitle}>소중한 자산일수록 전문가의 설계로 지키세요.</p>
               <p className={styles.serviceDescription}>
-                슈어스는 증여/상속을 통한 지혜로운 자산 승계부터, 부동산/주식 매도 시의 정교한 절세 전략까지<br />통합적인 자산 관리 솔루션을 제공합니다.
+                슈어스는 증여/상속을 통한 지혜로운 자산 승계부터, 부동산/주식 매도 시의 정교한 절세 전략까지 통합적인 자산 관리 솔루션을 제공합니다.<br /><br />
               </p>
               <div className={styles.subCardGrid}>
                 <div className={styles.subCard}>

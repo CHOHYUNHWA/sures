@@ -4,7 +4,7 @@ import { Hero, Button } from '@/components/ui'
 import styles from './page.module.css'
 
 export const metadata: Metadata = {
-  title: '오시는 길 | 슈어스세무회계, 당신의 필요에 확신을 더하는 파트너',
+  title: '슈어스세무회계, 당신의 필요에 확신을 더하는 파트너',
   description: '서울특별시 강동구 천호대로 1024 (힐스테이트천호역젠트리스) 303호. 지하철 5호선, 8호선 천호역 6번 출구 도보 1분.',
 }
 

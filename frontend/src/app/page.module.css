@@ -5,7 +5,22 @@
 }
 
 .sectionGray {
-  background-color: #f5f5f5;
+  background-image: url('/image/body-bg.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+}
+
+.sectionGray::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.2);
+  pointer-events: none;
 }
 
 .sectionContact {
@@ -16,6 +31,8 @@
   max-width: 900px;
   margin: 0 auto;
   padding: 0 1rem;
+  position: relative;
+  z-index: 1;
 }
 
 @media (max-width: 480px) {
@@ -209,3 +226,101 @@ a.contactItem:hover {
     min-width: 100%;
   }
 }
+
+/* Service Grid */
+.serviceGrid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0.4rem;
+  margin-bottom: 2rem;
+}
+
+.serviceTag {
+  background: #ffffff;
+  border: 1px solid #e8e8e8;
+  border-radius: 8px;
+  padding: 1rem 0.25rem;
+  text-align: center;
+  transition: all 0.2s ease;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.serviceTag:hover {
+  border-color: #28a7e1;
+  transform: translateY(-1px);
+  box-shadow: 0 3px 8px rgba(40, 167, 225, 0.1);
+}
+
+.serviceTitle {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: #011541;
+  line-height: 1.2;
+  word-break: keep-all;
+  white-space: nowrap;
+}
+
+.serviceBadges {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 0.2rem;
+  justify-content: center;
+  max-width: 100%;
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.1rem 0.25rem;
+  background-color: #f0f8ff;
+  color: #28a7e1;
+  font-size: 0.5625rem;
+  font-weight: 500;
+  border-radius: 3px;
+  border: 1px solid #d4ebf7;
+  white-space: nowrap;
+}
+
+/* Service Button */
+.serviceButtonWrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.serviceButton {
+  display: inline-block;
+  padding: 0.5rem 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #28a7e1;
+  background-color: transparent;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.serviceButton::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: #28a7e1;
+  transition: width 0.3s ease;
+}
+
+.serviceButton:hover::after {
+  width: 100%;
+}
+
+@media (max-width: 480px) {
+  .serviceButton {
+    font-size: 0.9375rem;
+  }
+}
+

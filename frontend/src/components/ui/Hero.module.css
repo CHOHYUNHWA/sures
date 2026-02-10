@@ -145,6 +145,66 @@
   font-weight: 700;
 }
 
+/* CTA Buttons */
+.ctaButtons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.ctaButtonOutline {
+  padding: 0.6rem 1.5rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  background-color: #ffffff;
+  color: #011541;
+  border: none;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  min-width: 140px;
+  text-align: center;
+}
+
+.ctaButtonOutline:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(255, 255, 255, 0.3);
+}
+
+.ctaButtonPrimary {
+  padding: 0.6rem 1.5rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  background-color: #011541;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  min-width: 140px;
+  text-align: center;
+}
+
+.ctaButtonPrimary:hover {
+  color: #ffffff;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(1, 21, 65, 0.4);
+}
+
+@media (max-width: 480px) {
+  .ctaButtons {
+    flex-direction: column;
+    gap: 0.75rem;
+    align-items: center;
+  }
+
+  .ctaButtonOutline,
+  .ctaButtonPrimary {
+    min-width: 200px;
+  }
+}
+
 /* Decorative Line */
 .decorLine {
   position: absolute;

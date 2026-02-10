@@ -196,12 +196,11 @@
   .ctaButtons {
     flex-direction: column;
     gap: 0.75rem;
-    align-items: center;
   }
 
   .ctaButtonOutline,
   .ctaButtonPrimary {
-    min-width: 200px;
+    min-width: 100%;
   }
 }
 

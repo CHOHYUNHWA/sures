@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Hero, FadeIn } from '@/components/ui';
+import { Hero, FadeIn, BottomCTA } from '@/components/ui';
 import styles from './page.module.css';
 
 export const metadata: Metadata = {
@@ -149,6 +149,8 @@ export default function FeesPage() {
           </div>
         </FadeIn>
       </section>
+
+      <BottomCTA />
     </main>
   );
 }

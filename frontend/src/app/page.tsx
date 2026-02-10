@@ -1,4 +1,4 @@
-import { Hero, ValueCard, ServiceCard, ProcessStep, FadeIn } from '@/components/ui'
+import { Hero, ValueCard, ServiceCard, ProcessStep, FadeIn, BottomCTA } from '@/components/ui'
 import styles from './page.module.css'
 
 export default function HomePage() {
@@ -17,15 +17,15 @@ export default function HomePage() {
             rel="noopener noreferrer"
             className={styles.ctaButtonOutline}
           >
-            카카오톡 문의
+            카카오톡 상담
           </a>
           <a
-            href="https://map.naver.com/p/entry/place/2083776809?c=15.00,0,0,0,dh&placePath=/ticket?fromPanelNum=1&additionalHeight=76&timestamp=202601281353&locale=ko&svcName=map_pcv5&additionalHeight=76&timestamp=202601281353&locale=ko&svcName=map_pcv5&fromPanelNum=1"
+            href="https://naver.me/G4GVUglM"
             target="_blank"
             rel="noopener noreferrer"
             className={styles.ctaButtonPrimary}
           >
-            예약하기 →
+            네이버 예약
           </a>
         </div>
       </Hero>
@@ -57,7 +57,7 @@ export default function HomePage() {
               <ValueCard
                 icon="🏢"
                 title="기업 재무팀 경력"
-                description="기업 재무팀 경력을 보유하고 있어 재무 실무자들의 환경을 깊게 이해하고 있습니다. 업무 현장과 업종을 고려한 최적의 절세전략 및 세무환경을 구축합니다."
+                description="기업 재무팀 경력으로 실무를 깊게 이해합니다. 업무 현장과 업종을 고려한 최적의 절세 전략과 세무환경을 구축합니다."
                 delay={0}
               />
             </FadeIn>
@@ -82,39 +82,39 @@ export default function HomePage() {
                 <div className={styles.serviceTitle}>신규창업자</div>
                 <div className={styles.serviceBadges}>
                   <span className={styles.badge}>사업자등록</span>
-                  <span className={styles.badge}>창업 감면등 지원</span>
+                  <span className={styles.badge}>창업감면</span>
                 </div>
               </div>
               <div className={styles.serviceTag}>
                 <div className={styles.serviceTitle}>경리 아웃소싱</div>
                 <div className={styles.serviceBadges}>
                   <span className={styles.badge}>장부관리</span>
-                  <span className={styles.badge}>원천세/4대보험</span>
+                  <span className={styles.badge}>원천세</span>
                 </div>
               </div>
               <div className={styles.serviceTag}>
                 <div className={styles.serviceTitle}>세무조사 대응</div>
                 <div className={styles.serviceBadges}>
-                  <span className={styles.badge}>추징세액최소</span>
+                  <span className={styles.badge}>세액축소</span>
                   <span className={styles.badge}>납세자 보호</span>
-                </div>
-              </div>
-              <div className={styles.serviceTag}>
-                <div className={styles.serviceTitle}>양도·상속·증여 자문</div>
-                <div className={styles.serviceBadges}>
-                  <span className={styles.badge}>절세전략</span>
-                  <span className={styles.badge}>사후관리</span>
                 </div>
               </div>
               <div className={styles.serviceTag}>
                 <div className={styles.serviceTitle}>조세불복 대행</div>
                 <div className={styles.serviceBadges}>
                   <span className={styles.badge}>이의신청</span>
-                  <span className={styles.badge}>심판 청구</span>
+                  <span className={styles.badge}>심판청구</span>
                 </div>
               </div>
               <div className={styles.serviceTag}>
-                <div className={styles.serviceTitle}>부가세 신고</div>
+                <div className={styles.serviceTitle}>양도·상속·증여</div>
+                <div className={styles.serviceBadges}>
+                  <span className={styles.badge}>절세전략</span>
+                  <span className={styles.badge}>사후관리</span>
+                </div>
+              </div>
+              <div className={styles.serviceTag}>
+                <div className={styles.serviceTitle}>부가가치세 신고</div>
                 <div className={styles.serviceBadges}>
                   <span className={styles.badge}>일반/간이</span>
                   <span className={styles.badge}>정기신고</span>
@@ -125,8 +125,6 @@ export default function HomePage() {
                 <div className={styles.serviceBadges}>
                   <span className={styles.badge}>개인사업자</span>
                   <span className={styles.badge}>프리랜서</span>
-                  <span className={styles.badge}>성실신고</span>
-                  <span className={styles.badge}>공동사업</span>
                 </div>
               </div>
               <div className={styles.serviceTag}>
@@ -187,43 +185,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 연락처 정보 */}
-      <section className={`${styles.section} ${styles.sectionContact}`}>
-        <div className={styles.sectionInner}>
-          <FadeIn>
-            <h2 className={styles.sectionTitle}>문의하기</h2>
-          </FadeIn>
-          <FadeIn delay={0.15}>
-            <div className={styles.contactGrid}>
-              <div className={styles.contactItem}>
-                <div className={styles.contactIcon}>📞</div>
-                <h3 className={styles.contactLabel}>전화</h3>
-                <p className={styles.contactValue}>02-6954-7716</p>
-              </div>
-              <div className={styles.contactItem}>
-                <div className={styles.contactIcon}>✉️</div>
-                <h3 className={styles.contactLabel}>이메일</h3>
-                <p className={styles.contactValue}>surestax@naver.com</p>
-              </div>
-              <div className={styles.contactItem}>
-                <div className={styles.contactIcon}>🕐</div>
-                <h3 className={styles.contactLabel}>영업시간</h3>
-                <p className={styles.contactValue}>평일 09:00-18:00</p>
-              </div>
-              <a
-                href="http://pf.kakao.com/_zqepn"
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.contactItem}
-              >
-                <div className={styles.contactIcon}>💬</div>
-                <h3 className={styles.contactLabel}>카카오톡</h3>
-                <p className={styles.contactValue}>상담하기</p>
-              </a>
-            </div>
-          </FadeIn>
-        </div>
-      </section>
+      <BottomCTA />
     </>
   )
 }

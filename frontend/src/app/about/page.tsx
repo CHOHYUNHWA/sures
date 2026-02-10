@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import Image from 'next/image'
-import { Hero, FadeIn } from '@/components/ui'
+import { Hero, FadeIn, BottomCTA } from '@/components/ui'
 import styles from './page.module.css'
 
 export const metadata: Metadata = {
@@ -145,6 +145,8 @@ export default function AboutPage() {
           </FadeIn>
         </div>
       </section>
+
+      <BottomCTA />
     </>
   )
 }

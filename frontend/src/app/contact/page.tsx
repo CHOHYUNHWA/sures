@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import Image from 'next/image'
-import { Hero, Button, FadeIn } from '@/components/ui'
+import { Hero, Button, FadeIn, BottomCTA } from '@/components/ui'
 import styles from './page.module.css'
 
 export const metadata: Metadata = {
@@ -52,49 +52,34 @@ export default function ContactPage() {
             </div>
           </FadeIn>
 
-          {/* 교통 안내 */}
-          <div className={styles.transportSection}>
-            <h3 className={styles.subsectionTitle}>교통 안내</h3>
+          {/* 교통편 안내 */}
+          <FadeIn delay={0.3}>
+            <div className={styles.transportCard}>
+              <h3 className={styles.subsectionTitle}>교통편 안내</h3>
 
-            {/* 차량 이용 */}
-            <FadeIn delay={0.3}>
-              <div className={styles.transportCard}>
-                <h4 className={styles.transportTitle}>🚗 차량 이용</h4>
-                <div className={styles.transportContent}>
-                  <p className={styles.transportHighlight}>
-                    <strong>주차 안내:</strong> 건물 내 주차 가능합니다. (무료주차 1시간 30분 지원)
-                  </p>
-                  <ul className={styles.transportList}>
-                    <li>지하 주차장에서 B동 출입문 옆 비상용 엘리베이터로 올라와 주세요.</li>
-                    <li>상가용 엘리베이터나 비상용 엘리베이터 탑승하셔서 3층으로 오시면 됩니다.</li>
-                    <li>오피스용 엘리베이터 이용 시 1층까지만 운행하여 갈아타야 합니다.</li>
-                  </ul>
-                </div>
-              </div>
-            </FadeIn>
+              <h4 className={styles.transportTitle}>🚗 자동차 이용</h4>
+              <ul className={styles.transportList}>
+                <li>내비게이션 &quot;슈어스세무회계&quot; 또는 &quot;서울 강동구 천호대로 1024&quot; 검색</li>
+                <li>빌딩 지하주차장 주차 가능 (무료주차 1시간 30분 지원)</li>
+                <li>지하 주차장에서 B동 출입문 옆 비상용 엘리베이터나 상가 전용 엘리베이터 탑승하여 3층으로 이동</li>
+              </ul>
 
-            {/* 대중교통 이용 */}
-            <FadeIn delay={0.4}>
-              <div className={styles.transportCard}>
-                <h4 className={styles.transportTitle}>🚇 대중교통 이용</h4>
-                <div className={styles.transportContent}>
-                  <div className={styles.transitItem}>
-                    <p className={styles.transitLabel}>
-                      <strong>지하철:</strong> <span className={styles.badge}>5호선</span> <span className={styles.badge}>8호선</span> <strong>천호역</strong> 6번 출구에서 도보 1분 거리입니다.
-                    </p>
-                    <p className={styles.transitDetail}>
-                      <span className={styles.badgeAccent}>GATE 6</span>으로 진입 시 편리합니다.
-                    </p>
-                  </div>
-                  <div className={styles.transitItem}>
-                    <p className={styles.transitLabel}>
-                      <strong>버스:</strong> <span className={styles.badge}>천호역</span> 중앙버스정류장 하차 후 <span className={styles.badge}>힐스테이트천호역젠트리스</span> 빌딩 방향으로 오시면 됩니다.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </FadeIn>
-          </div>
+              <h4 className={styles.transportTitle}>🚇 지하철 이용</h4>
+              <ul className={styles.transportList}>
+                <li>서울 지하철 5호선, 8호선 천호역 6번 출구 (도보 1분)</li>
+                <li>힐스테이트천호역젠트리스 건물 GATE6으로 진입</li>
+                <li>상가 전용 엘리베이터 탑승하여 3층으로 이동</li>
+              </ul>
+
+              <h4 className={styles.transportTitle}>🚌 버스 이용</h4>
+              <ul className={styles.transportList}>
+                <li>천호역 중앙버스정류장 하차</li>
+                <li>힐스테이트천호역젠트리스 빌딩방향으로 횡단보도 건너 진입</li>
+                <li>메가커피 옆 GATE2로 진입</li>
+                <li>에스컬레이터 이용하여 3층으로 이동</li>
+              </ul>
+            </div>
+          </FadeIn>
 
           {/* 네이버 지도 */}
           <FadeIn delay={0.5}>
@@ -155,36 +140,10 @@ export default function ContactPage() {
             </div>
           </FadeIn>
 
-          <FadeIn delay={0.2}>
-            <div className={styles.ctaButtons}>
-              <a
-                href="https://naver.me/G4GVUglM"
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.ctaButtonNaver}
-              >
-                <span className={styles.ctaIcon}>📅</span>
-                <span className={styles.ctaButtonText}>
-                  <strong>네이버 예약</strong>
-                  <small>온라인으로 간편하게</small>
-                </span>
-              </a>
-              <a
-                href="http://pf.kakao.com/_zqepn"
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.ctaButtonKakao}
-              >
-                <span className={styles.ctaIcon}>💬</span>
-                <span className={styles.ctaButtonText}>
-                  <strong>카카오톡 상담</strong>
-                  <small>실시간 문의 가능</small>
-                </span>
-              </a>
-            </div>
-          </FadeIn>
         </div>
       </section>
+
+      <BottomCTA />
     </>
   )
 }

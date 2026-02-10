@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Hero, FadeIn } from '@/components/ui';
+import { Hero, FadeIn, BottomCTA } from '@/components/ui';
 import styles from './page.module.css';
 
 export default function ConsultationPage() {
@@ -38,12 +38,27 @@ export default function ConsultationPage() {
     <>
       <Hero
         title={<>준비된 프로세스가<br />이기는 결과를 만듭니다.</>}
-        badge="상담안내"
+        badge="상담 안내"
         backgroundImage="/image/sures_background.png"
       >
-        <a href="#" className={styles.ctaLink}>
-          1:1 맞춤 신청하기 →
-        </a>
+        <div className={styles.ctaButtons}>
+          <a
+            href="http://pf.kakao.com/_zqepn"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.ctaButtonOutline}
+          >
+            카카오톡 상담
+          </a>
+          <a
+            href="https://naver.me/G4GVUglM"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.ctaButtonPrimary}
+          >
+            네이버 예약
+          </a>
+        </div>
       </Hero>
 
       {/* 수임프로세스 섹션 */}
@@ -119,8 +134,7 @@ export default function ConsultationPage() {
                 </h3>
                 <p className={styles.stepDescription}>
                   최종 결과 보고 및 향후 대응 솔루션을 제공합니다.<br />
-                  - 불복/환급: 결과에 따른 성공보수 발생<br />
-                  (성공 시에만 발생)<br />
+                  - 불복/환급: 결과에 따른 성공보수 발생 (성공 시에만 발생)<br />
                   - 기장/신고: 지속적인 사후 관리 서비스 제공
                 </p>
                 <div className={styles.stepTags}>
@@ -167,18 +181,7 @@ export default function ConsultationPage() {
         </div>
       </section>
 
-      {/* CTA 섹션 */}
-      <section className={styles.ctaSection}>
-        <div className={styles.sectionInner}>
-          <FadeIn>
-            <h2 className={styles.ctaTitle}>
-              막막한 세무 고민,<br />
-              4단계 정밀 프로세스로<br />
-              명쾌한 해답을 드립니다.
-            </h2>
-          </FadeIn>
-        </div>
-      </section>
+      <BottomCTA />
     </>
   );
 }

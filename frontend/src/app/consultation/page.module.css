@@ -30,22 +30,63 @@
   margin: 0 auto 2rem;
 }
 
-/* CTA Link in Hero */
-.ctaLink {
-  color: #ffffff;
-  text-decoration: none;
-  font-size: 1.0625rem;
-  font-weight: 600;
-  padding: 0.75rem 2rem;
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  border-radius: 8px;
-  transition: all 0.3s;
-  display: inline-block;
+/* CTA Buttons in Hero */
+.ctaButtons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 2rem;
 }
 
-.ctaLink:hover {
-  background-color: #28a7e1;
-  border-color: #28a7e1;
+.ctaButtonOutline {
+  padding: 0.6rem 1.5rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  background-color: #ffffff;
+  color: #011541;
+  border: none;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  min-width: 140px;
+  text-align: center;
+}
+
+.ctaButtonOutline:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(255, 255, 255, 0.3);
+}
+
+.ctaButtonPrimary {
+  padding: 0.6rem 1.5rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  background-color: #011541;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  min-width: 140px;
+  text-align: center;
+}
+
+.ctaButtonPrimary:hover {
+  color: #ffffff;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(1, 21, 65, 0.4);
+}
+
+@media (max-width: 480px) {
+  .ctaButtons {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .ctaButtonOutline,
+  .ctaButtonPrimary {
+    min-width: 100%;
+  }
 }
 
 /* Process Flow - Horizontal 4-column */
@@ -56,6 +97,10 @@
   align-items: stretch;
 }
 
+.processFlow > div {
+  height: 100%;
+}
+
 .processCard {
   border: 2px solid #BE9F5D;
   border-radius: 12px;
@@ -63,7 +108,8 @@
   background: #ffffff;
   display: flex;
   flex-direction: column;
-  min-height: 280px;
+  height: 100%;
+  box-sizing: border-box;
 }
 
 .stepNumber {
@@ -93,6 +139,7 @@
   display: flex;
   gap: 0.375rem;
   flex-wrap: wrap;
+  margin-top: auto;
 }
 
 .tag {

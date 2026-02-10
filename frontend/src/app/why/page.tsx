@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Hero, FadeIn } from '@/components/ui'
+import { Hero, FadeIn, BottomCTA } from '@/components/ui'
 import styles from './page.module.css'
 
 export const metadata: Metadata = {
@@ -87,22 +87,7 @@ export default function WhyPage() {
         </div>
       </section>
 
-      {/* 신뢰 섹션 */}
-      <section className={`${styles.section} ${styles.sectionTrust}`}>
-        <div className={styles.sectionInner}>
-          <FadeIn>
-            <h2 className={styles.trustTitle}>
-              당신의 필요에<br />확신을 더하는 파트너
-            </h2>
-          </FadeIn>
-          <FadeIn delay={0.2}>
-            <p className={styles.trustDescription}>
-              사업의 성장을 함께 고민하고, 세무 리스크를 사전에 관리하며,<br />
-              고객의 권익을 지키는 것이 SURES의 철학입니다.
-            </p>
-          </FadeIn>
-        </div>
-      </section>
+      <BottomCTA />
     </>
   )
 }

@@ -116,4 +116,9 @@
 
 .navMenu a:hover {
     color: #28a7e1;
+    transform: translateY(-1px);
+}
+
+.navMenu a {
+    transition: color 0.2s ease, transform 0.2s ease;
 }

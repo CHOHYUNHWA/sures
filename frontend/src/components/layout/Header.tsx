@@ -35,6 +35,12 @@ export function Header() {
           <Link href="/services" onClick={() => setIsMenuOpen(false)}>
             업무 안내
           </Link>
+          <Link href="/consultation" onClick={() => setIsMenuOpen(false)}>
+            상담안내
+          </Link>
+          <Link href="/fees" onClick={() => setIsMenuOpen(false)}>
+            수임료 안내
+          </Link>
           <Link href="/why" onClick={() => setIsMenuOpen(false)}>
             Why SURES
           </Link>

@@ -1,0 +1,227 @@
+/* Section Layouts */
+.section {
+  padding: 4rem 0;
+  background-color: #ffffff;
+}
+
+.sectionGray {
+  background-color: #f9fafb;
+}
+
+.sectionInner {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Section Title & Divider */
+.sectionTitle {
+  text-align: center;
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #011541;
+  margin-bottom: 1rem;
+}
+
+.divider {
+  width: 5rem;
+  height: 3px;
+  background-color: #28a7e1;
+  margin: 0 auto 2rem;
+}
+
+/* CTA Link in Hero */
+.ctaLink {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 1.0625rem;
+  font-weight: 600;
+  padding: 0.75rem 2rem;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 8px;
+  transition: all 0.3s;
+  display: inline-block;
+}
+
+.ctaLink:hover {
+  background-color: #28a7e1;
+  border-color: #28a7e1;
+}
+
+/* Process Flow - Horizontal 4-column */
+.processFlow {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr;
+  gap: 0;
+  align-items: stretch;
+}
+
+.processCard {
+  border: 2px solid #BE9F5D;
+  border-radius: 12px;
+  padding: 1.25rem;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  min-height: 280px;
+}
+
+.stepNumber {
+  color: #BE9F5D;
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.stepTitle {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #011541;
+  line-height: 1.4;
+  margin-bottom: 0.75rem;
+}
+
+.stepDescription {
+  color: #555;
+  font-size: 0.8125rem;
+  line-height: 1.7;
+  margin-bottom: 0.75rem;
+  flex: 1;
+}
+
+.stepTags {
+  display: flex;
+  gap: 0.375rem;
+  flex-wrap: wrap;
+}
+
+.tag {
+  color: #28a7e1;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  color: #BE9F5D;
+  padding: 0 0.5rem;
+}
+
+@media (max-width: 768px) {
+  .processFlow {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .arrow {
+    padding: 0.5rem 0;
+    font-size: 1.25rem;
+  }
+
+  .processCard {
+    padding: 1.5rem;
+  }
+
+  .stepTitle {
+    font-size: 1.125rem;
+  }
+
+  .stepDescription {
+    font-size: 0.875rem;
+  }
+
+  .tag {
+    font-size: 0.8125rem;
+  }
+}
+
+/* FAQ Section */
+.faqList {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.faqItem {
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.faqQuestion {
+  width: 100%;
+  background: none;
+  border: none;
+  text-align: left;
+  padding: 1.25rem 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #011541;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: color 0.3s;
+}
+
+.faqQuestion:hover {
+  color: #28a7e1;
+}
+
+.faqAnswer {
+  padding: 0 0 1.25rem;
+  color: #555;
+  font-size: 0.9375rem;
+  line-height: 1.8;
+}
+
+.faqIcon {
+  font-size: 1.25rem;
+  color: #28a7e1;
+  transition: transform 0.3s;
+  flex-shrink: 0;
+  margin-left: 1rem;
+}
+
+.faqIconOpen {
+  transform: rotate(180deg);
+}
+
+/* CTA Section */
+.ctaSection {
+  padding: 4rem 0;
+  background: linear-gradient(135deg, #011541 0%, #022a6e 100%);
+}
+
+.ctaTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #ffffff;
+  text-align: center;
+  line-height: 1.7;
+}
+
+/* Mobile Responsive */
+@media (max-width: 480px) {
+  .section {
+    padding: 2.5rem 0;
+  }
+
+  .sectionTitle {
+    font-size: 1.5rem;
+  }
+
+  .faqQuestion {
+    font-size: 0.9375rem;
+    padding: 1rem 0;
+  }
+
+  .faqAnswer {
+    font-size: 0.875rem;
+  }
+
+  .ctaLink {
+    font-size: 1rem;
+    padding: 0.625rem 1.5rem;
+  }
+}

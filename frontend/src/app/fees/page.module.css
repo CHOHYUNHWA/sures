@@ -1,0 +1,148 @@
+/* Section Styles */
+.section {
+  padding: 4rem 0;
+  background-color: #ffffff;
+}
+
+.sectionGray {
+  background-color: #f9fafb;
+}
+
+.sectionInner {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Section Title */
+.sectionTitle {
+  text-align: center;
+  color: #011541;
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+}
+
+/* Divider */
+.divider {
+  width: 5rem;
+  height: 3px;
+  background-color: #28a7e1;
+  margin: 0 auto 2rem;
+}
+
+/* Description */
+.description {
+  text-align: center;
+  color: #666;
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+/* Table */
+.tableWrapper {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1.5rem;
+}
+
+.table th {
+  background-color: #011541;
+  color: #ffffff;
+  padding: 1rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-align: left;
+}
+
+.table th + th {
+  border-left: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.table td {
+  padding: 1rem;
+  font-size: 0.875rem;
+  color: #333;
+  border-bottom: 1px solid #e0e0e0;
+  border-left: 1px solid #f0f0f0;
+  vertical-align: top;
+  line-height: 1.6;
+}
+
+.table td:first-child {
+  border-left: none;
+}
+
+.table tr:hover {
+  background-color: #f8fafc;
+}
+
+/* Notice Section */
+.notice {
+  background: #f0f8ff;
+  border: 1px solid #d4ebf7;
+  border-radius: 12px;
+  padding: 1.5rem 2rem;
+}
+
+.noticeTitle {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #011541;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.noticeList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.noticeList li {
+  font-size: 0.875rem;
+  color: #555;
+  line-height: 1.8;
+  padding-left: 1rem;
+  position: relative;
+}
+
+.noticeList li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: #28a7e1;
+}
+
+/* Mobile Responsive */
+@media (max-width: 480px) {
+  .section {
+    padding: 2.5rem 0;
+  }
+
+  .sectionTitle {
+    font-size: 1.5rem;
+  }
+
+  .table th,
+  .table td {
+    padding: 0.75rem 0.5rem;
+    font-size: 0.8125rem;
+  }
+
+  .notice {
+    padding: 1.25rem 1.5rem;
+  }
+
+  .noticeList li {
+    font-size: 0.8125rem;
+  }
+}

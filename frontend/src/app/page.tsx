@@ -41,7 +41,7 @@ export default function HomePage() {
               <ValueCard
                 icon="👨‍💼"
                 title="대표 세무사 전담"
-                description="믿을 수 있는 전문가와 함께하세요. 직원에게 맡기는 대형 사무소와는 다릅니다. 더 꼼꼼하게 더 전문적으로 대표 세무사가 직접 관리합니다."
+                description="믿을 수 있는 전문가와 함께하세요. 직원에게 맡기기만 하는 사무소와는 다릅니다. 더 꼼꼼하게 더 전문적으로 대표 세무사가 직접 관리합니다."
                 delay={0}
               />
             </FadeIn>
@@ -56,8 +56,8 @@ export default function HomePage() {
             <FadeIn delay={0.3}>
               <ValueCard
                 icon="🏢"
-                title="대형 법인 재무팀 경력"
-                description="실무 노하우를 바탕으로 기업의 재무 상태를 면밀히 분석하여 과도한 세금 지출을 막고 기업 성장을 위한 최적의 세무 환경을 구축합니다."
+                title="기업 재무팀 경력"
+                description="기업 재무팀 경력을 보유하고 있어 재무 실무자들의 환경을 깊게 이해하고 있습니다. 업무 현장과 업종을 고려한 최적의 절세전략 및 세무환경을 구축합니다."
                 delay={0}
               />
             </FadeIn>
@@ -79,45 +79,38 @@ export default function HomePage() {
           <FadeIn delay={0.2}>
             <div className={styles.serviceGrid}>
               <div className={styles.serviceTag}>
-                <div className={styles.serviceTitle}>법인 조정</div>
+                <div className={styles.serviceTitle}>신규창업자</div>
                 <div className={styles.serviceBadges}>
-                  <span className={styles.badge}>법인세</span>
-                  <span className={styles.badge}>세무조정</span>
-                </div>
-              </div>
-              <div className={styles.serviceTag}>
-                <div className={styles.serviceTitle}>신규 창업 사업자 등록</div>
-                <div className={styles.serviceBadges}>
-                  <span className={styles.badge}>사업자</span>
-                  <span className={styles.badge}>프리랜서/고소득자</span>
+                  <span className={styles.badge}>사업자등록</span>
+                  <span className={styles.badge}>창업 감면등 지원</span>
                 </div>
               </div>
               <div className={styles.serviceTag}>
                 <div className={styles.serviceTitle}>경리 아웃소싱</div>
                 <div className={styles.serviceBadges}>
                   <span className={styles.badge}>장부관리</span>
-                  <span className={styles.badge}>급여계산</span>
+                  <span className={styles.badge}>원천세/4대보험</span>
                 </div>
               </div>
               <div className={styles.serviceTag}>
                 <div className={styles.serviceTitle}>세무조사 대응</div>
                 <div className={styles.serviceBadges}>
-                  <span className={styles.badge}>자료준비</span>
-                  <span className={styles.badge}>조사입회</span>
+                  <span className={styles.badge}>추징세액최소</span>
+                  <span className={styles.badge}>납세자 보호</span>
                 </div>
               </div>
               <div className={styles.serviceTag}>
                 <div className={styles.serviceTitle}>양도·상속·증여 자문</div>
                 <div className={styles.serviceBadges}>
                   <span className={styles.badge}>절세전략</span>
-                  <span className={styles.badge}>정확한 신고</span>
+                  <span className={styles.badge}>사후관리</span>
                 </div>
               </div>
               <div className={styles.serviceTag}>
                 <div className={styles.serviceTitle}>조세불복 대행</div>
                 <div className={styles.serviceBadges}>
                   <span className={styles.badge}>이의신청</span>
-                  <span className={styles.badge}>심사청구</span>
+                  <span className={styles.badge}>심판 청구</span>
                 </div>
               </div>
               <div className={styles.serviceTag}>
@@ -132,6 +125,8 @@ export default function HomePage() {
                 <div className={styles.serviceBadges}>
                   <span className={styles.badge}>개인사업자</span>
                   <span className={styles.badge}>프리랜서</span>
+                  <span className={styles.badge}>성실신고</span>
+                  <span className={styles.badge}>공동사업</span>
                 </div>
               </div>
               <div className={styles.serviceTag}>
@@ -141,13 +136,7 @@ export default function HomePage() {
                   <span className={styles.badge}>세무조정</span>
                 </div>
               </div>
-              <div className={styles.serviceTag}>
-                <div className={styles.serviceTitle}>급여 계산 대행</div>
-                <div className={styles.serviceBadges}>
-                  <span className={styles.badge}>급여관리</span>
-                  <span className={styles.badge}>4대보험</span>
-                </div>
-              </div>
+
             </div>
           </FadeIn>
           <FadeIn delay={0.3}>

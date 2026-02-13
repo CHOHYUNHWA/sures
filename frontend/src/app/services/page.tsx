@@ -23,23 +23,23 @@ export default function ServicesPage() {
           <div className="grid-2">
             <FadeIn delay={0}>
               <div className={styles.serviceDetail}>
-                <h3 className={styles.serviceTitle}>법인 조정</h3>
+                <h3 className={styles.serviceTitle}>법인세</h3>
                 <div className={styles.divider}></div>
                 <p className={styles.serviceSubtitle}>법인의 가치를 높이고 세금부담은 낮추고</p>
                 <p className={styles.serviceDescription}>
-                  슈어스는 복잡한 법인 결산부터 기업별 특성에 맞는 정교한 세무조정까지, 기업의 재무 상태를 면밀히 분석하여 과도한 세금 지출을 막고 기업 성장을 위한 최적의 세무 환경을 구축합니다.
+                  슈어스는 복잡한 법인 결산부터 기업별 특성에 맞는 정교한 세무조정까지, 기업의 재무 상태를 면밀히 분석하여 과도한 세금 지출을 막고 기업 성장을 위한 최적의 세무환경을 구축합니다.
                 </p>
                 <div className={styles.subCardGrid}>
                   <div className={styles.subCard}>
-                    <h4 className={styles.subCardTitle}>법인세 세무조정</h4>
+                    <h4 className={styles.subCardTitle}>법인결산/세무조정</h4>
                     <p className={styles.subCardDescription}>
-                      세무상 이익 산출 및 기업회계와 세무회계의 차이 조정 등
+                      기업회계와 세무회계의 차이조정, 리스크 없는 세무 이익 산출
                     </p>
                   </div>
                   <div className={styles.subCard}>
                     <h4 className={styles.subCardTitle}>절세 혜택 극대화</h4>
                     <p className={styles.subCardDescription}>
-                      연구소 설립, 고용 증대 등 각종 세액공제 및 감면 적용 등
+                      고용, 투자, 연구개발 등 각종 세액공제 및 감면 발굴
                     </p>
                   </div>
                 </div>
@@ -50,21 +50,21 @@ export default function ServicesPage() {
               <div className={styles.serviceDetail}>
                 <h3 className={styles.serviceTitle}>종합소득세</h3>
                 <div className={styles.divider}></div>
-                <p className={styles.serviceSubtitle}>성공 사업자의 파트너, 업종별 맞춤 소득세 관리</p>
+                <p className={styles.serviceSubtitle}>사업자의 성공 파트너, 업종별 맞춤 세무관리</p>
                 <p className={styles.serviceDescription}>
                   슈어스는 개인 사업자의 업종별 맞춤 기장부터 프리랜서 및 고소득자의 소득세 신고까지, 누락 없는 공제와 정교한 분석으로 고객님의 세금 부담을 덜어드리는 통합 세무 솔루션을 제공합니다.
                 </p>
                 <div className={styles.subCardGrid}>
                   <div className={styles.subCard}>
-                    <h4 className={styles.subCardTitle}>사업자</h4>
+                    <h4 className={styles.subCardTitle}>개인사업자/성실신고</h4>
                     <p className={styles.subCardDescription}>
-                      업종별 맞춤 경비 분석 및 최적의 절세 전략 수립 등
+                      업종별 맞춤 경비 분석 및 최적의 절세 전략 수립
                     </p>
                   </div>
                   <div className={styles.subCard}>
-                    <h4 className={styles.subCardTitle}>프리랜서/고소득자</h4>
+                    <h4 className={styles.subCardTitle}>비사업자</h4>
                     <p className={styles.subCardDescription}>
-                      3.3% 사업소득자 환급 진단 및 고액 자산가 소득 관리 등
+                      프리랜서, 1인사업자의 안정적인 세무신고, 리스크 관리
                     </p>
                   </div>
                 </div>
@@ -73,23 +73,23 @@ export default function ServicesPage() {
 
             <FadeIn delay={0.2}>
               <div className={styles.serviceDetail}>
-                <h3 className={styles.serviceTitle}>기장 및 신고 대행</h3>
+                <h3 className={styles.serviceTitle}>경리 아웃소싱</h3>
                 <div className={styles.divider}></div>
                 <p className={styles.serviceSubtitle}>대표님은 사업에만 집중하세요.</p>
                 <p className={styles.serviceDescription}>
-                  슈어스는 매월 발생하는 복잡한 장부 작성과 급여 관리부터 부가가치세, 법인세/소득세 신고까지 비즈니스 주기에 맞춘 철저한 관리로 세무 리스크 제로(Zero)를 실현합니다.
+                  슈어스는 매월 발생하는 원천세 신고와 급여관리, 4대보험 업무, 분기/반기 부가가치세 신고까지 비즈니스 주기에 맞춘 결산 업무를 지원합니다.
                 </p>
                 <div className={styles.subCardGrid}>
                   <div className={styles.subCard}>
                     <h4 className={styles.subCardTitle}>정기 기장 관리</h4>
                     <p className={styles.subCardDescription}>
-                      실시간 장부 작성, 인건비 신고 및 4대 보험 관리 등
+                      실시간 장부 작성, 인건비 신고 및 4대 보험 관리
                     </p>
                   </div>
                   <div className={styles.subCard}>
                     <h4 className={styles.subCardTitle}>주요 세무 신고</h4>
                     <p className={styles.subCardDescription}>
-                      부가가치세, 법인세, 종합소득세 신고 대행 등
+                      부가가치세, 법인세, 종합소득세 신고 대행
                     </p>
                   </div>
                 </div>
@@ -102,7 +102,7 @@ export default function ServicesPage() {
                 <div className={styles.divider}></div>
                 <p className={styles.serviceSubtitle}>소중한 자산일수록 전문가의 설계로 지키세요.</p>
                 <p className={styles.serviceDescription}>
-                  슈어스는 증여/상속을 통한 지혜로운 자산 승계부터, 부동산/주식 매도 시의 정교한 절세 전략까지 통합적인 자산 관리 솔루션을 제공합니다.<br /><br />
+                  슈어스는 증여·상속을 통한 지혜로운 자산 승계부터 복잡한 부동산, 주식 양도까지 안정적이고 정교한 자산 이전 솔루션을 제공합니다.
                 </p>
                 <div className={styles.subCardGrid}>
                   <div className={styles.subCard}>
@@ -133,13 +133,13 @@ export default function ServicesPage() {
                   <div className={styles.subCard}>
                     <h4 className={styles.subCardTitle}>업종별 맞춤 등록</h4>
                     <p className={styles.subCardDescription}>
-                      간이/일반 과세자 선택 및 인허가 업종 체크 등
+                      인허가 업종 체크, 원활한 사업자 등록 지원
                     </p>
                   </div>
                   <div className={styles.subCard}>
                     <h4 className={styles.subCardTitle}>초기 세무 세팅</h4>
                     <p className={styles.subCardDescription}>
-                      창업 세액감면 요건 확인 및 홈택스/카드 등록 가이드 등
+                      세제혜택 발굴, 초기 세법 의무사항 가이드 설계
                     </p>
                   </div>
                 </div>
@@ -158,13 +158,13 @@ export default function ServicesPage() {
                   <div className={styles.subCard}>
                     <h4 className={styles.subCardTitle}>세무조사 대응</h4>
                     <p className={styles.subCardDescription}>
-                      조사 사전 대비 및 현장 대응, 의견 진술 대행 등
+                      자료수집부터 검토까지 직접 대응, 과세쟁점 리포팅과 사후관리
                     </p>
                   </div>
                   <div className={styles.subCard}>
-                    <h4 className={styles.subCardTitle}>조세불복·환급</h4>
+                    <h4 className={styles.subCardTitle}>조세불복</h4>
                     <p className={styles.subCardDescription}>
-                      경정청구, 이의신청, 조세심판청구 등 권리 구제
+                      이의신청, 심판청구 등 납세자 권리구제
                     </p>
                   </div>
                 </div>

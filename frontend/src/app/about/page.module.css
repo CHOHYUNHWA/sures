@@ -83,7 +83,15 @@
   font-size: 1.0625rem;
   color: #555;
   line-height: 1.8;
-  margin: 0;
+  margin: 0 0 0.5rem;
+}
+
+.profileDescription:last-child {
+  margin-bottom: 0;
+}
+
+.profileDescription strong {
+  color: #011541;
 }
 
 .caseSection {

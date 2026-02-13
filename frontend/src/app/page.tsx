@@ -79,10 +79,17 @@ export default function HomePage() {
           <FadeIn delay={0.2}>
             <div className={styles.serviceGrid}>
               <div className={styles.serviceTag}>
-                <div className={styles.serviceTitle}>신규창업자</div>
+                <div className={styles.serviceTitle}>법인세</div>
                 <div className={styles.serviceBadges}>
-                  <span className={styles.badge}>사업자등록</span>
-                  <span className={styles.badge}>창업감면</span>
+                  <span className={styles.badge}>법인결산</span>
+                  <span className={styles.badge}>세무조정</span>
+                </div>
+              </div>
+              <div className={styles.serviceTag}>
+                <div className={styles.serviceTitle}>종합소득세</div>
+                <div className={styles.serviceBadges}>
+                  <span className={styles.badge}>개인사업자</span>
+                  <span className={styles.badge}>성실신고</span>
                 </div>
               </div>
               <div className={styles.serviceTag}>
@@ -93,20 +100,6 @@ export default function HomePage() {
                 </div>
               </div>
               <div className={styles.serviceTag}>
-                <div className={styles.serviceTitle}>세무조사 대응</div>
-                <div className={styles.serviceBadges}>
-                  <span className={styles.badge}>세액축소</span>
-                  <span className={styles.badge}>납세자 보호</span>
-                </div>
-              </div>
-              <div className={styles.serviceTag}>
-                <div className={styles.serviceTitle}>조세불복 대행</div>
-                <div className={styles.serviceBadges}>
-                  <span className={styles.badge}>이의신청</span>
-                  <span className={styles.badge}>심판청구</span>
-                </div>
-              </div>
-              <div className={styles.serviceTag}>
                 <div className={styles.serviceTitle}>양도·상속·증여</div>
                 <div className={styles.serviceBadges}>
                   <span className={styles.badge}>절세전략</span>
@@ -114,27 +107,33 @@ export default function HomePage() {
                 </div>
               </div>
               <div className={styles.serviceTag}>
-                <div className={styles.serviceTitle}>부가가치세 신고</div>
+                <div className={styles.serviceTitle}>부가가치세</div>
                 <div className={styles.serviceBadges}>
                   <span className={styles.badge}>일반/간이</span>
-                  <span className={styles.badge}>정기신고</span>
+                  <span className={styles.badge}>예정/확정</span>
                 </div>
               </div>
               <div className={styles.serviceTag}>
-                <div className={styles.serviceTitle}>종합소득세 신고</div>
+                <div className={styles.serviceTitle}>세무조사 대응</div>
                 <div className={styles.serviceBadges}>
-                  <span className={styles.badge}>개인사업자</span>
-                  <span className={styles.badge}>프리랜서</span>
+                  <span className={styles.badge}>전략적대응</span>
+                  <span className={styles.badge}>납세자보호</span>
                 </div>
               </div>
               <div className={styles.serviceTag}>
-                <div className={styles.serviceTitle}>법인세 신고</div>
+                <div className={styles.serviceTitle}>조세불복</div>
                 <div className={styles.serviceBadges}>
-                  <span className={styles.badge}>법인결산</span>
-                  <span className={styles.badge}>세무조정</span>
+                  <span className={styles.badge}>이의신청</span>
+                  <span className={styles.badge}>심판청구</span>
                 </div>
               </div>
-
+              <div className={styles.serviceTag}>
+                <div className={styles.serviceTitle}>신규창업자</div>
+                <div className={styles.serviceBadges}>
+                  <span className={styles.badge}>사업자등록</span>
+                  <span className={styles.badge}>창업감면</span>
+                </div>
+              </div>
             </div>
           </FadeIn>
           <FadeIn delay={0.3}>

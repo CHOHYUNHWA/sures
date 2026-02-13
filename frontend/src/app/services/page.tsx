@@ -56,7 +56,7 @@ export default function ServicesPage() {
                 </p>
                 <div className={styles.subCardGrid}>
                   <div className={styles.subCard}>
-                    <h4 className={styles.subCardTitle}>개인사업자/성실신고</h4>
+                    <h4 className={styles.subCardTitle}>개인사업/성실신고</h4>
                     <p className={styles.subCardDescription}>
                       업종별 맞춤 경비 분석 및 최적의 절세 전략 수립
                     </p>

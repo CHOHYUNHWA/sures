@@ -16,7 +16,8 @@ export default function WhyPage() {
           <>
             <span style={{ color: '#BE9F5D' }}>SURES</span>는<br />
             고객의 확신<span style={{ color: '#BE9F5D' }}>SURE</span>을<br />
-            성공<span style={{ color: '#BE9F5D' }}>SUCCESS</span>으로 연결합니다
+            성공<span style={{ color: '#BE9F5D' }}>SUCCESS</span>으로<br />
+            연결합니다
           </>
         }
         backgroundImage="/image/sures_background.png"
@@ -36,10 +37,10 @@ export default function WhyPage() {
                 &lsquo;이 분야는 어떻게 아세요?&rsquo; 고객님께 가장 많이 들어본 말입니다.
               </p>
               <p className={styles.ceoDescription}>
-                기술경영 전공으로 사업 경영부터 IT 신기술 분야까지, 다양한 사업들의 특수성을 이해하고 세법으로 해결해 왔습니다.
+                사업 경영부터 신기술까지, 다양한 업종을 이해하고 세법으로 해결해 왔습니다.
               </p>
               <p className={styles.ceoDescription}>
-                이제 세무 전문성은 기본입니다. 고객님의 업종과 분야, 사회 트렌드까지 세무와 연결하여 생각하는 <strong>스마트 세무</strong>를 경험하세요.
+                고객님의 상황과 업종, 트렌드까지 세무와 연결하여 생각하는 <strong>스마트 세무</strong>를 경험하세요.
               </p>
             </div>
           </FadeIn>

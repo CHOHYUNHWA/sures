@@ -3,7 +3,7 @@ import styles from './Hero.module.css'
 
 interface HeroProps {
   title: ReactNode
-  subtitle?: string
+  subtitle?: ReactNode
   backgroundImage?: string
   children?: ReactNode
   showTrustBadges?: boolean

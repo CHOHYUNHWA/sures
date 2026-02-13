@@ -6,29 +6,10 @@ export default function HomePage() {
     <>
       {/* Hero Section */}
       <Hero
-        title={<>당신의 필요에 <span style={{ color: '#c0a460' }}>확신</span>을 더하는 파트너</>}
-        subtitle="시작부터 결이 다른 전략으로 모든 세무 문제를 해결하세요."
+        title={<>당신의 필요에<br /> <span style={{ color: '#c0a460' }}>확신</span>을 더하는 파트너</>}
+        subtitle={<>시작부터 결이 다른 전략으로<br />모든 세무 문제를 해결하세요.</>}
         backgroundImage="/image/sures_background.png"
-      >
-        <div className={styles.ctaButtons}>
-          <a
-            href="http://pf.kakao.com/_zqepn"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.ctaButtonOutline}
-          >
-            카카오톡 상담
-          </a>
-          <a
-            href="https://naver.me/G4GVUglM"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.ctaButtonPrimary}
-          >
-            네이버 예약
-          </a>
-        </div>
-      </Hero>
+      />
 
       {/* 핵심 가치 */}
       <section className={styles.section}>

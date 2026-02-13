@@ -15,7 +15,7 @@ export default function HomePage() {
       <section className={styles.section}>
         <div className={styles.sectionInner}>
           <FadeIn>
-            <h2 className={styles.sectionTitle}>슈어스는 고객의 확신을 성공으로 연결합니다.</h2>
+            <h2 className={styles.sectionTitle}>슈어스는 고객의 확신을<br className={styles.mobileBreak} /> 성공으로 연결합니다.</h2>
           </FadeIn>
           <div className="grid-3">
             <FadeIn delay={0}>

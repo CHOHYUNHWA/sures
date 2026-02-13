@@ -3,8 +3,9 @@
   background-color: #ffffff;
 }
 
-.sectionCards {
-  padding-top: 0;
+.sectionTrust {
+  background: linear-gradient(135deg, #011541 0%, #022a6e 100%);
+  color: #ffffff;
 }
 
 .sectionInner {
@@ -17,112 +18,104 @@
   .section {
     padding: 2.5rem 0;
   }
-
-  .sectionCards {
-    padding-top: 0;
-  }
 }
 
-/* 대표 세무사 소개 */
-.ceoSection {
-  text-align: center;
-  padding: 1rem 0 0;
-}
-
-.ceoName {
+.sectionTitle {
   font-size: 1.75rem;
   font-weight: 700;
   color: #011541;
-  margin-bottom: 0.75rem;
-}
-
-.ceoTagline {
-  font-size: 1.125rem;
-  font-weight: 600;
-  color: #28a7e1;
-  margin-bottom: 1.5rem;
-}
-
-.ceoQuote {
-  font-size: 1.0625rem;
-  color: #011541;
-  font-weight: 600;
-  font-style: italic;
-  margin-bottom: 1.25rem;
-  line-height: 1.6;
-}
-
-.ceoDescription {
-  font-size: 1.0625rem;
-  color: #555;
-  line-height: 1.8;
-  margin-bottom: 0.5rem;
-  text-align: left;
-}
-
-.ceoDescription strong {
-  color: #011541;
-}
-
-@media (max-width: 480px) {
-  .ceoName {
-    font-size: 1.5rem;
-  }
-
-  .ceoTagline {
-    font-size: 1rem;
-  }
-}
-
-/* Expert Card */
-.expertCard {
-  background: #ffffff;
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  padding: 2rem;
-  margin-bottom: 1.25rem;
-  transition: all 150ms ease;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-}
-
-.expertCard:hover {
-  border-color: #28a7e1;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.expertTitle {
-  font-size: 1.375rem;
-  font-weight: 700;
-  color: #011541;
-  margin-bottom: 0.75rem;
-}
-
-.divider {
-  width: 3rem;
-  height: 3px;
-  background-color: #28a7e1;
+  text-align: center;
   margin-bottom: 1rem;
 }
 
-.expertTagline {
+@media (max-width: 480px) {
+  .sectionTitle {
+    font-size: 1.5rem;
+  }
+}
+
+.sectionSubtitle {
+  text-align: center;
+  color: #666;
   font-size: 1.0625rem;
-  color: #011541;
-  font-weight: 600;
-  margin-bottom: 1.25rem;
-  line-height: 1.5;
+  margin-bottom: 2rem;
+  line-height: 1.6;
 }
 
-.expertDetail p {
+/* Value Card */
+.valueCard {
+  background: #ffffff;
+  border: 2px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 2rem;
+  transition: all 150ms ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.valueCard:hover {
+  border-color: #28a7e1;
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+  transform: translateY(-4px);
+}
+
+.valueNumber {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 3rem;
+  font-weight: 700;
+  color: rgba(40, 167, 225, 0.1);
+  line-height: 1;
+}
+
+.valueTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #011541;
+  margin-bottom: 0.5rem;
+}
+
+.valueSubtitle {
   font-size: 1rem;
-  color: #555;
+  color: #28a7e1;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.valueDescription {
+  font-size: 0.9375rem;
+  color: #666;
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* Trust Section */
+.trustTitle {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #ffffff;
+  text-align: center;
+  line-height: 1.4;
+  margin-bottom: 1.5rem;
+}
+
+@media (max-width: 480px) {
+  .trustTitle {
+    font-size: 1.5rem;
+  }
+}
+
+.trustDescription {
+  text-align: center;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1.0625rem;
   line-height: 1.8;
-  margin-bottom: 0.75rem;
+  margin: 0;
 }
 
-.expertDetail p:last-child {
-  margin-bottom: 0;
-}
-
-.expertDetail strong {
-  color: #011541;
+@media (max-width: 480px) {
+  .trustDescription br {
+    display: none;
+  }
 }

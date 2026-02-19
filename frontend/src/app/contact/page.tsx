@@ -61,7 +61,8 @@ export default function ContactPage() {
                 rel="noopener noreferrer"
                 className={styles.naverMapButton}
               >
-                🗺️ 네이버 지도에서 보기
+                <span>🗺️</span>
+                <span>네이버 지도에서 열기</span>
               </a>
             </div>
           </FadeIn>

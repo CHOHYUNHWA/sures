@@ -52,14 +52,14 @@ export default function ContactPage() {
             </div>
           </FadeIn>
 
-          {/* 모바일 네이버 지도 바로가기 */}
+          {/* 네이버 지도 바로가기 */}
           <FadeIn delay={0.25}>
-            <div className={styles.mobileMapLink}>
+            <div className={styles.naverMapLink}>
               <a
                 href="https://map.naver.com/p/entry/place/2083776809"
                 target="_blank"
                 rel="noopener noreferrer"
-                className={styles.mobileMapButton}
+                className={styles.naverMapButton}
               >
                 🗺️ 네이버 지도에서 보기
               </a>
@@ -95,26 +95,17 @@ export default function ContactPage() {
             </div>
           </FadeIn>
 
-          {/* 네이버 지도 */}
+          {/* 건물 약도 */}
           <FadeIn delay={0.5}>
-            <div className={styles.mapContainer}>
-              <iframe
-                src="https://map.naver.com/p/entry/place/2083776809?c=15.00,0,0,0,dh"
-                className={styles.map}
-                title="슈어스세무회계 위치"
-                allowFullScreen
-              ></iframe>
-              <div className={styles.mapButtonContainer}>
-                <a
-                  href="https://map.naver.com/p/entry/place/2083776809"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={styles.mapButton}
-                >
-                  <span className={styles.mapButtonIcon}>🗺️</span>
-                  <span>네이버 지도 앱에서 열기</span>
-                </a>
-              </div>
+            <div className={styles.locationMapBox}>
+              <h3 className={styles.subsectionTitle}>건물 약도</h3>
+              <Image
+                src="/image/building-map.png"
+                alt="힐스테이트천호역젠트리스 건물 약도"
+                width={800}
+                height={600}
+                className={styles.locationMapImage}
+              />
             </div>
           </FadeIn>
         </div>

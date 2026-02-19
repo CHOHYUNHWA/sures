@@ -83,20 +83,13 @@
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
-/* Mobile Map Link */
-.mobileMapLink {
-  display: none;
+/* Naver Map Link */
+.naverMapLink {
   text-align: center;
   margin-bottom: 1.5rem;
 }
 
-@media (max-width: 480px) {
-  .mobileMapLink {
-    display: block;
-  }
-}
-
-.mobileMapButton {
+.naverMapButton {
   display: inline-flex;
   align-items: center;
   gap: 0.375rem;
@@ -208,58 +201,6 @@
   font-weight: 700;
 }
 
-/* Map Container */
-.mapContainer {
-  margin-bottom: 2rem;
-}
-
-.map {
-  width: 100%;
-  height: 350px;
-  border: 3px solid #ffffff;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-}
-
-@media (max-width: 480px) {
-  .mapContainer {
-    display: none;
-  }
-}
-
-/* Map Button Container */
-.mapButtonContainer {
-  display: flex;
-  justify-content: center;
-  margin-top: 1.5rem;
-}
-
-.mapButton {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  width: 100%;
-  max-width: 320px;
-  padding: 1.25rem 2rem;
-  background: linear-gradient(135deg, #03C75A 0%, #02b351 100%);
-  color: #ffffff;
-  font-size: 1.125rem;
-  font-weight: 700;
-  text-decoration: none;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(3, 199, 90, 0.3);
-  transition: all 0.3s ease;
-}
-
-.mapButton:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 20px rgba(3, 199, 90, 0.4);
-}
-
-.mapButtonIcon {
-  font-size: 1.5rem;
-}
 
 /* Notice Box */
 .noticeBox {

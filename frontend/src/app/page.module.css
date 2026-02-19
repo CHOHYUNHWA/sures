@@ -305,29 +305,31 @@ a.contactItem:hover {
 
 .serviceButton {
   display: inline-block;
-  padding: 0.5rem 0;
-  font-size: 1rem;
-  font-weight: 600;
-  color: #28a7e1;
-  background-color: transparent;
+  font-size: 1.0625rem;
+  font-weight: 700;
+  color: #011541;
+  background: none;
+  border: none;
+  border-bottom: 2px solid rgba(1, 21, 65, 0.25);
   text-decoration: none;
-  transition: all 0.3s ease;
-  position: relative;
+  padding: 0.25rem 0;
+  transition: border-color 0.2s ease;
 }
 
-.serviceButton::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background-color: #28a7e1;
-  transition: width 0.3s ease;
+.serviceArrow {
+  display: inline-block;
+  opacity: 0;
+  transform: translateX(-4px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
-.serviceButton:hover::after {
-  width: 100%;
+.serviceButton:hover {
+  border-bottom-color: #011541;
+}
+
+.serviceButton:hover .serviceArrow {
+  opacity: 1;
+  transform: translateX(0);
 }
 
 @media (max-width: 480px) {

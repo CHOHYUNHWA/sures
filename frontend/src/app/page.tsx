@@ -120,7 +120,7 @@ export default function HomePage() {
           <FadeIn delay={0.3}>
             <div className={styles.serviceButtonWrapper}>
               <a href="/services" className={styles.serviceButton}>
-                자세히 보기
+                자세히 보기<span className={styles.serviceArrow}> →</span>
               </a>
             </div>
           </FadeIn>

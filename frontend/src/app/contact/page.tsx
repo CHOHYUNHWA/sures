@@ -43,12 +43,26 @@ export default function ContactPage() {
             <div className={styles.locationMapBox}>
               <h3 className={styles.subsectionTitle}>약도</h3>
               <Image
-                src="/images/location-map.png"
+                src="/image/map.png"
                 alt="슈어스세무회계 약도"
-                width={400}
-                height={300}
+                width={800}
+                height={600}
                 className={styles.locationMapImage}
               />
+            </div>
+          </FadeIn>
+
+          {/* 모바일 네이버 지도 바로가기 */}
+          <FadeIn delay={0.25}>
+            <div className={styles.mobileMapLink}>
+              <a
+                href="https://map.naver.com/p/entry/place/2083776809"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.mobileMapButton}
+              >
+                🗺️ 네이버 지도에서 보기
+              </a>
             </div>
           </FadeIn>
 

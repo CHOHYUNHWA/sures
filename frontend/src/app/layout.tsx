@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Script from 'next/script'
 import { Header, Footer } from '@/components/layout'
 import { FloatingKakao } from '@/components/ui'
 import './globals.css'
@@ -25,6 +26,23 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ko">
+      <head>
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-CTM344P514"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('consent', 'default', {
+              analytics_storage: 'granted'
+            });
+            gtag('config', 'G-CTM344P514');
+          `}
+        </Script>
+      </head>
       <body>
         <div className="page-wrapper">
           <Header />
